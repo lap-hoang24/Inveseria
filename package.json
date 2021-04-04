@@ -1,0 +1,25 @@
+{
+  "name": "inveseria",
+  "version": "1.0.0",
+  "description": "Investing Platform",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lap-hoang24/Inveseria.git"
+  },
+  "author": "Lap Hoang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lap-hoang24/Inveseria/issues"
+  },
+  "homepage": "https://github.com/lap-hoang24/Inveseria#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3",
+    "nodemon": "^2.0.7"
+  }
+}
