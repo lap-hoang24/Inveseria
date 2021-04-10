@@ -1,0 +1,15 @@
+#
+# mozaik generic demo dashboard
+#
+# It's not required, but you should add this env var,
+# without it, you'll probably reach the API rate limit.
+#
+# GITHUB_API_TOKEN=xxxxx
+#
+host: 0.0.0.0
+port: 5000
+
+# define duration between each dashboard rotation (ms)
+rotationDuration: 10000
+# define the interval used by Mozaïk Bus to call registered APIs
+apisPollInterval: 100000
