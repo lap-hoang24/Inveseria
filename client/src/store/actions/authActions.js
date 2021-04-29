@@ -9,3 +9,12 @@ export const login = (userCredentials) => {
    }
 }
 
+
+export const signup = (userInfo) => {
+   return (dispatch, getState) => {
+      axios.post('/user/signup', userInfo)
+         .then(message => { dispatch({ type: SIGNUP, message }) })
+         .catch(err => { console.error(err) })
+   }
+}
+

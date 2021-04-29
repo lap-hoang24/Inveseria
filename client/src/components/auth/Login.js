@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../store/actions/authActions';
+import Google from './Google';
 
 class Login extends Component {
-
    state = {
       username: "",
       password: ""
@@ -23,26 +24,34 @@ class Login extends Component {
          username: "",
          password: ""
       })
+
+      document.getElementById('login-form').reset();
    }
 
    render() {
       const { whatever } = this.props;
-      let Name = whatever.data ? whatever.data.username : "Guy";
+      console.log(whatever);
 
       return (
          <div>
-            <form onSubmit={this.handleSubmit} className="row">
-               <div className="input-field col s12">
+            <form id='login-form' onSubmit={this.handleSubmit} className="row">
+               <div className="input-field col s4 offset-s4">
                   <input type="text" id="username" onChange={this.handleChange} />
                   <label htmlFor="username">Username</label>
                </div>
-               <div className="input-field col s12">
+               <div className="input-field col s4 offset-s4">
                   <input type="text" id="password" onChange={this.handleChange} />
                   <label htmlFor="password">Password</label>
                </div>
-               <button className="btn col s12 red darken-2">Log In</button>
+               <button className=" btn col s4 offset-s4 red darken-2">Log In</button>
+
+               <NavLink to="/signup">
+                  <button className="btn col s4 offset-s4 green darken-2">Sign Up</button>
+               </NavLink>
+               <div className="col s5 offset-s2">{whatever.data ? whatever.data.username : "shit"}</div>
             </form>
-            <div className="col s12"> Hello, {Name}!</div>
+
+            <Google />  
          </div>
       )
    }
@@ -51,7 +60,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
    return {
-      whatever: state.user.user
+      whatever: state.userRed.user
    }
 }
 

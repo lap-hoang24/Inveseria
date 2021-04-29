@@ -1,7 +1,8 @@
 import { LOGIN, SIGNUP } from '../actions/actionTypes';
 
 const initState = {
-   user: {}
+   user: {},
+   message: {},
 }
 
 const userReducer = (state = initState, action) => {
@@ -15,7 +16,7 @@ const userReducer = (state = initState, action) => {
       case SIGNUP:
          return {
             ...state,
-            user: action.user
+            message: action.message
          }
       default:
          return state
