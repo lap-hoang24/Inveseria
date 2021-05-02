@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Google() {
    return (
-      <div className="col s8 offset-s2">
-         <a href="/auth/google" className="btn btn-danger"><span className="fa fa-google"></span> SignIn with Google</a>
+      <div className="col s4 offset-s4">
+         <a href="http://localhost:5000/auth/google" className="btn btn-danger"><span className="fa fa-google"></span> SignIn with Google</a>
       </div>
    )
 }

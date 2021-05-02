@@ -49,9 +49,9 @@ class Login extends Component {
                   <button className="btn col s4 offset-s4 green darken-2">Sign Up</button>
                </NavLink>
                <div className="col s5 offset-s2">{whatever.data ? whatever.data.username : "shit"}</div>
+               <Google />
             </form>
 
-            <Google />  
          </div>
       )
    }

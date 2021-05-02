@@ -5,11 +5,11 @@ dotenv.config();
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const User = require('./models/User');
 const cors = require('cors');
+const cookieSession = require('cookie-session');
 const PORT = process.env.PORT;
-let userProfile;
-
 
 // database connection
 
@@ -22,13 +22,19 @@ connection.on('error', (err) => { console.error(err) })
 
 app.use(express.json());
 app.use(cors());
-app.use(session({
-   resave: false,
-   saveUninitialized: true,
-   secret: 'SECRET'
-}));
+// app.use(session({
+//    resave: false,
+//    saveUninitialized: true,
+//    secret: 'SECRET'
+// }));
+app.use(cookieSession({
+   name: 'session',
+   keys: "secreet",
+   maxAge: "60*60*1000",
+}))
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 passport.serializeUser(function (user, cb) {
    cb(null, user);
@@ -40,15 +46,28 @@ passport.deserializeUser(function (obj, cb) {
 
 
 passport.use(new GoogleStrategy({
-   // clientID: process.env.CLIENT_ID,
-   // clientSecret: process.env.CLIENT_SECRET,
-   clientID: "789728722377-fnvevaqgkb6b1qo0v9vd38rb1u3k803p.apps.googleusercontent.com",
-   clientSecret: "-ETJu1_NeEqSmky4H_gUND34",
+   clientID: process.env.CLIENT_ID,
+   clientSecret: process.env.CLIENT_SECRET,
    callbackURL: "/auth/google/redirect"
 },
-   function (accessToken, refreshToken, profile, done) {
-      userProfile = profile;
-      return done(null, userProfile);
+   async function (accessToken, refreshToken, profile, done) {
+      try {
+         let currentUser = await User.findOne({ googleId: profile.id });
+         if (currentUser) {
+            done(null, currentUser);
+         } else {
+            const userGoogle = {
+               googleId: profile._json.sub,
+               username: profile._json.given_name,
+               email: profile._json.email,
+               picture: profile._json.picture
+            };
+            let newUser = await User.create(userGoogle);
+            done(null, newUser);
+         }
+      } catch (err) {
+         console.error(err)
+      }
    }
 ));
 
@@ -57,22 +76,14 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 app.get('/auth/google/redirect',
    passport.authenticate('google', { failureRedirect: '/error' }),
    function (req, res) {
+      console.log(req.session)
       // Successful authentication, redirect success.
-      res.redirect('/success');
+      res.redirect('http://localhost:3000/login');
    });
-
-app.get('/success', (req, res) => res.send(userProfile));
-app.get('/error', (req, res) => res.send("error logging in"));
 
 // import routes
 const userRoutes = require('./routes/user-routes');
 app.use('/user', userRoutes);
-
-
-
-app.get('/', (req, res) => {
-   res.send('first getting');
-})
 
 app.listen(PORT, () => {
    console.log('listening on port ' + PORT);
