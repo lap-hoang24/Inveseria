@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const passport = require('passport');
 
 
 exports.login = async (req, res) => {
@@ -29,6 +30,11 @@ exports.signup = async (req, res) => {
       response.message = "you have succesfully signed up";
       res.status(200).send(response);
    }
+}
+
+exports.googleRedirect = (req, res) => {
+      console.log(req.session)
+      res.redirect('http://localhost:3000/login');
 }
 
 
