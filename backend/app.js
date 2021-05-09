@@ -4,11 +4,11 @@ app = express();
 dotenv.config();
 const mongoose = require('mongoose');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const GoogleOAuth = require('./middlewares/passport');
 const cors = require('cors');
-const cookieSession = require('cookie-session');
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 // database connection
 
@@ -26,30 +26,35 @@ app.use('/user', userRoutes);
 
 app.use(express.json());
 app.use(cors());
-// app.use(session({
-//    resave: false,
-//    saveUninitialized: true,
-//    secret: 'SECRET'
-// }));
-app.use(cookieSession({
-   name: 'session',
-   keys: "secreet",
-   maxAge: "60*60*1000",
-}))
+app.use(session({
+   resave: false,
+   saveUninitialized: true,
+   secret: 'SECRET'
+}));
+app.use(cookieParser());
+
 app.use(passport.initialize());
 app.use(passport.session());
 GoogleOAuth(passport);
 
 
-// app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-// app.get('/auth/google/redirect',
-//    passport.authenticate('google', { failureRedirect: '/error' }),
-//    function (req, res) {
-//       // console.log(req.session)
-//       res.redirect('http://localhost:3000/login');
-//    }
-// );
+GoogleOAuth(passport);
+
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/auth/google/redirect',
+   passport.authenticate('google', { failureRedirect: '/login' }),
+   function (req, res) {
+      // Successful authentication, redirect success.
+      res.cookie("email", req.session.passport.user.email);
+      res.redirect('http://localhost:3000/login');
+   });
+
+// import routes
+const userRoutes = require('./routes/user-routes');
+app.use('/user', userRoutes);
+
 
 
 app.listen(PORT, () => {

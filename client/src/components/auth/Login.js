@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from '../../store/actions/authActions';
+import { login, getUserInfo } from '../../store/actions/authActions';
 import Google from './Google';
+import { withCookies } from 'react-cookie';
 
 class Login extends Component {
    state = {
@@ -28,9 +29,13 @@ class Login extends Component {
       document.getElementById('login-form').reset();
    }
 
+   componentDidMount() {
+      const email = this.props.cookies.get('email');
+      this.props.getUserInfo({ email })
+   }
+
    render() {
-      const { whatever } = this.props;
-      console.log(whatever);
+      const { userInfo } = this.props;
 
       return (
          <div>
@@ -48,8 +53,11 @@ class Login extends Component {
                <NavLink to="/signup">
                   <button className="btn col s4 offset-s4 green darken-2">Sign Up</button>
                </NavLink>
-               <div className="col s5 offset-s2">{whatever.data ? whatever.data.username : "shit"}</div>
+               <div className="col s5 offset-s2">{userInfo.data ? userInfo.data.username : "shit"}</div>
                <Google />
+
+               <button className="btn col s4 offset-s4 green darken-2"> <a href='http://localhost:5000/user/logout'>Log Out</a></button>
+
             </form>
 
          </div>
@@ -58,16 +66,22 @@ class Login extends Component {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
    return {
-      whatever: state.userRed.user
+      userInfo: state.userRed.user,
+      cookies: ownProps.cookies
    }
 }
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      login: (userCredentials) => { dispatch(login(userCredentials)) }
+      login: (userCredentials) => { dispatch(login(userCredentials)) },
+      getUserInfo: (email) => { dispatch(getUserInfo(email)) },
    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withCookies(
+   connect
+      (mapStateToProps, mapDispatchToProps)
+      (Login)
+);

@@ -29,7 +29,7 @@ class Signup extends Component {
       document.getElementById('signup-form').reset();
    }
    render() {
-      console.log(this.props);
+      const { message } = this.props;
       return (
          <div>
             <form id="signup-form" onSubmit={this.handleSubmit} className="row">
@@ -49,7 +49,7 @@ class Signup extends Component {
                <NavLink to="/login">
                   <button className="btn col s4 offset-s4 green darken-2">Log In</button>
                </NavLink>
-               <div className="col s5 offset-s1">{this.props.message.message}</div>
+               <div className="col s5 offset-s1">{message.data}</div>
             </form>
          </div>
       )

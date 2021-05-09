@@ -5,13 +5,15 @@ const googleOAuth = (passport) => {
    passport.use(new GoogleStrategy({
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "/user/auth/google/redirect"
+
+      callbackURL: "/auth/google/redirect"
+
    },
       async function (accessToken, refreshToken, profile, done) {
          try {
             let currentUser = await User.findOne({ googleId: profile.id });
             if (currentUser) {
-               console.log(currentUser);
+
                done(null, currentUser);
             } else {
                const userGoogle = {
@@ -36,6 +38,5 @@ const googleOAuth = (passport) => {
    passport.deserializeUser(function (obj, cb) {
       cb(null, obj);
    });
-}
 
-module.exports = googleOAuth;
+module.exports = googleOAuth; 
