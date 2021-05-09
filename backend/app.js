@@ -17,6 +17,11 @@ const connection = mongoose.connection;
 connection.once('open', () => { console.log("Connected to MongoDB") });
 connection.on('error', (err) => { console.error(err) })
 
+// import routes
+const userRoutes = require('./routes/user-routes');
+app.use('/user', userRoutes);
+
+
 // middlewares
 
 app.use(express.json());
@@ -30,6 +35,8 @@ app.use(cookieParser());
 
 app.use(passport.initialize());
 app.use(passport.session());
+GoogleOAuth(passport);
+
 
 
 GoogleOAuth(passport);
@@ -47,6 +54,8 @@ app.get('/auth/google/redirect',
 // import routes
 const userRoutes = require('./routes/user-routes');
 app.use('/user', userRoutes);
+
+
 
 app.listen(PORT, () => {
    console.log('listening on port ' + PORT);

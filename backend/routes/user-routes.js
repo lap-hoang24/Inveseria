@@ -1,12 +1,16 @@
 const express = require('express');
+const passport = require('passport');
 router = express.Router();
 const userCtrl= require('../controllers/user-controllers');
 
+
 // @route = user/...
+
 
 router.post('/login', userCtrl.login);
 
 router.post('/signup', userCtrl.signup);
+
 
 router.post('/info', userCtrl.getUserInfo);
 
