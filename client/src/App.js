@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { withCookies } from 'react-cookie';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 
@@ -22,4 +23,4 @@ export class App extends Component {
 }
 
 
-export default App;
+export default withCookies(App);

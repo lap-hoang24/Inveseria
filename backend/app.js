@@ -4,12 +4,11 @@ app = express();
 dotenv.config();
 const mongoose = require('mongoose');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const User = require('./models/User');
+const GoogleOAuth = require('./middlewares/passport');
 const cors = require('cors');
-const cookieSession = require('cookie-session');
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 // database connection
 
@@ -22,62 +21,26 @@ connection.on('error', (err) => { console.error(err) })
 
 app.use(express.json());
 app.use(cors());
-// app.use(session({
-//    resave: false,
-//    saveUninitialized: true,
-//    secret: 'SECRET'
-// }));
-app.use(cookieSession({
-   name: 'session',
-   keys: "secreet",
-   maxAge: "60*60*1000",
-}))
+app.use(session({
+   resave: false,
+   saveUninitialized: true,
+   secret: 'SECRET'
+}));
+app.use(cookieParser());
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 
-passport.serializeUser(function (user, cb) {
-   cb(null, user);
-});
-
-passport.deserializeUser(function (obj, cb) {
-   cb(null, obj);
-});
-
-
-passport.use(new GoogleStrategy({
-   clientID: process.env.CLIENT_ID,
-   clientSecret: process.env.CLIENT_SECRET,
-   callbackURL: "/auth/google/redirect"
-},
-   async function (accessToken, refreshToken, profile, done) {
-      try {
-         let currentUser = await User.findOne({ googleId: profile.id });
-         if (currentUser) {
-            done(null, currentUser);
-         } else {
-            const userGoogle = {
-               googleId: profile._json.sub,
-               username: profile._json.given_name,
-               email: profile._json.email,
-               picture: profile._json.picture
-            };
-            let newUser = await User.create(userGoogle);
-            done(null, newUser);
-         }
-      } catch (err) {
-         console.error(err)
-      }
-   }
-));
+GoogleOAuth(passport);
 
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get('/auth/google/redirect',
-   passport.authenticate('google', { failureRedirect: '/error' }),
+   passport.authenticate('google', { failureRedirect: '/login' }),
    function (req, res) {
-      console.log(req.session)
       // Successful authentication, redirect success.
+      res.cookie("email", req.session.passport.user.email);
       res.redirect('http://localhost:3000/login');
    });
 

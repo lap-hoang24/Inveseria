@@ -1,8 +1,8 @@
-import { LOGIN, SIGNUP } from '../actions/actionTypes';
+import { LOGIN, SIGNUP, GET_USERINFO } from '../actions/actionTypes';
 
 const initState = {
    user: {},
-   message: {},
+   message: {}
 }
 
 const userReducer = (state = initState, action) => {
@@ -17,6 +17,11 @@ const userReducer = (state = initState, action) => {
          return {
             ...state,
             message: action.message
+         }
+      case GET_USERINFO:
+         return {
+            ...state,
+            user: action.userInfo
          }
       default:
          return state

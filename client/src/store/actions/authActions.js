@@ -1,4 +1,4 @@
-import { LOGIN, SIGNUP } from './actionTypes';
+import { LOGIN, SIGNUP, GET_USERINFO } from './actionTypes';
 import axios from 'axios';
 
 export const login = (userCredentials) => {
@@ -18,3 +18,10 @@ export const signup = (userInfo) => {
    }
 }
 
+export const getUserInfo = (email) => {
+   return (dispatch, getState) => {
+      axios.post('/user/info', email)
+      .then(userInfo => dispatch({type: GET_USERINFO, userInfo}))
+      .catch(err=> console.error(err))
+   }
+}
