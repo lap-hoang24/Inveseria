@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
+import Home from './components/tabs/Home';
 
 export class App extends Component {
   render() {
@@ -12,7 +13,7 @@ export class App extends Component {
         <div className="App">
           {/* <NavBar /> */}
           <Switch>
-            {/* <Route exact path="/" component={Main} /> */}
+            <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
           </Switch>

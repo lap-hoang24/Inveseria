@@ -35,7 +35,7 @@ exports.signup = async (req, res) => {
 
 exports.getUserInfo = async (req, res) => {
    try {
-      let user = await User.findOne({ email: req.body.email });
+      let user = await User.findOne({ _id: req.body.id });
 
       user ? res.send(user) : res.send("user not found, please try again")
    } catch (err) {
@@ -51,8 +51,12 @@ exports.logout = (req, res) => {
 }
 
 exports.googleRedirect = (req, res) => {
-   console.log(req.session)
-   res.redirect('http://localhost:3000/login');
+   // Successful authentication, redirect success.
+   res.cookie("id", req.user._id);
+
+   // console.log('redirect session',req.session);
+   // console.log('req.user',req.user)
+   res.redirect('http://localhost:3000/');
 
 }
 

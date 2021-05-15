@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login, getUserInfo } from '../../store/actions/authActions';
-import Google from './Google';
 import { withCookies } from 'react-cookie';
 
 class Login extends Component {
@@ -53,11 +52,10 @@ class Login extends Component {
                <NavLink to="/signup">
                   <button className="btn col s4 offset-s4 green darken-2">Sign Up</button>
                </NavLink>
-               <div className="col s5 offset-s2">{userInfo.data ? userInfo.data.username : "shit"}</div>
-               <Google />
-
-               <button className="btn col s4 offset-s4 green darken-2"> <a href='http://localhost:5000/user/logout'>Log Out</a></button>
-
+               {/* <div className="col s8 offset-s2"> */}
+               <a href="http://localhost:5000/auth/google" className="btn btn-danger col"><span className="fa fa-google"></span> SignIn with Google</a>
+               {/* </div> */}
+               <button className="btn col s4 offset-s4 green darken-2"> <a href='http://localhost:5000/auth/logout'>Log Out</a></button>
             </form>
 
          </div>
@@ -68,7 +66,7 @@ class Login extends Component {
 
 const mapStateToProps = (state, ownProps) => {
    return {
-      userInfo: state.userRed.user,
+      userInfo: state.userReducer.user,
       cookies: ownProps.cookies
    }
 }

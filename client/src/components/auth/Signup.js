@@ -29,7 +29,9 @@ class Signup extends Component {
       document.getElementById('signup-form').reset();
    }
    render() {
-      const { message } = this.props;
+      console.log(this.props);
+
+      const {message} = this.props;
       return (
          <div>
             <form id="signup-form" onSubmit={this.handleSubmit} className="row">
@@ -59,8 +61,8 @@ class Signup extends Component {
 
 const mapStateToProps = (state) => {
    return {
-      message: state.userRed.message,
-      user: state.userRed.user
+      message: state.userReducer.message,
+      user: state.userReducer.user
    }
 }
 

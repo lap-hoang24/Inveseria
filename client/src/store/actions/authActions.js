@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const login = (userCredentials) => {
    return (dispatch, getState) => {
-      axios.post('/user/login', userCredentials)
+      axios.post('/auth/login', userCredentials)
          .then(user => dispatch({ type: LOGIN, user }))
          .catch(err => console.error(err))
    }
@@ -12,15 +12,15 @@ export const login = (userCredentials) => {
 
 export const signup = (userInfo) => {
    return (dispatch, getState) => {
-      axios.post('/user/signup', userInfo)
+      axios.post('/auth/signup', userInfo)
          .then(message => { dispatch({ type: SIGNUP, message }) })
          .catch(err => { console.error(err) })
    }
 }
 
-export const getUserInfo = (email) => {
+export const getUserInfo = (id) => {
    return (dispatch, getState) => {
-      axios.post('/user/info', email)
+      axios.post('/auth/info', id)
       .then(userInfo => dispatch({type: GET_USERINFO, userInfo}))
       .catch(err=> console.error(err))
    }
