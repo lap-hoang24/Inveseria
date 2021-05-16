@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login, getUserInfo } from '../../store/actions/authActions';
+import { login } from '../../store/actions/authActions';
 import { withCookies } from 'react-cookie';
 
+
+
 class Login extends Component {
+
    state = {
       username: "",
       password: ""
@@ -28,13 +31,7 @@ class Login extends Component {
       document.getElementById('login-form').reset();
    }
 
-   componentDidMount() {
-      const email = this.props.cookies.get('email');
-      this.props.getUserInfo({ email })
-   }
-
    render() {
-      const { userInfo } = this.props;
 
       return (
          <div>
@@ -52,12 +49,10 @@ class Login extends Component {
                <NavLink to="/signup">
                   <button className="btn col s4 offset-s4 green darken-2">Sign Up</button>
                </NavLink>
-               {/* <div className="col s8 offset-s2"> */}
-               <a href="http://localhost:5000/auth/google" className="btn btn-danger col"><span className="fa fa-google"></span> SignIn with Google</a>
-               {/* </div> */}
+
+               <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fa fa-google"></span> SignIn with Google</a>
                <button className="btn col s4 offset-s4 green darken-2"> <a href='http://localhost:5000/auth/logout'>Log Out</a></button>
             </form>
-
          </div>
       )
    }
@@ -74,7 +69,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
    return {
       login: (userCredentials) => { dispatch(login(userCredentials)) },
-      getUserInfo: (email) => { dispatch(getUserInfo(email)) },
    }
 }
 

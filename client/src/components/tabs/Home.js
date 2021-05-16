@@ -5,22 +5,22 @@ import { withCookies } from 'react-cookie';
 
 class Home extends Component {
 
-   constructor(props) {
-      super(props);
-      const id = props.cookies.get('id');
-      props.getUserInfo({ id });
+   componentDidMount() {
+      const id = this.props.cookies.get('id');
+      this.props.getUserInfo({ id });
    }
 
-   // componentDidMount() {
-   //    const email = this.props.cookies.get('email');
-   //    this.props.getUserInfo({ email })
-   // }
+   componentDidUpdate() {
+   }
 
    render() {
       const { userInfo } = this.props;
+      console.log(userInfo);
       return (
          <div>
-            <div className="welcome">Welcome, {userInfo.data ? userInfo.data.username : ''}</div>
+            <div className="welcome">Welcome, {userInfo.data ? userInfo.data.user.username : ''}</div>
+            <div className="account">Buying Power: ${userInfo.data ? userInfo.data.account.total : 5000}</div>
+            <img style={{ height:'30px', width:'30px'}} src={userInfo.data ? userInfo.data.user.picture : 5000} alt="" />
          </div>
       )
    }

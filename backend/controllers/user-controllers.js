@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const passport = require('passport');
+const Account = require('../models/Account');
 
 exports.login = async (req, res) => {
    try {
@@ -35,9 +35,16 @@ exports.signup = async (req, res) => {
 
 exports.getUserInfo = async (req, res) => {
    try {
+      let userInfo = {};
       let user = await User.findOne({ _id: req.body.id });
 
-      user ? res.send(user) : res.send("user not found, please try again")
+      if (user) {
+         let account = await Account.findOne({ userId: req.body.id });
+         userInfo.user = user;
+         userInfo.account = account
+      }
+
+      user ? res.send(userInfo) : res.send("user not found, please try again")
    } catch (err) {
       console.error(err);
    }
@@ -46,16 +53,14 @@ exports.getUserInfo = async (req, res) => {
 
 exports.logout = (req, res) => {
    // req.logout();
-   res.clearCookie("email")
+   res.clearCookie("id")
    res.redirect('http://localhost:3000/login');
 }
 
 exports.googleRedirect = (req, res) => {
    // Successful authentication, redirect success.
+   console.log(req.session);
    res.cookie("id", req.user._id);
-
-   // console.log('redirect session',req.session);
-   // console.log('req.user',req.user)
    res.redirect('http://localhost:3000/');
 
 }

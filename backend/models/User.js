@@ -20,6 +20,11 @@ const userSchema = mongoose.Schema({
    picture: {
       type: String,
       required: false,
+   },
+   createdAt: {
+      type: String,
+      required: true,
+      default: new Date().toJSON()
    }
 }, {collection: 'users'});
 

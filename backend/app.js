@@ -4,6 +4,7 @@ app = express();
 dotenv.config();
 const mongoose = require('mongoose');
 const session = require('express-session');
+const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const GoogleOAuth = require('./middlewares/passport');
@@ -21,15 +22,17 @@ connection.on('error', (err) => { console.error(err) })
 
 app.use(express.json());
 app.use(cors());
-app.use(session({
-   resave: false,
-   saveUninitialized: true,
-   secret: 'SECRET'
-}));
+
+// app.use(cookieSession({
+//    name: "Inveseria",
+//    keys: ["Investingaaaaa"],
+//    maxAge: 60*60*1000, //1hour
+// }))
+
 app.use(cookieParser());
 
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 // import routes
 const userRoutes = require('./routes/user-routes');
