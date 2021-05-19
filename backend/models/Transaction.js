@@ -6,6 +6,10 @@ const transactionSchema = mongoose.Schema({
       required: true,
    },
    ticker: {
+      ticker: {
+         type: String,
+         required: true,
+      },
       logo: {
          type: String,
          required: true,
@@ -14,7 +18,7 @@ const transactionSchema = mongoose.Schema({
          type: String,
          required: true,
       }
-   },
+   }, 
    action: {
       type: String,
       required: true,

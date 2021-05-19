@@ -3,7 +3,7 @@ let request, response, remarks, docs, ACCESS_KEY;
 
 docs = "https://marketstack.com/documentation";
 
-ACCESS_KEY = "ffeab6a86076cff0f69f0de0983a6058";
+ACCESS_KEY = "75b6f2af2935400d9770adbdadf74a58";
 
 
 
@@ -15,7 +15,7 @@ ACCESS_KEY = "ffeab6a86076cff0f69f0de0983a6058";
 
 // END OF DAY DATA
 
-request = "http://api.marketstack.com/v1/eod?access_key=1c211e83b136384d0bc2e81e4f13c51e&symbols=AAPL,TSLA,AMZN"
+request = "http://api.marketstack.com/v1/eod?access_key=75b6f2af2935400d9770adbdadf74a58&symbols=AAPL,TSLA,AMZN"
 
 let response = {
     "pagination": {

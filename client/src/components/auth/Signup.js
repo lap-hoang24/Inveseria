@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { signup } from '../../store/actions/authActions';
+import Navbar from '../layouts/Navbar';
 
 class Signup extends Component {
    state = {
@@ -33,7 +34,7 @@ class Signup extends Component {
 
       const {message} = this.props;
       return (
-         <div>
+         <div id="signup-page"> 
             <form id="signup-form" onSubmit={this.handleSubmit} className="row">
                <div className="input-field col s4 offset-s4">
                   <input id="username" type="text" onChange={this.handleChange} />
@@ -53,6 +54,8 @@ class Signup extends Component {
                </NavLink>
                <div className="col s5 offset-s1">{message.data}</div>
             </form>
+
+            <Navbar />
          </div>
       )
    }

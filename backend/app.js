@@ -10,6 +10,7 @@ const passport = require('passport');
 const GoogleOAuth = require('./middlewares/passport');
 const cors = require('cors');
 const PORT = process.env.PORT || 5000;
+const Ticker = require('./models/Ticker')
 
 // database connection
 
@@ -37,6 +38,29 @@ app.use(passport.initialize());
 // import routes
 const userRoutes = require('./routes/user-routes');
 app.use('/auth', userRoutes);
+
+
+
+app.post('/getTicker', async (req, res) => {
+   const {logo, sector, tags, symbol, name} = req.body.data;
+
+   let existTicker = await Ticker.findOne({ticker: symbol});
+
+   if (existTicker) {
+      res.send('ticker already exists in Database')
+   } else {
+      let tickerInfo = {
+         logo: logo,
+         sector: sector,
+         tags: tags,
+         ticker: symbol,
+         companyName: name
+      }
+      let newTicker = await Ticker.create(tickerInfo);
+   
+      res.send(newTicker);
+   }
+})
 
 app.listen(PORT, () => {
    console.log('listening on port ' + PORT);

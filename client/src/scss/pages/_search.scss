@@ -1,0 +1,7 @@
+@import '../utilities/_mixins';
+
+#search-bar {
+   border-radius: 50%;
+   @include flex(row, center, center);
+}
+

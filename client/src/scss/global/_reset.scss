@@ -1,0 +1,35 @@
+
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   
+   a {
+       text-decoration: none;
+       &:visited {
+          color: $second-color;
+       }
+
+       &:link {
+         color: $primary-color;
+       }
+   }
+
+   li {
+       list-style: none;
+   }
+
+   &:focus {
+       outline: none;
+   }
+
+   img {
+       width: 100%;
+       height: 100%;
+       display: block;
+    }
+}
+
+body {
+   position: relative;
+}

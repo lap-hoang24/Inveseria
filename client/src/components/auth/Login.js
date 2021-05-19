@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../store/actions/authActions';
 import { withCookies } from 'react-cookie';
+import Navbar from '../layouts/Navbar';
 
 
 
@@ -34,7 +35,7 @@ class Login extends Component {
    render() {
 
       return (
-         <div>
+         <div id="login-page">
             <form id='login-form' onSubmit={this.handleSubmit} className="row">
                <div className="input-field col s4 offset-s4">
                   <input type="text" id="username" onChange={this.handleChange} />
@@ -53,6 +54,8 @@ class Login extends Component {
                <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fa fa-google"></span> SignIn with Google</a>
                <button className="btn col s4 offset-s4 green darken-2"> <a href='http://localhost:5000/auth/logout'>Log Out</a></button>
             </form>
+            <Navbar />
+
          </div>
       )
    }

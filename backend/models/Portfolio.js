@@ -6,6 +6,10 @@ const portfolioSchema = mongoose.Schema({
       required: true,
    },
    ticker: {
+      ticker: {
+         type: String,
+         required: true,
+      },
       logo: {
          type: String,
          required: true,

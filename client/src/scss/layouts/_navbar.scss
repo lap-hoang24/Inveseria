@@ -1,0 +1,19 @@
+#nav-bar {
+   height: 55px;
+   width: 90%;
+   background-color: $primary-color;
+   @include flex(row, space-around, center);
+
+   position: fixed;
+   margin: 0 auto;
+   left: 4%;
+   bottom: 10px;
+   border-radius: 40px;
+
+
+
+   .nav-link {
+      color: white;
+   }
+}
+

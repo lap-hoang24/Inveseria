@@ -41,7 +41,7 @@ exports.getUserInfo = async (req, res) => {
       if (user) {
          let account = await Account.findOne({ userId: req.body.id });
          userInfo.user = user;
-         userInfo.account = account
+         userInfo.account = account;
       }
 
       user ? res.send(userInfo) : res.send("user not found, please try again")
