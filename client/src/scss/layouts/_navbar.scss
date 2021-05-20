@@ -1,5 +1,5 @@
 #nav-bar {
-   height: 55px;
+   height: 50px;
    width: 90%;
    background-color: $primary-color;
    @include flex(row, space-around, center);
@@ -13,7 +13,7 @@
 
 
    .nav-link {
-      color: white;
+      color: $white;
    }
 }
 

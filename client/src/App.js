@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
-import Home from './components/pages/Home';
+import Home from './components/pages/Home/Home';
 import GetTicker from './components/auth/getTicker'
 
 export class App extends Component {

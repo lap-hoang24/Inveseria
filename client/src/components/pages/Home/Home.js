@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { getUserInfo } from '../../store/actions/authActions';
+import { getUserInfo } from '../../../store/actions/authActions';
 import { connect } from 'react-redux';
 import { withCookies } from 'react-cookie';
-import Navbar from '../layouts/Navbar';
+import Navbar from '../../layouts/Navbar';
+import UserInfo from './UserInfo';
+import Search from './Search';
+import Account from './Account';
 
 class Home extends Component {
 
@@ -13,12 +16,14 @@ class Home extends Component {
 
    render() {
       const { userInfo } = this.props;
+
       return (
          <div id="home-page">
-            <div className="welcome">Welcome, {userInfo.data ? userInfo.data.user.username : ''}</div>
-            <div className="account">Net Worth: $ 4000.00</div>
-            <div className="account">Buying Power: ${userInfo.data ? userInfo.data.account.total : '0'}</div>
-            <img style={{ height:'30px', width:'30px'}} src={userInfo.data ? userInfo.data.user.picture : '0'} alt="" />
+            <div id="user-info_search-wrapper">
+               <UserInfo userInfo={userInfo.data} />
+               <Search />
+            </div>
+            <Account userInfo={userInfo.data}/>
             <Navbar />
          </div>
       )
@@ -35,7 +40,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      getUserInfo: (email) => { dispatch(getUserInfo(email)) },
+      getUserInfo: (id) => { dispatch(getUserInfo(id)) },
    }
 }
 

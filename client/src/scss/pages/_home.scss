@@ -2,4 +2,42 @@
    position: relative;
    height: 100vh;
    width: 100%;
+   // display: grid;
+   // grid-template-rows: 35px 100px auto auto auto;
+
+
+   #user-info_search-wrapper {
+      width: 90%;
+      height: 35px;
+      margin: 2rem auto 1rem auto;
+      @include flex(row, space-between, center);
+      background-color: $white;
+      border-radius: 50px;
+      
+      #user-info {
+         height: 35px;
+         @include flex(row, flex-start, center);
+
+         .user-picture {
+            height: 30px;
+            width: 30px;
+            margin-left: 1rem;
+            border-radius: 100%;
+         }
+
+         .username {
+            // align-self: flex-end;
+            margin-left: 0.5rem;
+            font-weight: bold;
+         }
+      }
+
+      #search-icon {
+         margin-right: 1rem;
+         .fa-search {
+            color: $primary-color;
+            font-size: 1.5rem;
+         }
+      }
+   }
 }
