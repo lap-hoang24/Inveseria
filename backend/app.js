@@ -37,7 +37,9 @@ app.use(passport.initialize());
 
 // import routes
 const userRoutes = require('./routes/user-routes');
+const stockRoutes = require('./routes/stock-routes');
 app.use('/auth', userRoutes);
+app.use('/stockApi', stockRoutes);
 
 
 

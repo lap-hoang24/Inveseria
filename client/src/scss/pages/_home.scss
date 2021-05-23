@@ -1,19 +1,14 @@
 #home-page {
    position: relative;
-   height: 100vh;
    width: 100%;
-   // display: grid;
-   // grid-template-rows: 35px 100px auto auto auto;
-
 
    #user-info_search-wrapper {
-      width: 90%;
-      height: 35px;
-      margin: 2rem auto 1rem auto;
       @include flex(row, space-between, center);
-      background-color: $white;
-      border-radius: 50px;
-      
+      @include component-container(50px, 90%, $light-bg);
+
+      margin: 2rem auto 1rem auto;
+      height: 35px;
+
       #user-info {
          height: 35px;
          @include flex(row, flex-start, center);
@@ -26,7 +21,6 @@
          }
 
          .username {
-            // align-self: flex-end;
             margin-left: 0.5rem;
             font-weight: bold;
          }
@@ -39,5 +33,86 @@
             font-size: 1.5rem;
          }
       }
-   }
+   } // end #user-info_search-wrapper
+
+   #account {
+      @include component-container(10px, 90%, $light-bg);
+      margin: 0 auto 1rem auto;
+      padding: .5rem 0 .5rem 0;
+
+      #balance,
+      #cash {
+         margin-left: 1rem;
+      }
+
+      #balance {
+         font-size: 1.4rem;
+         .amount {
+            font-size: 2rem;
+         }
+      }
+
+      #cash {
+         font-size: 1rem;
+         .amount {
+            font-size: 1.4rem;
+         }
+      }
+   } // end #account
+
+   #portfolio {
+      @include component-container(10px, 90%, $light-bg);
+      padding: 0.5rem 0;
+      // height: 400px;
+      margin: 0 auto 1rem auto;
+
+      .ticker-info {
+         height: 40px;
+         width: 90%;
+         @include flex(row, space-between, center);
+         margin: 0 auto;
+
+         .logo-symbol-wrapper {
+            width: 50%;
+            @include flex(row, flex-start, center);
+            .logo {
+               height: 30px;
+               width: 30px;
+               border-radius: 100%;
+               margin-right: 0.3rem;
+            }
+            .symbol-name-wrapper {
+               @include flex(column, center, flex-start);
+               margin-left: 0.3rem;
+               .symbol {
+                  font-size: 12px;
+               }
+
+               .company-name {
+                  font-size: 11px;
+               }
+            }
+         }
+
+         .price-percent-wrapper {
+            width: 50%;
+            @include flex(column, center, flex-end);
+
+            .price {
+               font-size: 14px;
+            }
+            .percent {
+               font-size: 11px;
+            }
+         }
+      }
+   } // end #portfolio
+
+   #news {
+      @include component-container(10px, 90%, $light-bg);
+
+      height: 300px;
+      margin: 0 auto 5rem auto;
+      padding: 0 0 1rem 0;
+   } // end #news
 }

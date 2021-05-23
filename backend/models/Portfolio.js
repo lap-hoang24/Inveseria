@@ -5,7 +5,7 @@ const portfolioSchema = mongoose.Schema({
       type: mongoose.Schema.ObjectId,
       required: true,
    },
-   ticker: {
+   company: {
       ticker: {
          type: String,
          required: true,

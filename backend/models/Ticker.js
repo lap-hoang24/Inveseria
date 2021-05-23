@@ -21,6 +21,10 @@ const tickerSchema = mongoose.Schema({
       type: Array,
       required: true
    },
+   intraday: {
+      type: Array,
+      required: false
+   }
 }, {collection: 'tickers'})
 
 module.exports = mongoose.model('Ticker', tickerSchema);

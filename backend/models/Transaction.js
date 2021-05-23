@@ -5,7 +5,7 @@ const transactionSchema = mongoose.Schema({
       type: moongose.Schema.ObjectId,
       required: true,
    },
-   ticker: {
+   company: {
       ticker: {
          type: String,
          required: true,

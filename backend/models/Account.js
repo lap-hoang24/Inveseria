@@ -5,7 +5,12 @@ const accountSchema = mongoose.Schema({
       type: mongoose.Schema.ObjectId,
       required: true
    },
-   total: {
+   balance: {
+      type: Number,
+      required: true,
+      default: 0,
+   },
+   cash: {
       type: Number,
       required: true,
       default: 0,

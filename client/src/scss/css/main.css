@@ -77,14 +77,10 @@ body {
 
 #home-page {
   position: relative;
-  height: 100vh;
   width: 100%;
 }
 
 #home-page #user-info_search-wrapper {
-  width: 90%;
-  height: 35px;
-  margin: 2rem auto 1rem auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -100,8 +96,11 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #ffffff;
+  width: 90%;
   border-radius: 50px;
+  background-color: #f8f9fa;
+  margin: 2rem auto 1rem auto;
+  height: 35px;
 }
 
 #home-page #user-info_search-wrapper #user-info {
@@ -142,6 +141,153 @@ body {
 #home-page #user-info_search-wrapper #search-icon .fa-search {
   color: #2d6a4f;
   font-size: 1.5rem;
+}
+
+#home-page #account {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  margin: 0 auto 1rem auto;
+  padding: .5rem 0 .5rem 0;
+}
+
+#home-page #account #balance,
+#home-page #account #cash {
+  margin-left: 1rem;
+}
+
+#home-page #account #balance {
+  font-size: 1.4rem;
+}
+
+#home-page #account #balance .amount {
+  font-size: 2rem;
+}
+
+#home-page #account #cash {
+  font-size: 1rem;
+}
+
+#home-page #account #cash .amount {
+  font-size: 1.4rem;
+}
+
+#home-page #portfolio {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  padding: 0.5rem 0;
+  margin: 0 auto 1rem auto;
+}
+
+#home-page #portfolio .ticker-info {
+  height: 40px;
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 auto;
+}
+
+#home-page #portfolio .ticker-info .logo-symbol-wrapper {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#home-page #portfolio .ticker-info .logo-symbol-wrapper .logo {
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  margin-right: 0.3rem;
+}
+
+#home-page #portfolio .ticker-info .logo-symbol-wrapper .symbol-name-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-left: 0.3rem;
+}
+
+#home-page #portfolio .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .symbol {
+  font-size: 12px;
+}
+
+#home-page #portfolio .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .company-name {
+  font-size: 11px;
+}
+
+#home-page #portfolio .ticker-info .price-percent-wrapper {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+#home-page #portfolio .ticker-info .price-percent-wrapper .price {
+  font-size: 14px;
+}
+
+#home-page #portfolio .ticker-info .price-percent-wrapper .percent {
+  font-size: 11px;
+}
+
+#home-page #news {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  height: 300px;
+  margin: 0 auto 5rem auto;
+  padding: 0 0 1rem 0;
 }
 
 #search-bar {

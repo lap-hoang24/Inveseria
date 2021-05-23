@@ -7,4 +7,11 @@
    align-items: $y;
 }
 
+// =================================
+
+@mixin component-container ($border-radius, $width, $bg-color) {
+   width: $width;
+   border-radius: $border-radius;
+   background-color: $bg-color;
+}
 

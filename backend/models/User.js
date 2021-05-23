@@ -25,7 +25,12 @@ const userSchema = mongoose.Schema({
       type: String,
       required: true,
       default: new Date().toJSON()
-   }
+   },
+   cash: {
+      type: Number,
+      required: true,
+      default: 0,
+   },
 }, {collection: 'users'});
 
 module.exports = mongoose.model('User', userSchema);
