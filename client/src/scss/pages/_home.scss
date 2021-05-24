@@ -32,6 +32,25 @@
             color: $primary-color;
             font-size: 1.5rem;
          }
+
+         #search-modal {
+            height: 500px;
+            .modal-content {
+               background-color: $light-bg;
+            }
+         }
+
+
+         #found-stock-container {
+            .search-result {
+               padding: .2rem .3rem;
+               &:nth-child(even) {
+                  background-color: darken($light-bg, 5%);
+               }
+            }
+            
+           
+         }
       }
    } // end #user-info_search-wrapper
 

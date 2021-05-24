@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-class TickerInfo extends Component {
+class PortfolioStock extends Component {
 
    state = {
       tickerInfo: {}
@@ -10,9 +10,7 @@ class TickerInfo extends Component {
    componentDidMount() {
       axios.get("/stockApi/getIntraday/TSLA")
          .then(response => {
-            const latestData = response.data.intraday[6];
-
-            console.log(response)
+            const latestData = response.data.intraday[8];
             this.setState({
                tickerInfo: {
                   open: latestData.open,
@@ -61,4 +59,4 @@ class TickerInfo extends Component {
    }
 }
 
-export default TickerInfo;
+export default PortfolioStock;

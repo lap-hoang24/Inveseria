@@ -5,7 +5,7 @@ class GetTicker extends React.Component {
 
   getTicker = () => {
 
-    let allTickers = ['TSLA', 'AAPL', 'AMZN', 'SQ', 'AAL', 'ABNB', 'NIO', 'BABA', 'MSFT', 'NKLA', 'JD', 'FB', 'BIDU', 'QCOM','EBAY','GOOG','AMD','NVDA','GME','AMC','AIG','M','CCL','PLTR','F','GM','SPY','T','PLUG','QQQ','UBER','UAL','WISH','SPCE','PFE','TLRY',];
+    let allTickers = ['MMM', 'PG', 'UNH', 'CAT', 'HD', 'ABT', 'ICE', 'C', 'WFC', 'AXP', 'ADSK', 'MSI', 'FISV', 'AMAT', 'FTNT', 'CAT', 'LLY', 'GE', 'BA', 'ADI', 'AVGO', 'MS', 'ABT', 'PEP', 'COST', 'ATVI', 'SBUX', 'MCD',];
 
     let i = 0;
     setInterval(() => {
@@ -20,10 +20,37 @@ class GetTicker extends React.Component {
     }, 21000)
   }
 
+
+
+  // addIntraday = async () => {
+
+  //   let allStocks = await axios.get('/stockApi/getAllStocks');
+
+  //   console.log(allStocks.data);
+
+  //   let i = 0;
+  //   setInterval(() => {
+  //     axios.get('http://api.marketstack.com/v1/intraday?access_key=75b6f2af2935400d9770adbdadf74a58&symbols=' + allStocks.data[i].ticker)
+  //       .then(response => {
+  //         axios.post('/stockApi/addIntraday', response.data)
+  //           .then(ss => {
+  //             console.log('from DATABASE', ss)
+  //           })
+  //           .catch(err => { console.error(err) })
+  //       })
+  //       .catch(err => console.error(err))
+  //     i++;
+  //   }, 1000)
+  // }
+
+
+
   render() {
     return (
       <div>
         <button onClick={this.getTicker}>get the ticker!</button>
+        <br></br>
+        <button onClick={this.addIntraday}>add Intraday</button>
       </div>
     );
   }

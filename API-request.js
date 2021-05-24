@@ -80,7 +80,7 @@ let response = {
 // ==================================
 // INTRA DAY DATA
 
-request = "http://api.marketstack.com/v1/intraday?access_key=ffeab6a86076cff0f69f0de0983a6058&symbols=TESLA,AAPL,SQ,ETSY,ABNB"
+request = "http://api.marketstack.com/v1/intraday?access_key=75b6f2af2935400d9770adbdadf74a58&symbols=TESLA,AAPL,SQ,ETSY,ABNB"
 
 
 response = {

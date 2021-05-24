@@ -1,11 +1,11 @@
 import React from 'react'
 // import PortfolioItem from './PortfolioItem'
-import TickerInfo from '../TickerInfo/TickerInfo'
+import PortfolioStock from './PortfolioStock'
 
 function Portfolio() {
    return (
       <div id="portfolio">
-         <TickerInfo />
+         <PortfolioStock />
       </div>
    )
 }

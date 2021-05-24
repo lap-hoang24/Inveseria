@@ -19,8 +19,6 @@ class Home extends Component {
    render() {
       const { userInfo } = this.props;
 
-      console.log(userInfo)
-
       return (
          <div id="home-page">
             <div id="user-info_search-wrapper">

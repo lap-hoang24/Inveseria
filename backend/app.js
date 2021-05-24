@@ -44,12 +44,12 @@ app.use('/stockApi', stockRoutes);
 
 
 app.post('/getTicker', async (req, res) => {
-   const {logo, sector, tags, symbol, name} = req.body.data;
+   const { logo, sector, tags, symbol, name } = req.body.data;
 
-   let existTicker = await Ticker.findOne({ticker: symbol});
+   let existTicker = await Ticker.findOne({ ticker: symbol });
 
    if (existTicker) {
-      res.send('ticker already exists in Database')
+      res.send( symbol + ' already exists in Database')
    } else {
       let tickerInfo = {
          logo: logo,
@@ -59,8 +59,8 @@ app.post('/getTicker', async (req, res) => {
          companyName: name
       }
       let newTicker = await Ticker.create(tickerInfo);
-   
-      res.send(newTicker);
+
+      res.send(symbol + ' added to database');
    }
 })
 

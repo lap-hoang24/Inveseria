@@ -143,6 +143,22 @@ body {
   font-size: 1.5rem;
 }
 
+#home-page #user-info_search-wrapper #search-icon #search-modal {
+  height: 500px;
+}
+
+#home-page #user-info_search-wrapper #search-icon #search-modal .modal-content {
+  background-color: #f8f9fa;
+}
+
+#home-page #user-info_search-wrapper #search-icon #found-stock-container .search-result {
+  padding: .2rem .3rem;
+}
+
+#home-page #user-info_search-wrapper #search-icon #found-stock-container .search-result:nth-child(even) {
+  background-color: #e9ecef;
+}
+
 #home-page #account {
   width: 90%;
   border-radius: 10px;
@@ -288,6 +304,98 @@ body {
   height: 300px;
   margin: 0 auto 5rem auto;
   padding: 0 0 1rem 0;
+}
+
+#stock-details {
+  position: relative;
+  width: 100%;
+}
+
+#stock-details .top-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem 0 .7rem 0;
+  border-bottom: 1px solid #2d6a4f;
+}
+
+#stock-details .top-wrapper i {
+  font-size: 1.4rem;
+}
+
+#stock-details .top-wrapper .ticker {
+  font-size: 1.3rem;
+}
+
+#stock-details .price-buy-btn-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  padding: .7rem 0 1rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#stock-details .price-buy-btn-wrapper .price-percent-wrapper .price {
+  font-size: 1.5rem;
+}
+
+#stock-details .price-buy-btn-wrapper .buy-btn, #stock-details .price-buy-btn-wrapper .sell-btn {
+  padding: .3rem .8rem;
+  border: none;
+  color: #ffffff;
+  margin: 0 .3rem;
+  border-radius: 3px;
+}
+
+#stock-details .price-buy-btn-wrapper .buy-btn {
+  background-color: #52b788;
+}
+
+#stock-details .price-buy-btn-wrapper .sell-btn {
+  background-color: #f94144;
+}
+
+#stock-details .chart {
+  height: 300px;
+  margin: 0 auto;
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+}
+
+#stock-details .news {
+  height: 300px;
+  margin: 0 auto;
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
 }
 
 #search-bar {
