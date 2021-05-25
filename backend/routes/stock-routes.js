@@ -12,4 +12,6 @@ router.post('/search-ticker', stockCtrl.searchTicker);
 
 router.get('/getAllStocks', stockCtrl.getAllStocks);
 
+router.post('/buyStock', stockCtrl.buyStock);
+
 module.exports = router;
