@@ -91,12 +91,20 @@
          @include flex(row, space-between, center);
          margin: 0 auto;
 
+         // &:first-child {
+         //    margin: 0 0 .1rem 0;
+         //  }
+
+         // &:last-child {
+         //    margin: .1rem 0 0 0;
+         // } 
+
          .logo-symbol-wrapper {
             width: 50%;
             @include flex(row, flex-start, center);
             .logo {
-               height: 30px;
-               width: 30px;
+               height: 25px;
+               width: 25px;
                border-radius: 100%;
                margin-right: 0.3rem;
             }

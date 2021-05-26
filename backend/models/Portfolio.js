@@ -5,20 +5,18 @@ const portfolioSchema = mongoose.Schema({
       type: mongoose.Schema.ObjectId,
       required: true,
    },
-   company: {
-      ticker: {
-         type: String,
-         required: true,
-      },
-      logo: {
-         type: String,
-         required: true,
-      },
-      name: {
-         type: String,
-         required: true,
-      }
-   }, 
+   ticker: {
+      type: String,
+      required: true,
+   },
+   logo: {
+      type: String,
+      required: true,
+   },
+   name: {
+      type: String,
+      required: true,
+   },
    avgPrice: {
       type: Number,
       required: true,
@@ -27,7 +25,7 @@ const portfolioSchema = mongoose.Schema({
       type: Number,
       required: true,
    }
-}, {collection: 'portfolios'});
+}, { collection: 'portfolios' });
 
 
 module.exports = mongoose.model('Portfolio', portfolioSchema)

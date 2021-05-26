@@ -26,7 +26,7 @@ class Home extends Component {
                <Search />
             </div>
             <Account userInfo={userInfo} />
-            <Portfolio />
+            <Portfolio userInfo={userInfo}/>
             <News />
             <Navbar />
          </div>

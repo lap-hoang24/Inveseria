@@ -2,28 +2,30 @@ const mongoose = require('mongoose');
 
 const transactionSchema = mongoose.Schema({
    userId: {
-      type: moongose.Schema.ObjectId,
+      type: mongoose.Schema.ObjectId,
       required: true,
    },
-   company: {
-      ticker: {
-         type: String,
-         required: true,
-      },
-      logo: {
-         type: String,
-         required: true,
-      },
-      name: {
-         type: String,
-         required: true,
-      }
-   }, 
+   ticker: {
+      type: String,
+      required: true,
+   },
+   logo: {
+      type: String,
+      required: true,
+   },
+   name: {
+      type: String,
+      required: true,
+   },
    action: {
       type: String,
       required: true,
    },
-   amount: {
+   price: {
+      type: Number,
+      required: true
+   },
+   numOfShares: {
       type: Number,
       required: true
    },

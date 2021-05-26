@@ -14,4 +14,6 @@ router.get('/getAllStocks', stockCtrl.getAllStocks);
 
 router.post('/buyStock', stockCtrl.buyStock);
 
+router.post('/getUserPortfolio', stockCtrl.getUserPortfolio);
+
 module.exports = router;

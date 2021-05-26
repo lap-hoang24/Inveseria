@@ -237,8 +237,8 @@ body {
 }
 
 #home-page #portfolio .ticker-info .logo-symbol-wrapper .logo {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   border-radius: 100%;
   margin-right: 0.3rem;
 }

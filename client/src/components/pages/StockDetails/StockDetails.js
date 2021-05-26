@@ -38,6 +38,9 @@ function StockDetails(props) {
       document.getElementById('numOfShares').value = "";
    }, [buyPrice])
 
+
+   console.log(tickerInfo)
+
    let percent = tickerInfo.intraday && String(((tickerInfo.intraday[8].last - tickerInfo.intraday[8].close) / tickerInfo.intraday[8].close) * 100).slice(0, 4);
 
    return (
