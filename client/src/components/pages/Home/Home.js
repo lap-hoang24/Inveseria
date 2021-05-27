@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { getUserInfo } from '../../../store/actions/authActions';
+import { getUserPortfolio } from '../../../store/actions/stockActions'
 import { connect } from 'react-redux';
 import { withCookies } from 'react-cookie';
 import Navbar from '../../layouts/Navbar';
@@ -13,11 +14,17 @@ class Home extends Component {
 
    componentDidMount() {
       const id = this.props.cookies.get('id');
-      this.props.getUserInfo({ id });
+      this.props.getUserInfo(id);
+      this.props.getUserPortfolio(id)
    }
 
    render() {
-      const { userInfo } = this.props;
+      const { userInfo, userPortfolio } = this.props;
+
+      console.log(this.props)
+      // if (userInfo && userPortfolio) {
+      //    userInfo.totalBalance = userPortfolio.totalBalance;
+      // }
 
       return (
          <div id="home-page">
@@ -26,7 +33,7 @@ class Home extends Component {
                <Search />
             </div>
             <Account userInfo={userInfo} />
-            <Portfolio userInfo={userInfo}/>
+            <Portfolio userPortfolio={userPortfolio} />
             <News />
             <Navbar />
          </div>
@@ -38,13 +45,15 @@ class Home extends Component {
 const mapStateToProps = (state, ownProps) => {
    return {
       userInfo: state.userReducer.user,
+      userPortfolio: state.stockReducer.portfolios,
       cookies: ownProps.cookies
    }
 }
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      getUserInfo: (id) => { dispatch(getUserInfo(id)) },
+      getUserInfo: (userId) => { dispatch(getUserInfo({ userId })) },
+      getUserPortfolio: (userId) => { dispatch(getUserPortfolio({ userId })) },
    }
 }
 
@@ -52,5 +61,4 @@ const mapDispatchToProps = (dispatch) => {
 export default withCookies(
    connect
       (mapStateToProps, mapDispatchToProps)
-      (Home)
-);
+      (Home));

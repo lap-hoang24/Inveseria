@@ -93,6 +93,7 @@ exports.searchTicker = async (req, res) => {
 // .../getUserPortfolio - POST
 
 exports.getUserPortfolio = async (req, res) => {
+   console.log('port', req.body);
    const { userId } = req.body;
    let portfolios = await Portfolio.find({ userId })
 

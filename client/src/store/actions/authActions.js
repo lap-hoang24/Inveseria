@@ -18,9 +18,9 @@ export const signup = (userInfo) => {
    }
 }
 
-export const getUserInfo = (id) => {
+export const getUserInfo = (userId) => {
    return (dispatch, getState) => {
-      axios.post('/auth/info', id)
+      axios.post('/auth/info', userId)
       .then(userInfo => dispatch({type: GET_USERINFO, userInfo}))
       .catch(err=> console.error(err))
    }

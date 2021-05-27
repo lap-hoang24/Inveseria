@@ -12,7 +12,6 @@ function Search() {
    useEffect(() => {
       axios.post('/stockApi/search-ticker', { companyName: tickerInput })
          .then(response => {
-            console.log('tickers found', response);
             if (typeof response.data === 'object') {
                setStocksFound(response.data);
             } else {

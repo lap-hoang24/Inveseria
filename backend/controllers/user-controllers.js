@@ -34,8 +34,9 @@ exports.signup = async (req, res) => {
 }
 
 exports.getUserInfo = async (req, res) => {
+   console.log('user',req.body);
    try {
-      let user = await User.findOne({ _id: req.body.id });
+      let user = await User.findOne({ _id: req.body.userId });
 
       user ? res.send(user) : res.send("user not found, please try again")
    } catch (err) {
