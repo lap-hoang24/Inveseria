@@ -93,9 +93,24 @@ exports.searchTicker = async (req, res) => {
 // .../getUserPortfolio - POST
 
 exports.getUserPortfolio = async (req, res) => {
-   console.log('port', req.body);
    const { userId } = req.body;
-   let portfolios = await Portfolio.find({ userId })
 
-   res.send(portfolios);
+   let portfolios = await Portfolio.find({ userId , numOfShares: {$gte: 1}})
+   let tickerArr = portfolios.map(portfo => portfo.ticker)
+   let portfoIntra = await Ticker.find({ 'ticker': { $in: tickerArr } }, {ticker: 1, intraday: 1})
+
+   const userPorfo = {portfolios, portfoIntra};
+   res.send(userPorfo);
+}
+
+
+
+// .../getPortfoIntra - POST
+
+exports.getPortfoIntra = async (req, res) => {
+   console.log(req.body);
+
+   let portfoIntra = await Ticker.find({ 'ticker': { $in: req.body } }, {ticker: 1, intraday: 1})
+
+   res.send(portfoIntra);
 }

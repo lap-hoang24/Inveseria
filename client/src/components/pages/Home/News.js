@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
 
 function News() {
+
    return (
       <div id="news">
-         
       </div>
    )
 }

@@ -1,35 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { withCookies } from 'react-cookie';
-import axios from 'axios'
 
-function Portfolio({ cookies, userPortfolio }) {
-   // let userId = cookies.get('id');
+function Portfolio({ cookies, userPortfolio, portfoIntra }) {
+   const [randomNum, setRandomNum] = useState(0);
+   let randomNumber = 0;
+   useEffect(() => {
+      setInterval(() => {
+         randomNumber = Math.floor(Math.random() * 99);
 
-   // const [portfolios, setPortfolios] = useState([]);
-   // const [portfolioBalance, setPortfolioBalance] = useState(0);
+         setRandomNum(randomNumber);
+      }, 1500)
+   }, [randomNumber])
 
-
-   // // TRANSFER THIS TO HOME PARENT COMPONENT
-
-   // useEffect(() => {
-   //    const getUserPortfolio = async () => {
-   //       let totalBalance = 0;
-   //       let portfolios = await axios.post('/stockApi/getUserPortfolio', { userId });
-   //       console.log(portfolios);
-
-   //       portfolios.data.forEach(port => {
-   //          totalBalance += port.avgPrice * port.numOfShares;
-   //       })
-   //       console.log(totalBalance);
-   //       setPortfolios(portfolios.data)
-   //       setPortfolioBalance(totalBalance)
-   //    }
-   //    getUserPortfolio();
-   // }, [])
 
    return (
       <div id="portfolio">
-         {userPortfolio && userPortfolio.data.map(portfolio => {
+
+         {userPortfolio && userPortfolio.map(portfolio => {
+            let open = portfolio.intra[randomNum].open;
+            let close = portfolio.intra[randomNum].low;
+
+
             return (
                <div key={portfolio._id} className='ticker-info'>
                   <div className="logo-symbol-wrapper">
@@ -39,9 +29,15 @@ function Portfolio({ cookies, userPortfolio }) {
                         <div className="company-name">{portfolio.numOfShares} shares</div>
                      </div>
                   </div>
+
+
+                  <div className="intra-percent-wrapper">
+                     <div className="price">{open}</div>
+                     <div className="percent">% {(((open - close) / close) * 100).toFixed(2)}</div>
+                  </div>
                   <div className="price-percent-wrapper">
-                     <div className='price'>$ {portfolio.avgPrice.toFixed(2)}</div>
-                     {/* <div className="percent">{portfolio.numOfShares}%</div> */}
+                     <div className='price'>$ {(open * portfolio.numOfShares).toFixed(2)}</div>
+                     <div className="percent"> % {(((open - portfolio.avgPrice) / portfolio.avgPrice) * 100).toFixed(2)}</div>
                   </div>
                </div>
             )
@@ -51,4 +47,4 @@ function Portfolio({ cookies, userPortfolio }) {
    )
 }
 
-export default withCookies(Portfolio);
+export default Portfolio;

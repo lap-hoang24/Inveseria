@@ -34,7 +34,6 @@ exports.signup = async (req, res) => {
 }
 
 exports.getUserInfo = async (req, res) => {
-   console.log('user',req.body);
    try {
       let user = await User.findOne({ _id: req.body.userId });
 

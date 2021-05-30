@@ -91,16 +91,8 @@
          @include flex(row, space-between, center);
          margin: 0 auto;
 
-         // &:first-child {
-         //    margin: 0 0 .1rem 0;
-         //  }
-
-         // &:last-child {
-         //    margin: .1rem 0 0 0;
-         // } 
-
          .logo-symbol-wrapper {
-            width: 50%;
+            // width: 50%;
             @include flex(row, flex-start, center);
             .logo {
                height: 25px;
@@ -121,12 +113,23 @@
             }
          }
 
-         .price-percent-wrapper {
-            width: 50%;
+         .intra-percent-wrapper {
             @include flex(column, center, flex-end);
+            width: 50px;
+            .price {
+               font-size: 13px;
+            }
+            .percent {
+               font-size: 11px;
+            }
+         }
+
+         .price-percent-wrapper {
+            @include flex(column, center, flex-end);
+            width: 70px;
 
             .price {
-               font-size: 14px;
+               font-size: 13px;
             }
             .percent {
                font-size: 11px;
