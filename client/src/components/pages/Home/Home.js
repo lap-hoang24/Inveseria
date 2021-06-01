@@ -1,7 +1,4 @@
-import React, { Component, } from 'react'
-import { getUserInfo } from '../../../store/actions/authActions';
-import { getUserPortfolio, getPortfoIntra } from '../../../store/actions/stockActions'
-import { connect } from 'react-redux';
+import React, { Component, useState, useEffect, createContext } from 'react'
 import { withCookies } from 'react-cookie';
 import Navbar from '../../layouts/Navbar';
 import UserInfo from './UserInfo';
@@ -9,67 +6,64 @@ import Search from './Search';
 import Account from './Account';
 import Portfolio from './Portfolio';
 import News from './News';
+import axios from 'axios';
 
 
 
-class Home extends Component {
+function Home(props) {
 
-   componentDidMount() {
-      const id = this.props.cookies.get('id');
-      this.props.getUserInfo(id);
-      this.props.getUserPortfolio(id);
-   }
+   const [userInfo, setUserInfo] = useState();
+   const [userPortfolio, setUserPortfolio] = useState();
+   const [portfoIntra, setPortfoIntra] = useState();
+   let totalBalance = 0;
 
 
-   render() {
-      const { userInfo, userPortfolio, portfoIntra } = this.props;
-      console.log(this.props)
+   useEffect(() => {
+      const userId = props.cookies.get('id');
+      const userInfo = axios.post('/auth/info', { userId });
+      const userPortfo = axios.post('/stockApi/getUserPortfolio', { userId });
 
-      if (portfoIntra && userPortfolio) {
-         userInfo.totalBalance = userPortfolio.totalBalance;
+      Promise.all([userInfo, userPortfo]).then(values => {
+         // console.log(values);
+         setUserInfo(values[0].data);
+         setUserPortfolio(values[1].data.portfolios);
+         setPortfoIntra(values[1].data.portfoIntra);
 
-         userPortfolio.forEach(portfo => {
-            for (let i = 0; i < portfoIntra.length; i++) {
-               if (portfo.ticker === portfoIntra[i].ticker) {
-                  portfo.intra = portfoIntra[i].intraday
-               }
+      })
+   }, []);
+
+  
+   if (portfoIntra && userPortfolio) {
+      userPortfolio.forEach(port => {
+         totalBalance += port.avgPrice * port.numOfShares;
+      })
+
+      userPortfolio.totalBalance = totalBalance;
+
+      userPortfolio.forEach(portfo => {
+         for (let i = 0; i < portfoIntra.length; i++) {
+            if (portfo.ticker === portfoIntra[i].ticker) {
+               portfo.intra = portfoIntra[i].intraday
             }
-         })
-      }
+         }
+      })
+   }
 
-      return (
-         <div id="home-page">
-            <div id="user-info_search-wrapper">
-               <UserInfo userInfo={userInfo} />
-               <Search />
-            </div>
-            <Account userInfo={userInfo} userPortfolio={userPortfolio} />
-            <Portfolio userPortfolio={userPortfolio} portfoIntra={portfoIntra} />
-            <News />
-            <Navbar />
+
+   console.log(userPortfolio);
+
+   return (
+      <div id="home-page">
+         <div id="user-info_search-wrapper">
+            <UserInfo userInfo={userInfo} />
+            <Search />
          </div>
-      )
-   }
+         {/* <Account userInfo={userInfo} userPortfolio={userPortfolio} /> */}
+         {/* <Portfolio userPortfolio={userPortfolio} portfoIntra={portfoIntra} />
+         <News /> */}
+         <Navbar />
+      </div>
+   )
 }
 
-
-const mapStateToProps = (state, ownProps) => {
-   return {
-      userInfo: state.userReducer.user,
-      userPortfolio: state.stockReducer.userPortfo,
-      portfoIntra: state.stockReducer.portfoIntra,
-      cookies: ownProps.cookies
-   }
-}
-
-const mapDispatchToProps = (dispatch) => {
-   return {
-      getUserInfo: userId => dispatch(getUserInfo({ userId })),
-      getUserPortfolio: userId => dispatch(getUserPortfolio({ userId })),
-      getPortfoIntra: portfo => dispatch(getPortfoIntra(portfo))
-   }
-}
-
-export default withCookies(connect
-   (mapStateToProps, mapDispatchToProps)
-   (Home));
+export default withCookies(Home);

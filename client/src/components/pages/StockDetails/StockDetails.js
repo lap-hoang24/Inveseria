@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { withCookies } from 'react-cookie';
 import Navbar from '../../layouts/Navbar';
 
+
 function StockDetails(props) {
 
    const { ticker } = useParams();
@@ -38,8 +39,6 @@ function StockDetails(props) {
       document.getElementById('numOfShares').value = "";
    }, [buyPrice])
 
-
-   console.log(tickerInfo)
 
    let percent = tickerInfo.intraday && String(((tickerInfo.intraday[8].last - tickerInfo.intraday[8].close) / tickerInfo.intraday[8].close) * 100).slice(0, 4);
 
@@ -81,7 +80,6 @@ function StockDetails(props) {
          <div className="news">
             <h5>News</h5>
          </div>
-
 
          <Navbar />
       </div>

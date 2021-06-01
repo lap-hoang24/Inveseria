@@ -76,6 +76,7 @@ exports.buyStock = async (req, res) => {
 }
 
 
+
 // .../search-ticker - POST
 exports.searchTicker = async (req, res) => {
    let regexQuery = {
@@ -94,12 +95,21 @@ exports.searchTicker = async (req, res) => {
 
 exports.getUserPortfolio = async (req, res) => {
    const { userId } = req.body;
+   let totalBalance = 0;
+   
 
    let portfolios = await Portfolio.find({ userId , numOfShares: {$gte: 1}})
    let tickerArr = portfolios.map(portfo => portfo.ticker)
    let portfoIntra = await Ticker.find({ 'ticker': { $in: tickerArr } }, {ticker: 1, intraday: 1})
 
+   // console.log('intra', portfoIntra)
+   
+   portfolios.forEach(port => {
+      totalBalance += port.avgPrice * port.numOfShares;
+   })
+  
    const userPorfo = {portfolios, portfoIntra};
+
    res.send(userPorfo);
 }
 

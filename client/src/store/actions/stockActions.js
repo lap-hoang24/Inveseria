@@ -28,6 +28,7 @@ export const getPortfoIntra = (portfo) => {
 export const getUserPort = async (userId) => {
    let totalBalance = 0;
    let userPortfo = await axios.post('/stockApi/getUserPortfolio', userId);
+   
       userPortfo.data.portfolios.forEach(port => {
          totalBalance += port.avgPrice * port.numOfShares;
       })
