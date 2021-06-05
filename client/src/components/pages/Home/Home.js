@@ -1,22 +1,17 @@
-import React, { Component, useState, useEffect, createContext } from 'react'
+import React, { useState, useEffect} from 'react'
 import { withCookies } from 'react-cookie';
 import Navbar from '../../layouts/Navbar';
 import UserInfo from './UserInfo';
 import Search from './Search';
-import Account from './Account';
 import Portfolio from './Portfolio';
 import News from './News';
 import axios from 'axios';
 
 
-
 function Home(props) {
 
-   const [userInfo, setUserInfo] = useState();
-   const [userPortfolio, setUserPortfolio] = useState();
-   const [portfoIntra, setPortfoIntra] = useState();
-   let totalBalance = 0;
-
+   const [state, setState] = useState({});
+   const [loading, setLoading] = useState(true);
 
    useEffect(() => {
       const userId = props.cookies.get('id');
@@ -24,46 +19,45 @@ function Home(props) {
       const userPortfo = axios.post('/stockApi/getUserPortfolio', { userId });
 
       Promise.all([userInfo, userPortfo]).then(values => {
-         // console.log(values);
-         setUserInfo(values[0].data);
-         setUserPortfolio(values[1].data.portfolios);
-         setPortfoIntra(values[1].data.portfoIntra);
+         let portfolios = values[1].data.portfolios;
+         let portfoIntra = values[1].data.portfoIntra;
+         let userInfo = values[0].data;
 
+         if (portfoIntra && portfolios) {
+            portfolios.forEach(portfo => {
+               for (let i = 0; i < portfoIntra.length; i++) {
+                  if (portfo.ticker === portfoIntra[i].ticker) {
+                     portfo.intra = portfoIntra[i].intraday
+                  }
+               }
+            })
+         }
+
+         setState({ portfolios, portfoIntra, userInfo });
+         setLoading(false);
       })
    }, []);
 
-  
-   if (portfoIntra && userPortfolio) {
-      userPortfolio.forEach(port => {
-         totalBalance += port.avgPrice * port.numOfShares;
-      })
 
-      userPortfolio.totalBalance = totalBalance;
+   const { portfolios, userInfo } = state;
+   console.log(state);
 
-      userPortfolio.forEach(portfo => {
-         for (let i = 0; i < portfoIntra.length; i++) {
-            if (portfo.ticker === portfoIntra[i].ticker) {
-               portfo.intra = portfoIntra[i].intraday
-            }
-         }
-      })
-   }
+   if (loading) {
+      return (<div className="loading">LOADING...</div>)
+   } else {
+      return (
+         <div id="home-page">
+            <div id="user-info_search-wrapper">
+               <UserInfo userInfo={userInfo} />
+               <Search />
+            </div>
+            <Portfolio userPortfolio={portfolios} cash={userInfo.cash}/>
+            <News />
+            <Navbar />
 
-
-   console.log(userPortfolio);
-
-   return (
-      <div id="home-page">
-         <div id="user-info_search-wrapper">
-            <UserInfo userInfo={userInfo} />
-            <Search />
          </div>
-         {/* <Account userInfo={userInfo} userPortfolio={userPortfolio} /> */}
-         {/* <Portfolio userPortfolio={userPortfolio} portfoIntra={portfoIntra} />
-         <News /> */}
-         <Navbar />
-      </div>
-   )
+      )
+   }
 }
 
 export default withCookies(Home);

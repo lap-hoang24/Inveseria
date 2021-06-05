@@ -1,12 +1,13 @@
 #stock-details {
    position: relative;
    width: 100%;
+   margin-bottom: 5rem;
 
    .top-wrapper {
       @include flex(row, space-between, center);
       width: 90%;
       margin: 0 auto;
-      padding: 1rem 0 .7rem 0;
+      padding: 1rem 0 0.7rem 0;
 
       i {
          font-size: 1.4rem;
@@ -19,53 +20,35 @@
       border-bottom: 1px solid $primary-color;
    }
 
-
    .price-buy-btn-wrapper {
       width: 90%;
       margin: 0 auto;
-      padding: .7rem 0 1rem 0;
+      padding: 0.7rem 0 1rem 0;
 
       @include flex(row, space-between, center);
 
       .price-percent-wrapper {
-   
          .price {
             font-size: 1.5rem;
          }
       }
-
-      .buy-btn, .sell-btn {
-         padding: .3rem .8rem;
-         border: none;
-         color: $white;
-         margin: 0 .3rem;
-         border-radius: 3px;
-      }
-
-      .buy-btn {
-         background-color: $green;
-      }
-
-      .sell-btn {
-         background-color: $red;
-      }
    }
 
+   .user-position {
+      margin: 0 auto;
+      padding: .5rem 0 .5rem 1rem;
+      @include component-container(10px, 90%, $light-bg);
+   }
 
    .chart {
       height: 300px;
       margin: 0 auto;
       @include component-container(10px, 90%, $light-bg);
-
    }
-
 
    .news {
       height: 300px;
       margin: 0 auto;
       @include component-container(10px, 90%, $light-bg);
    }
-
-
-
 }

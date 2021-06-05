@@ -1,0 +1,16 @@
+.buy-btn,
+.sell-btn {
+   padding: 0.3rem 0.8rem;
+   border: none;
+   color: $white;
+   margin: 0 0.3rem;
+   border-radius: 3px;
+}
+
+.buy-btn {
+   background-color: $green;
+}
+
+.sell-btn {
+   background-color: $red;
+}

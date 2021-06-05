@@ -75,6 +75,23 @@ body {
   color: #ffffff;
 }
 
+.buy-btn,
+.sell-btn {
+  padding: 0.3rem 0.8rem;
+  border: none;
+  color: #ffffff;
+  margin: 0 0.3rem;
+  border-radius: 3px;
+}
+
+.buy-btn {
+  background-color: #52b788;
+}
+
+.sell-btn {
+  background-color: #f94144;
+}
+
 #home-page {
   position: relative;
   width: 100%;
@@ -134,29 +151,9 @@ body {
   font-weight: bold;
 }
 
-#home-page #user-info_search-wrapper #search-icon {
-  margin-right: 1rem;
-}
-
-#home-page #user-info_search-wrapper #search-icon .fa-search {
-  color: #2d6a4f;
+#home-page #user-info_search-wrapper #search-icon button {
   font-size: 1.5rem;
-}
-
-#home-page #user-info_search-wrapper #search-icon #search-modal {
-  height: 500px;
-}
-
-#home-page #user-info_search-wrapper #search-icon #search-modal .modal-content {
-  background-color: #f8f9fa;
-}
-
-#home-page #user-info_search-wrapper #search-icon #found-stock-container .search-result {
-  padding: .2rem .3rem;
-}
-
-#home-page #user-info_search-wrapper #search-icon #found-stock-container .search-result:nth-child(even) {
-  background-color: #e9ecef;
+  color: #2d6a4f;
 }
 
 #home-page #account {
@@ -335,6 +332,7 @@ body {
 #stock-details {
   position: relative;
   width: 100%;
+  margin-bottom: 5rem;
 }
 
 #stock-details .top-wrapper {
@@ -355,7 +353,7 @@ body {
           align-items: center;
   width: 90%;
   margin: 0 auto;
-  padding: 1rem 0 .7rem 0;
+  padding: 1rem 0 0.7rem 0;
   border-bottom: 1px solid #2d6a4f;
 }
 
@@ -370,7 +368,7 @@ body {
 #stock-details .price-buy-btn-wrapper {
   width: 90%;
   margin: 0 auto;
-  padding: .7rem 0 1rem 0;
+  padding: 0.7rem 0 1rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -392,20 +390,12 @@ body {
   font-size: 1.5rem;
 }
 
-#stock-details .price-buy-btn-wrapper .buy-btn, #stock-details .price-buy-btn-wrapper .sell-btn {
-  padding: .3rem .8rem;
-  border: none;
-  color: #ffffff;
-  margin: 0 .3rem;
-  border-radius: 3px;
-}
-
-#stock-details .price-buy-btn-wrapper .buy-btn {
-  background-color: #52b788;
-}
-
-#stock-details .price-buy-btn-wrapper .sell-btn {
-  background-color: #f94144;
+#stock-details .user-position {
+  margin: 0 auto;
+  padding: .5rem 0 .5rem 1rem;
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
 }
 
 #stock-details .chart {
@@ -441,4 +431,34 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+#search-modal {
+  overflow: scroll;
+}
+
+#search-modal .search-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+#search-modal #found-stock-container .search-result {
+  padding: .3rem .3rem;
+}
+
+#search-modal #found-stock-container .search-result:nth-child(even) {
+  background-color: #e9ecef;
 }

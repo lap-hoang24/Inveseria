@@ -1,0 +1,16 @@
+#search-modal {
+   overflow: scroll;
+   .search-bar {
+      @include flex(row, center, flex-start);
+
+   }
+
+   #found-stock-container {
+      .search-result {
+         padding: .3rem .3rem;
+         &:nth-child(even) {
+            background-color: darken($light-bg, 5%);
+         }
+      }
+   }
+}

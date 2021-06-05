@@ -1,13 +1,17 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
+import Modal from '@material-ui/core/Modal';
+import { useStyles, modalStyle } from '../../component/Modal';
 
-function Search() {
-   const array = [{
+function Search(props) {
+   const emptyArray = [{
       _id: 'nothing',
-      ticker: '',
    }]
    const [tickerInput, setTickerInput] = useState('');
    const [stocksFound, setStocksFound] = useState([]);
+   const [open, setOpen] = useState(false);
+   const handleOpen = () => { setOpen(true) };
+   const handleClose = () => { setOpen(false) };
 
    useEffect(() => {
       axios.post('/stockApi/search-ticker', { companyName: tickerInput })
@@ -15,42 +19,49 @@ function Search() {
             if (typeof response.data === 'object') {
                setStocksFound(response.data);
             } else {
-               setStocksFound(array);
+               setStocksFound(emptyArray);
             }
          })
          .catch(err => console.error(err));
    }, [tickerInput])
 
-   return (
-      // modal or side slide-in search effect
-      <div id="search-icon">
-         <a href="#search-modal" className="modal-trigger"><i className="fas fa-search"></i></a>
-         {/* <!-- Modal Structure --> */}
-         <div id="search-modal" className="modal">
-            <div className="modal-content">
-               <i className="fas fa-search"></i><input onChange={(event) => { setTickerInput(event.target.value) }} value={tickerInput} type="text" id='ticker-search' />
 
-               <div id="found-stock-container">
-                  {stocksFound && stocksFound.map(stock => {
-                     if (stock.ticker) {
-                        let nameDisplay = stock.companyName.length > 20 ? stock.companyName.slice(0, 20) + "..." : stock.companyName;
-                        return (
-                           <div className="search-result" key={stock._id}>
-                              <a href={"/viewstock/" + stock.ticker}> {stock.ticker} - {nameDisplay}</a>
-                           </div>
-                        )
-                     } else {
-                        return (
-                           <div className="search-result" key={stock._id}>
-                              ...
-                           </div>
-                        )
-                     }
-                  })
-                  }
-               </div>
-            </div>
+   // ==============MODAL BODY AND STYLINGS===========================
+
+   const classes = useStyles();
+
+   const body = (
+      <div style={modalStyle} className={classes.paper} id="search-modal">
+         <input onChange={(event) => { setTickerInput(event.target.value) }} value={tickerInput} type="text" id='ticker-search' placeholder="Find your stock..." autoComplete="off" />
+         <div id="found-stock-container">
+            {stocksFound && stocksFound.map(stock => {
+               if (stock.ticker) {
+                  let nameDisplay = stock.companyName.length > 20 ? stock.companyName.slice(0, 20) + "..." : stock.companyName;
+                  return (
+                     <div className="search-result" key={stock._id}>
+                        <a href={"/viewstock/" + stock.ticker}> {stock.ticker} - {nameDisplay}</a>
+                     </div>
+                  )
+               } else {
+                  return (
+                     <div className="search-result" key={stock._id}>
+                        ...
+                     </div>
+                  )
+               }
+            })}
          </div>
+      </div>
+   )
+
+   return (
+      <div id="search-icon">
+         <button type="button" style={{ border: 'none', background: 'none' }} onClick={handleOpen}><i className="fas fa-search"></i></button>
+         <Modal open={open} onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description">
+            {body}
+         </Modal>
       </div>
    )
 }
