@@ -43,11 +43,16 @@ function StockDetails(props) {
       Promise.all([stockIntraday, userPos])
          .then(values => {
             console.log(values);
-            const tickerInfo = [...values[0].data.intraday];
+            const tickerIntra = [...values[0].data.intraday];
+            const tickerInfo = {
+               ticker: values[0].data.ticker,
+               logo: values[0].data.logo,
+               companyName: values[0].data.companyName,
+            };
             const userPosition = values[1].data;
-            setState({ tickerInfo, userPosition });
+            setState({ tickerInfo, tickerIntra, userPosition });
 
-            let dataSet = tickerInfo.map(intraday => {
+            let dataSet = tickerIntra.map(intraday => {
                return {
                   time: intraday.date.slice(0, 10),
                   value: intraday.open
@@ -74,10 +79,10 @@ function StockDetails(props) {
 
          }).catch(err => console.error(err))
 
-         setInterval(() => {
-            randomNum = Math.floor((Math.random() * 50));
-            setrandomNumber(randomNum)
-         }, 1500)
+      setInterval(() => {
+         randomNum = Math.floor((Math.random() * 50));
+         setrandomNumber(randomNum)
+      }, 1500)
    }, [])
 
    useEffect(() => {
@@ -118,22 +123,22 @@ function StockDetails(props) {
 
 
 
-   const { tickerInfo, userPosition } = state;
+   const { tickerInfo, tickerIntra, userPosition } = state;
    const classes = useStyles();
-   if (tickerInfo && userPosition) {
+   if (tickerIntra && userPosition) {
 
-      let percent = tickerInfo && String(((tickerInfo[randomNumber].open.toFixed(1) - tickerInfo[randomNumber].low.toFixed(1)) / tickerInfo[randomNumber].close) * 100).slice(0, 4);
+      let percent = tickerIntra && String(((tickerIntra[randomNumber].open.toFixed(1) - tickerIntra[randomNumber].low.toFixed(1)) / tickerIntra[randomNumber].close) * 100).slice(0, 4);
       return (
          <div id="stock-details">
             <div className="top-wrapper">
                <div className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></div>
-               <div className="ticker">{tickerInfo[randomNumber].symbol}</div>
+               <div className="ticker">{tickerIntra[randomNumber].symbol}</div>
                <div className="add-favorite-btn"><i className="far fa-star"></i></div>
             </div>
 
             <div className="price-buy-btn-wrapper">
                <div className="price-percent-wrapper">
-                  <div className='price'>$ {tickerInfo && tickerInfo[randomNumber].open}</div>
+                  <div className='price'>$ {tickerIntra && tickerIntra[randomNumber].open}</div>
                   <div className="percent">{percent}%</div>
                </div>
 
@@ -146,12 +151,12 @@ function StockDetails(props) {
                      aria-describedby="simple-modal-description">
                      <div style={modalStyle} className={classes.paper} id="buy-modal">
                         <div className="modal-content">
-                           <div className="ticker">{tickerInfo[randomNumber].symbol}</div>
-                           <div className="price">{tickerInfo && tickerInfo[randomNumber].open}</div>
+                           <div className="ticker">{tickerIntra[randomNumber].symbol}</div>
+                           <div className="price">{tickerIntra && tickerIntra[randomNumber].open}</div>
                         </div>
                         <p>Please enter number of shares</p>
                         <input id='numOfShares' onChange={(event) => { setNumOfShares(event.target.value) }} type="text" autoComplete="off" />
-                        <button onClick={() => { setBuyPrice(tickerInfo[randomNumber].open) }} className="buy-btn">BUY</button>
+                        <button onClick={() => { setBuyPrice(tickerIntra[randomNumber].open) }} className="buy-btn">BUY</button>
                      </div>
                   </Modal>
 
@@ -161,12 +166,12 @@ function StockDetails(props) {
 
                      <div style={modalStyle} className={classes.paper} id="sell-modal">
                         <div className="modal-content">
-                           <div className="ticker">{tickerInfo[randomNumber].symbol}</div>
-                           <div className="price">{tickerInfo && tickerInfo[randomNumber].open}</div>
+                           <div className="ticker">{tickerIntra[randomNumber].symbol}</div>
+                           <div className="price">{tickerIntra && tickerIntra[randomNumber].open}</div>
                         </div>
                         <p>Please enter number of shares</p>
                         <input id='numOfShares' onChange={(event) => { setNumOfShares(event.target.value) }} type="text" autoComplete="off" />
-                        <button onClick={() => { setSellPrice(tickerInfo[randomNumber].open) }} className="sell-btn">SELL</button>
+                        <button onClick={() => { setSellPrice(tickerIntra[randomNumber].open) }} className="sell-btn">SELL</button>
                      </div>
                   </Modal>
                </div>
