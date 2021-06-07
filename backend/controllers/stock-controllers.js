@@ -76,6 +76,26 @@ exports.buyStock = async (req, res) => {
 }
 
 
+// .../sellStock - POST
+
+exports.sellStock = async (req, res) => {
+   const { price, numOfShares, tickerInfo, userId } = req.body;
+
+   // recalculate AvgPrice
+
+}
+
+
+// .../getUserPosition - POST
+
+exports.getUserPosition = async (req, res) => {
+   const {ticker, userId} = req.body;
+   let position = await Portfolio.findOne({ticker, userId})
+
+   position ? res.send(position) : res.send({noPosition: true})
+}
+
+
 
 // .../search-ticker - POST
 exports.searchTicker = async (req, res) => {

@@ -8,13 +8,18 @@ router.post('/addIntraday', stockCtrl.addIntraday);
 
 router.get('/getIntraday/:ticker', stockCtrl.getIntraday);
 
-router.post('/search-ticker', stockCtrl.searchTicker);
-
 router.get('/getAllStocks', stockCtrl.getAllStocks);
+
+router.post('/getUserPosition/', stockCtrl.getUserPosition);
+
+router.post('/search-ticker', stockCtrl.searchTicker);
 
 router.post('/buyStock', stockCtrl.buyStock);
 
+router.post('/sellStock', stockCtrl.sellStock);
+
 router.post('/getUserPortfolio', stockCtrl.getUserPortfolio);
+
 
 router.post('/getPortfoIntra', stockCtrl.getPortfoIntra);
 
