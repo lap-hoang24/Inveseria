@@ -1,15 +1,13 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { getUserInfo } from '../../../store/actions/authActions';
 import { useParams } from "react-router-dom";
 import { withCookies } from 'react-cookie';
 import Navbar from '../../layouts/Navbar';
 import Modal from '@material-ui/core/Modal'
 import { useStyles, modalStyle } from '../../component/Modal';
-import { createChart } from 'lightweight-charts';
 import { paintLineChart } from './LineChart';
-import BuyModal from './BuyModal';
+
+
 function StockDetails(props) {
 
    const { ticker } = useParams();
@@ -20,6 +18,8 @@ function StockDetails(props) {
    const [buyOpen, setBuyOpen] = useState(false);
    const [sellOpen, setSellOpen] = useState(false);
    const [randomNumber, setrandomNumber] = useState(0);
+   const [shareExceed, setShareExceed] = useState(false);
+   const [cashExceed, setCashExceed] = useState(false);
    const handleBuyOpen = () => { setBuyOpen(true) };
    const handleBuyClose = () => { setBuyOpen(false) };
    const handleSellOpen = () => { setSellOpen(true) };
@@ -28,16 +28,9 @@ function StockDetails(props) {
 
 
 
-
-
-
-   // const sellBtn = document.getElementById('sell-btn-disable');
-   // userPosition.noPosition ? sellBtn.disabled = true : sellBtn.disabled = false;
-
    useEffect(() => {
       const userId = props.cookies.get('id');
       const stockIntraday = axios.get('/stockApi/getIntraday/' + ticker);
-      // get user stock info for this stock, if null, disable SELL button
       const userPos = axios.post('/stockApi/getUserPosition/', { ticker, userId });
 
       Promise.all([stockIntraday, userPos])
@@ -49,8 +42,9 @@ function StockDetails(props) {
                logo: values[0].data.logo,
                companyName: values[0].data.companyName,
             };
-            const userPosition = values[1].data;
-            setState({ tickerInfo, tickerIntra, userPosition });
+            const userPosition = values[1].data._doc;
+            const userCash = values[1].data.userCash;
+            setState({ tickerInfo, tickerIntra, userPosition, userCash });
 
             let dataSet = tickerIntra.map(intraday => {
                return {
@@ -71,12 +65,12 @@ function StockDetails(props) {
                { time: '2019-04-20', value: 74.43 },
             ])
 
+            // disable Sell button if user doesnt have any share
             const sellBtn = document.getElementById('sell-btn-disable');
             if (userPosition.noPosition) {
                sellBtn.disabled = true;
                sellBtn.style.backgroundColor = 'grey';
             }
-
          }).catch(err => console.error(err))
 
       setInterval(() => {
@@ -107,7 +101,7 @@ function StockDetails(props) {
       if (sellPrice !== 0 && numOfShares !== 0) {
          const params = {
             price: sellPrice,
-            numOfShares: numOfShares,
+            numOfShares,
             tickerInfo,
             userId: props.cookies.get('id')
          }
@@ -120,14 +114,39 @@ function StockDetails(props) {
       }
    }, [sellPrice])
 
-
-
-
-   const { tickerInfo, tickerIntra, userPosition } = state;
+   const { tickerInfo, tickerIntra, userPosition, userCash } = state;
    const classes = useStyles();
-   if (tickerIntra && userPosition) {
 
+   if (tickerIntra && userPosition) {
+      const compareShares = (numOfShares) => {
+         const sellBtn = document.getElementById('sell-btn-modal');
+         if (numOfShares > userPosition.numOfShares) {
+            setShareExceed(true);
+            sellBtn.disabled = true;
+            sellBtn.style.backgroundColor = 'grey';
+         } else {
+            setShareExceed(false);
+            sellBtn.disabled = false;
+            sellBtn.style.backgroundColor = 'red';
+         }
+      }
+
+      const compareCash = (numOfShares) => {
+         const buyBtn = document.getElementById('buy-btn-modal');
+         let totalPurchase = numOfShares * tickerIntra[randomNumber].open;
+         if (totalPurchase > userCash) {
+            setCashExceed(true);
+            buyBtn.disabled = true;
+            buyBtn.style.backgroundColor = 'grey';
+         } else {
+            setCashExceed(false);
+            buyBtn.disabled = false;
+            buyBtn.style.backgroundColor = 'green';
+         }
+      }
       let percent = tickerIntra && String(((tickerIntra[randomNumber].open.toFixed(1) - tickerIntra[randomNumber].low.toFixed(1)) / tickerIntra[randomNumber].close) * 100).slice(0, 4);
+
+      // ========================RETURN=============================
       return (
          <div id="stock-details">
             <div className="top-wrapper">
@@ -155,8 +174,9 @@ function StockDetails(props) {
                            <div className="price">{tickerIntra && tickerIntra[randomNumber].open}</div>
                         </div>
                         <p>Please enter number of shares</p>
-                        <input id='numOfShares' onChange={(event) => { setNumOfShares(event.target.value) }} type="text" autoComplete="off" />
-                        <button onClick={() => { setBuyPrice(tickerIntra[randomNumber].open) }} className="buy-btn">BUY</button>
+                        <input id='numOfShares' onChange={(event) => { setNumOfShares(event.target.value); compareCash(event.target.value) }} type="text" autoComplete="off" autoFocus />
+                        {cashExceed ? <div> work harder then you can buy more share mother fucker!</div> : ''}
+                        <button onClick={() => { setBuyPrice(tickerIntra[randomNumber].open) }} className="buy-btn" id="buy-btn-modal">BUY</button>
                      </div>
                   </Modal>
 
@@ -170,8 +190,9 @@ function StockDetails(props) {
                            <div className="price">{tickerIntra && tickerIntra[randomNumber].open}</div>
                         </div>
                         <p>Please enter number of shares</p>
-                        <input id='numOfShares' onChange={(event) => { setNumOfShares(event.target.value) }} type="text" autoComplete="off" />
-                        <button onClick={() => { setSellPrice(tickerIntra[randomNumber].open) }} className="sell-btn">SELL</button>
+                        <input id='numOfShares' onChange={(event) => { setNumOfShares(event.target.value); compareShares(event.target.value) }} type="number" autoComplete="off" autoFocus />
+                        {shareExceed ? <div> you can't fucking sell what you dont own mother fucker!</div> : ''}
+                        <button onClick={() => { setSellPrice(tickerIntra[randomNumber].open) }} className="sell-btn" id='sell-btn-modal'>SELL</button>
                      </div>
                   </Modal>
                </div>
@@ -200,18 +221,5 @@ function StockDetails(props) {
    }
 }
 
-const mapStateToProps = (state, ownProps) => {
-   return {
-      userInfo: state.userReducer.user,
-      cookies: ownProps.cookies
-   }
-}
 
-const mapDispatchToProps = (dispatch) => {
-   return {
-      getUserInfo: (id) => { dispatch(getUserInfo(id)) },
-   }
-}
-
-
-export default withCookies(connect(mapStateToProps, mapDispatchToProps)(StockDetails))
+export default withCookies(StockDetails)

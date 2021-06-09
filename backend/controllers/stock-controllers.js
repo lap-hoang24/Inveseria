@@ -18,7 +18,6 @@ exports.addIntraday = async (req, res) => {
 // .../getIntraday - GET
 exports.getIntraday = async (req, res) => {
    let stock = await Ticker.findOne({ ticker: req.params.ticker })
-
    stock ? res.send(stock) : res.send('no stock found')
 }
 
@@ -31,25 +30,24 @@ exports.getAllStocks = async (req, res) => {
 
 // .../buyStock - POST
 exports.buyStock = async (req, res) => {
+   const { price, numOfShares, tickerInfo, userId } = req.body;
+   let addedPosition, userPosition, updatedNumOfShares, updatedAvgPrice, avgPrice, updatedCash, cashAmount, totalPurchase, updatedUserCash;
    // check if user already has this position (ticker)
    // if YES, accumulate
    // if NO, create new posistion
 
-   const { price, numOfShares, tickerInfo, userId } = req.body;
-   let addedPosition;
-
-   let userPosition = await Portfolio.findOne({ userId: userId, ticker: tickerInfo.ticker })
-
+   userPosition = await Portfolio.findOne({ userId: userId, ticker: tickerInfo.ticker })
+  
    if (userPosition) {
-      let updatedNumOfShares = parseInt(numOfShares) + userPosition.numOfShares;
-      let updatedAvgPrice = ((price * parseInt(numOfShares)) + (userPosition.avgPrice * userPosition.numOfShares)) / updatedNumOfShares;
+      updatedNumOfShares = parseInt(numOfShares) + userPosition.numOfShares;
+      updatedAvgPrice = ((price * parseInt(numOfShares)) + (userPosition.avgPrice * userPosition.numOfShares)) / updatedNumOfShares;
 
       addedPosition = await Portfolio.updateOne(
          { userId: userId, ticker: tickerInfo.ticker },
          { $set: { avgPrice: updatedAvgPrice, numOfShares: updatedNumOfShares } }
       )
    } else {
-      let avgPrice = price * numOfShares / numOfShares;
+      avgPrice = price * numOfShares / numOfShares;
       addedPosition = await Portfolio.create({
          userId,
          avgPrice,
@@ -59,6 +57,12 @@ exports.buyStock = async (req, res) => {
          numOfShares,
       })
    }
+
+   totalPurchase = price * numOfShares;
+   cashAmount = await User.findOne({ _id: userId }, { cash: 1 });
+   updatedCash = cashAmount.cash - totalPurchase;
+
+   updatedUserCash = await User.updateOne({ _id: userId }, { $set: { cash: updatedCash} });
 
    // add to Transactions
    let info = {
@@ -80,19 +84,44 @@ exports.buyStock = async (req, res) => {
 
 exports.sellStock = async (req, res) => {
    const { price, numOfShares, tickerInfo, userId } = req.body;
+   let userPosition, updatedNumOfShares, totalLiquidation, updatedAvgPrice, cashAmount, updatedCash, updatedPosition;
+
+   userPosition = await Portfolio.findOne({ userId, ticker: tickerInfo.ticker })
 
    // recalculate AvgPrice
+   totalLiquidation = (price * parseInt(numOfShares))
+   updatedNumOfShares = userPosition.numOfShares - parseInt(numOfShares);
+   updatedAvgPrice = ((userPosition.avgPrice * userPosition.numOfShares) - totalLiquidation) / updatedNumOfShares;
+   // add sold shares money to CASH
+   cashAmount = await User.findOne({ _id: userId }, { cash: 1 });
+   updatedCash = cashAmount.cash + totalLiquidation;
 
+   // update user position and user cash amount
+   updatedPosition = await Portfolio.updateOne({ userId, ticker: tickerInfo.ticker }, {$set: {numOfShares: updatedNumOfShares, avgPrice: updatedAvgPrice}})
+   updatedUserCash = await User.updateOne({ _id: userId }, { $set: { cash: updatedCash} });
+
+   // add to Transactions
+   let info = {
+      userId,
+      numOfShares,
+      price,
+      action: 'sell',
+      ticker: tickerInfo.ticker,
+      name: tickerInfo.companyName,
+      logo: tickerInfo.logo,
+   }
+   let newTransaction = await Transaction.create(info);
+   res.redirect(301, 'http://localhost:3000/');
 }
-
 
 // .../getUserPosition - POST
 
 exports.getUserPosition = async (req, res) => {
-   const {ticker, userId} = req.body;
-   let position = await Portfolio.findOne({ticker, userId})
-
-   position ? res.send(position) : res.send({noPosition: true})
+   const { ticker, userId } = req.body;
+   let position = await Portfolio.findOne({ ticker, userId })
+   let cashAmount = await User.findOne({_id: userId}, {cash: 1});
+   let UP = {...position, userCash: cashAmount.cash};
+   position ? res.send(UP) : res.send({ noPosition: true })
 }
 
 
@@ -116,19 +145,19 @@ exports.searchTicker = async (req, res) => {
 exports.getUserPortfolio = async (req, res) => {
    const { userId } = req.body;
    let totalBalance = 0;
-   
 
-   let portfolios = await Portfolio.find({ userId , numOfShares: {$gte: 1}})
+
+   let portfolios = await Portfolio.find({ userId, numOfShares: { $gte: 1 } })
    let tickerArr = portfolios.map(portfo => portfo.ticker)
-   let portfoIntra = await Ticker.find({ 'ticker': { $in: tickerArr } }, {ticker: 1, intraday: 1})
+   let portfoIntra = await Ticker.find({ 'ticker': { $in: tickerArr } }, { ticker: 1, intraday: 1 })
 
    // console.log('intra', portfoIntra)
-   
+
    portfolios.forEach(port => {
       totalBalance += port.avgPrice * port.numOfShares;
    })
-  
-   const userPorfo = {portfolios, portfoIntra};
+
+   const userPorfo = { portfolios, portfoIntra };
 
    res.send(userPorfo);
 }
@@ -140,7 +169,7 @@ exports.getUserPortfolio = async (req, res) => {
 exports.getPortfoIntra = async (req, res) => {
    console.log(req.body);
 
-   let portfoIntra = await Ticker.find({ 'ticker': { $in: req.body } }, {ticker: 1, intraday: 1})
+   let portfoIntra = await Ticker.find({ 'ticker': { $in: req.body } }, { ticker: 1, intraday: 1 })
 
    res.send(portfoIntra);
 }

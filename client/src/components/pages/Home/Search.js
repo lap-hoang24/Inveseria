@@ -32,7 +32,7 @@ function Search(props) {
 
    const body = (
       <div style={modalStyle} className={classes.paper} id="search-modal">
-         <input onChange={(event) => { setTickerInput(event.target.value) }} value={tickerInput} type="text" id='ticker-search' placeholder="Find your stock..." autoComplete="off" />
+         <input onChange={(event) => { setTickerInput(event.target.value) }} value={tickerInput} type="text" id='ticker-search' placeholder="Find your stock..." autoComplete="off"  autoFocus/>
          <div id="found-stock-container">
             {stocksFound && stocksFound.map(stock => {
                if (stock.ticker) {
