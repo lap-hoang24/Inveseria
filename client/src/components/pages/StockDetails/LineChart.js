@@ -1,4 +1,3 @@
-import React from 'react';
 import { createChart } from 'lightweight-charts';
 
 export const paintLineChart = (dataSet) => {

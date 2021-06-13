@@ -1,12 +1,13 @@
 import React from 'react'
+import Search from '../pages/Home/Search';
 
 function Navbar() {
    return (
       <div id="nav-bar">
-         <a href="/" className="nav-link"><i className="fas fa-2x fa-dice-five"></i></a>
-         <a href="/watchlist" className="nav-link"><i className="fab fa-2x fa-atlassian"></i></a>
-         <a href="/transations" className="nav-link"><i className="fas fa-2x fa-file-alt"></i></a>
-         <a href="/login" className="nav-link"><i className="fas fa-2x fa-bars"></i></a>
+         <a href="/" className="nav-link"><i className="fas fa-dice-five"></i></a>
+         <a href="/watchlist" className="nav-link"><i className="fas fa-star"></i></a>
+         <Search />
+         <a href="/login" className="nav-link"><i className="fas fa-bars"></i></a>
       </div>
    )
 }

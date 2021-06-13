@@ -1,0 +1,50 @@
+* {
+    // ====== GLOBAL RESET =============
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: $second-font;
+    a {
+        text-decoration: none;
+        &:visited {
+            color: $primary-color;
+        }
+
+        &:link {
+            color: $primary-color;
+        }
+    }
+
+    li {
+        list-style: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    // ====== GLOBAL CLASSES =============
+
+    .green-font {
+        color: $green;
+    }
+    .red-font {
+        color: $red;
+    }
+
+    #search-button {
+        color: $white;
+        font-size: $nav-icon;
+    }
+}
+
+body {
+    position: relative;
+}

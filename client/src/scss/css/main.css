@@ -13,7 +13,7 @@
 }
 
 * a:visited {
-  color: #01497c;
+  color: #2d6a4f;
 }
 
 * a:link {
@@ -32,6 +32,19 @@
   width: 100%;
   height: 100%;
   display: block;
+}
+
+* .green-font {
+  color: #52b788;
+}
+
+* .red-font {
+  color: #f94144;
+}
+
+* #search-button {
+  color: #ffffff;
+  font-size: 1.5rem;
 }
 
 body {
@@ -73,6 +86,7 @@ body {
 
 #nav-bar .nav-link {
   color: #ffffff;
+  font-size: 1.5rem;
 }
 
 .buy-btn,
@@ -166,7 +180,7 @@ body {
 
 #home-page #account #balance,
 #home-page #account #cash {
-  margin-left: 1rem;
+  margin-left: .5rem;
 }
 
 #home-page #account #balance {
@@ -185,7 +199,7 @@ body {
   font-size: 1.4rem;
 }
 
-#home-page #portfolio {
+#home-page #portfolio-acount-wrapper {
   width: 90%;
   border-radius: 10px;
   background-color: #f8f9fa;
@@ -193,9 +207,9 @@ body {
   margin: 0 auto 1rem auto;
 }
 
-#home-page #portfolio .ticker-info {
+#home-page #portfolio-acount-wrapper .ticker-info {
   height: 40px;
-  width: 90%;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -211,10 +225,15 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0 auto;
+  margin: .2rem auto;
+  padding: 0 1rem;
 }
 
-#home-page #portfolio .ticker-info .logo-symbol-wrapper {
+#home-page #portfolio-acount-wrapper .ticker-info:nth-child(odd) {
+  background-color: #eff1f4;
+}
+
+#home-page #portfolio-acount-wrapper .ticker-info .logo-symbol-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -232,14 +251,14 @@ body {
           align-items: center;
 }
 
-#home-page #portfolio .ticker-info .logo-symbol-wrapper .logo {
-  height: 25px;
-  width: 25px;
+#home-page #portfolio-acount-wrapper .ticker-info .logo-symbol-wrapper .logo {
+  height: 30px;
+  width: 30px;
   border-radius: 100%;
   margin-right: 0.3rem;
 }
 
-#home-page #portfolio .ticker-info .logo-symbol-wrapper .symbol-name-wrapper {
+#home-page #portfolio-acount-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -258,15 +277,15 @@ body {
   margin-left: 0.3rem;
 }
 
-#home-page #portfolio .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .symbol {
+#home-page #portfolio-acount-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .symbol {
   font-size: 12px;
 }
 
-#home-page #portfolio .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .company-name {
+#home-page #portfolio-acount-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .company-name {
   font-size: 11px;
 }
 
-#home-page #portfolio .ticker-info .intra-percent-wrapper {
+#home-page #portfolio-acount-wrapper .ticker-info .intra-percent-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -285,15 +304,15 @@ body {
   width: 50px;
 }
 
-#home-page #portfolio .ticker-info .intra-percent-wrapper .price {
+#home-page #portfolio-acount-wrapper .ticker-info .intra-percent-wrapper .price {
   font-size: 13px;
 }
 
-#home-page #portfolio .ticker-info .intra-percent-wrapper .percent {
+#home-page #portfolio-acount-wrapper .ticker-info .intra-percent-wrapper .percent {
   font-size: 11px;
 }
 
-#home-page #portfolio .ticker-info .price-percent-wrapper {
+#home-page #portfolio-acount-wrapper .ticker-info .price-percent-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -312,11 +331,11 @@ body {
   width: 70px;
 }
 
-#home-page #portfolio .ticker-info .price-percent-wrapper .price {
+#home-page #portfolio-acount-wrapper .ticker-info .price-percent-wrapper .price {
   font-size: 13px;
 }
 
-#home-page #portfolio .ticker-info .price-percent-wrapper .percent {
+#home-page #portfolio-acount-wrapper .ticker-info .price-percent-wrapper .percent {
   font-size: 11px;
 }
 
@@ -390,6 +409,24 @@ body {
   font-size: 1.5rem;
 }
 
+#stock-details .price-buy-btn-wrapper .btn-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 #stock-details .user-position {
   margin: 0 auto;
   padding: .5rem 0 .5rem 1rem;
@@ -431,6 +468,89 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+#watchlist .heading {
+  font-size: 1.7rem;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+#watchlist #list-wrapper {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  margin: 0 auto 1rem auto;
+}
+
+#watchlist .stock-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: .2rem 0;
+}
+
+#watchlist .stock-info:nth-child(even) {
+  background-color: #f2f4f6;
+}
+
+#watchlist .stock-info .ticker-logo-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50%;
+  padding-left: 1rem;
+}
+
+#watchlist .stock-info .ticker-logo-wrapper .logo {
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  margin-right: 0.3rem;
+}
+
+#watchlist .stock-info .price-percent-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  width: 50%;
+  padding-right: 1rem;
 }
 
 #search-modal {

@@ -9,14 +9,16 @@ import axios from 'axios';
 
 
 function Home(props) {
-
+   sessionStorage.setItem('lastPath', "/");
    const [state, setState] = useState({});
    const [loading, setLoading] = useState(true);
+   
 
    useEffect(() => {
       const userId = props.cookies.get('id');
       const userInfo = axios.post('/auth/info', { userId });
       const userPortfo = axios.post('/stockApi/getUserPortfolio', { userId });
+      // const marketNews = axios.get('https://finnhub.io/api/v1/news?category=general&token=c32dffiad3ieculvh350');
 
       Promise.all([userInfo, userPortfo]).then(values => {
          let portfolios = values[1].data.portfolios;
@@ -33,13 +35,13 @@ function Home(props) {
             })
          }
 
-         setState({ portfolios, portfoIntra, userInfo });
+         setState({ portfolios, portfoIntra, userInfo});
          setLoading(false);
       })
    }, []);
 
 
-   const { portfolios, userInfo } = state;
+   const { portfolios, userInfo} = state;
    console.log(state);
 
    if (loading) {
@@ -54,7 +56,6 @@ function Home(props) {
             <Portfolio userPortfolio={portfolios} cash={userInfo.cash}/>
             <News />
             <Navbar />
-
          </div>
       )
    }

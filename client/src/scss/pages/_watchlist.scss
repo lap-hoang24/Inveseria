@@ -1,0 +1,38 @@
+
+#watchlist {
+   .heading {
+      font-size: 1.7rem;
+      text-align: center;
+      padding: 1rem 0;
+   }
+
+   #list-wrapper {
+      @include component-container(10px, 90%, $light-bg);
+      margin: 0 auto 1rem auto;
+   }
+
+   .stock-info {
+      @include flex(row, space-between, center);
+      &:nth-child(even) {
+         background-color: darken($light-bg, 2%);
+      }
+      padding: .2rem 0;
+      .ticker-logo-wrapper {
+         @include flex(row, flex-start, center);
+         width: 50%;
+         padding-left: 1rem;
+         .logo {
+            height: 30px;
+            width: 30px;
+            border-radius: 100%;
+            margin-right: 0.3rem;
+         }
+      }
+
+      .price-percent-wrapper {
+         @include flex(column, flex-end, flex-end);
+         width: 50%;
+         padding-right: 1rem;
+      }
+   }
+}

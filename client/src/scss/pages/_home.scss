@@ -41,7 +41,7 @@
 
       #balance,
       #cash {
-         margin-left: 1rem;
+         margin-left: .5rem;
       }
 
       #balance {
@@ -59,24 +59,28 @@
       }
    } // end #account
 
-   #portfolio {
+   #portfolio-acount-wrapper {
       @include component-container(10px, 90%, $light-bg);
       padding: 0.5rem 0;
-      // height: 400px;
       margin: 0 auto 1rem auto;
+
 
       .ticker-info {
          height: 40px;
-         width: 90%;
+         width: 100%;
          @include flex(row, space-between, center);
-         margin: 0 auto;
+         margin: .2rem auto;
+         padding: 0 1rem;
+
+         &:nth-child(odd) {
+            background-color: darken($light-bg, 3%);
+         }
 
          .logo-symbol-wrapper {
-            // width: 50%;
             @include flex(row, flex-start, center);
             .logo {
-               height: 25px;
-               width: 25px;
+               height: 30px;
+               width: 30px;
                border-radius: 100%;
                margin-right: 0.3rem;
             }
@@ -86,7 +90,6 @@
                .symbol {
                   font-size: 12px;
                }
-
                .company-name {
                   font-size: 11px;
                }

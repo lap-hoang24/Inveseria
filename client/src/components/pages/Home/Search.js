@@ -11,7 +11,24 @@ function Search(props) {
    const [stocksFound, setStocksFound] = useState([]);
    const [open, setOpen] = useState(false);
    const handleOpen = () => { setOpen(true) };
-   const handleClose = () => { setOpen(false) };
+   const handleClose = () => {
+      setOpen(false);
+      setTickerInput('');
+   };
+
+   const saveHistory = (event) => {
+      let ticker = sessionStorage.getItem('ticker');
+      if (ticker) {
+         if (ticker.includes(event.target.textContent)) {
+            sessionStorage.setItem('ticker', ticker)
+         } else {
+            sessionStorage.setItem('ticker', `${ticker}/${event.target.textContent}`)
+         }
+      } else {
+         sessionStorage.setItem('ticker', event.target.textContent)
+      }
+   }
+   let history = sessionStorage.getItem('ticker') ? sessionStorage.getItem('ticker').split('/ ') : '';
 
    useEffect(() => {
       axios.post('/stockApi/search-ticker', { companyName: tickerInput })
@@ -23,6 +40,8 @@ function Search(props) {
             }
          })
          .catch(err => console.error(err));
+
+
    }, [tickerInput])
 
 
@@ -32,20 +51,28 @@ function Search(props) {
 
    const body = (
       <div style={modalStyle} className={classes.paper} id="search-modal">
-         <input onChange={(event) => { setTickerInput(event.target.value) }} value={tickerInput} type="text" id='ticker-search' placeholder="Find your stock..." autoComplete="off"  autoFocus/>
+         <input onChange={(event) => { setTickerInput(event.target.value) }} value={tickerInput} type="text" id='ticker-search' placeholder="Find your stock..." autoComplete="off" autoFocus />
          <div id="found-stock-container">
             {stocksFound && stocksFound.map(stock => {
                if (stock.ticker) {
                   let nameDisplay = stock.companyName.length > 20 ? stock.companyName.slice(0, 20) + "..." : stock.companyName;
                   return (
                      <div className="search-result" key={stock._id}>
-                        <a href={"/viewstock/" + stock.ticker}> {stock.ticker} - {nameDisplay}</a>
+                        <a data={stock._id} onClick={(event) => { saveHistory(event) }} href={"/viewstock/" + stock.ticker}> {stock.ticker} - {nameDisplay}</a>
                      </div>
                   )
                } else {
                   return (
-                     <div className="search-result" key={stock._id}>
-                        ...
+                     <div className="search-result" key={'something'}>
+                        <p>search history...</p>
+                        {history && history.map(hist => {
+                           let ticker = hist.split(' - ');
+                           return (
+                              <div className="search-result" key={ticker}>
+                                 <a href={`/viewstock/${ticker[0].trim()}`} className="history">{hist}</a>
+                              </div>
+                           )
+                        })}
                      </div>
                   )
                }
@@ -56,7 +83,7 @@ function Search(props) {
 
    return (
       <div id="search-icon">
-         <button type="button" style={{ border: 'none', background: 'none' }} onClick={handleOpen}><i className="fas fa-search"></i></button>
+         <button id='search-button' type="button" style={{ border: 'none', background: 'none' }} onClick={handleOpen}><i className="fas fa-search"></i></button>
          <Modal open={open} onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">

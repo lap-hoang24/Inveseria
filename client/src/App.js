@@ -7,6 +7,7 @@ import Signup from './components/auth/Signup';
 import Home from './components/pages/Home/Home';
 import GetTicker from './components/auth/getTicker'
 import StockDetails from './components/pages/StockDetails/StockDetails';
+import Watchlist from './components/pages/Watchlist/Watchlist';
 
 
 export class App extends Component {
@@ -20,6 +21,7 @@ export class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/getTicker" component={GetTicker} />
             <Route path="/viewstock/:ticker" component={StockDetails} />
+            <Route path="/watchlist" component={Watchlist} />
           </Switch>
         </div>
       </Router>
