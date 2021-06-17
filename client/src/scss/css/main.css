@@ -165,7 +165,7 @@ body {
   font-weight: bold;
 }
 
-#home-page #user-info_search-wrapper #search-icon button {
+#home-page #user-info_search-wrapper #search button {
   font-size: 1.5rem;
   color: #2d6a4f;
 }
@@ -175,12 +175,12 @@ body {
   border-radius: 10px;
   background-color: #f8f9fa;
   margin: 0 auto 1rem auto;
-  padding: .5rem 0 .5rem 0;
+  padding: 0.5rem 0 0.5rem 0;
 }
 
 #home-page #account #balance,
 #home-page #account #cash {
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 #home-page #account #balance {
@@ -225,7 +225,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: .2rem auto;
+  margin: 0.2rem auto;
   padding: 0 1rem;
 }
 
@@ -451,25 +451,6 @@ body {
   background-color: #f8f9fa;
 }
 
-#search-bar {
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
 #watchlist .heading {
   font-size: 1.7rem;
   text-align: center;
@@ -576,7 +557,7 @@ body {
 }
 
 #search-modal #found-stock-container .search-result {
-  padding: .3rem .3rem;
+  padding: 0.3rem 0.3rem;
 }
 
 #search-modal #found-stock-container .search-result:nth-child(even) {

@@ -1,13 +1,17 @@
+// #ticker-search {
+//    height: 10px;
+//    width: 100%;
+// }
+
 #search-modal {
    overflow: scroll;
    .search-bar {
       @include flex(row, center, flex-start);
-
    }
 
    #found-stock-container {
       .search-result {
-         padding: .3rem .3rem;
+         padding: 0.3rem 0.3rem;
          &:nth-child(even) {
             background-color: darken($light-bg, 5%);
          }

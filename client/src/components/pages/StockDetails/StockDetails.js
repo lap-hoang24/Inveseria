@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useParams, withRouter, Link } from "react-router-dom";
 import { withCookies } from 'react-cookie';
-import Navbar from '../../layouts/Navbar';
 import { paintLineChart } from './LineChart';
 import Favorite from '../../component/Favorite';
 import BuyButton from './BuyButton';
@@ -10,7 +9,7 @@ import SellButton from './SellButton';
 
 
 function StockDetails(props) {
-   const lastPath = sessionStorage.getItem('lastPath');
+   const lastPath = localStorage.getItem('lastPath');
    const { ticker } = useParams();
    const [state, setState] = useState({})
    const [randomNumber, setRandomNumber] = useState(0);
@@ -23,7 +22,7 @@ function StockDetails(props) {
 
       Promise.all([stockIntraday, userPos])
          .then(values => {
-            console.log(values);
+            // console.log(values);
             const tickerIntra = [...values[0].data.intraday];
             const tickerInfo = {
                ticker: values[0].data.ticker,
@@ -81,7 +80,7 @@ function StockDetails(props) {
       return (
          <div id="stock-details">
             <div className="top-wrapper">
-               <a href={lastPath} className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></a>
+               <Link to={lastPath} className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></Link>
                <div className="ticker">{symbol}</div>
                <Favorite ticker={symbol} userId={userId} inWatchlist={inWatchlist} />
             </div>
@@ -112,12 +111,10 @@ function StockDetails(props) {
             <div className="news">
                <h5>News</h5>
             </div>
-
-            <Navbar />
          </div>
       )
    } else {
       return (<div className="loading">LOADING...</div>)
    }
 }
-export default withCookies(StockDetails)
+export default withCookies(withRouter(StockDetails));

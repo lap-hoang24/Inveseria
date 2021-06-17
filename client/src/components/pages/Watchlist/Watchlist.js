@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { withCookies } from 'react-cookie';
-import Navbar from '../../layouts/Navbar';
 
-function Watchlist(props) {
-   sessionStorage.setItem('lastPath', "/watchlist");
+function Watchlist({cookies}) {
+   localStorage.setItem('lastPath', "/watchlist");
    const [watchlist, setWatchlist] = useState(false);
    const [randomNum, setRandomNum] = useState();
 
    useEffect(() => {
-      const userId = props.cookies.get('id');
+      const userId = cookies.get('id');
 
       axios.get('/stockApi/getWatchlist?userId=' + userId)
          .then(response => {
@@ -47,8 +46,6 @@ function Watchlist(props) {
                   )
                })}
             </div>
-
-            <Navbar />
          </div>
       )
    } else {

@@ -1,9 +1,27 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 import { useStyles, modalStyle } from '../../component/Modal';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
-function Search(props) {
+const inputStyles = {
+   input: {
+      height: "40px",
+      width: "100%"
+   },
+   label: {
+      fontStyle: 'italic',
+      fontSize: "14px",
+   },
+   float: {
+      color: 'red'
+   }
+}
+
+function Search({ classes }) {
    const emptyArray = [{
       _id: 'nothing',
    }]
@@ -17,18 +35,19 @@ function Search(props) {
    };
 
    const saveHistory = (event) => {
-      let ticker = sessionStorage.getItem('ticker');
+      let ticker = localStorage.getItem('ticker');
       if (ticker) {
          if (ticker.includes(event.target.textContent)) {
-            sessionStorage.setItem('ticker', ticker)
+            localStorage.setItem('ticker', ticker)
          } else {
-            sessionStorage.setItem('ticker', `${ticker}/${event.target.textContent}`)
+            localStorage.setItem('ticker', `${ticker}/${event.target.textContent}`)
          }
       } else {
-         sessionStorage.setItem('ticker', event.target.textContent)
+         localStorage.setItem('ticker', event.target.textContent)
       }
    }
-   let history = sessionStorage.getItem('ticker') ? sessionStorage.getItem('ticker').split('/ ') : '';
+
+   let history = localStorage.getItem('ticker') ? localStorage.getItem('ticker').split('/ ') : '';
 
    useEffect(() => {
       axios.post('/stockApi/search-ticker', { companyName: tickerInput })
@@ -40,18 +59,22 @@ function Search(props) {
             }
          })
          .catch(err => console.error(err));
-
-
    }, [tickerInput])
 
 
    // ==============MODAL BODY AND STYLINGS===========================
 
-   const classes = useStyles();
-
+   const classe = useStyles();
    const body = (
-      <div style={modalStyle} className={classes.paper} id="search-modal">
-         <input onChange={(event) => { setTickerInput(event.target.value) }} value={tickerInput} type="text" id='ticker-search' placeholder="Find your stock..." autoComplete="off" autoFocus />
+      <div style={modalStyle} className={classe.paper} id="search-modal">
+         <TextField InputProps={{ classes: { root: classes.input } }}
+            InputLabelProps={{ className: classes.label }}
+            value={tickerInput}
+            onChange={(event) => { setTickerInput(event.target.value) }}
+            id='ticker-search' label="Find stocks..."
+            autoComplete="off"
+            autoFocus variant="outlined" />
+
          <div id="found-stock-container">
             {stocksFound && stocksFound.map(stock => {
                if (stock.ticker) {
@@ -82,15 +105,22 @@ function Search(props) {
    )
 
    return (
-      <div id="search-icon">
+      <div id="search">
          <button id='search-button' type="button" style={{ border: 'none', background: 'none' }} onClick={handleOpen}><i className="fas fa-search"></i></button>
          <Modal open={open} onClose={handleClose}
             aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description">
-            {body}
+            aria-describedby="simple-modal-description"
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+               timeout: 250,
+            }}>
+            <Fade in={open}>
+               {body}
+            </Fade>
          </Modal>
       </div>
    )
 }
 
-export default Search;
+export default withStyles(inputStyles)(Search);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { withCookies } from 'react-cookie';
-import Navbar from '../../layouts/Navbar';
+import {withRouter} from 'react-router-dom';
 import UserInfo from './UserInfo';
 import Search from './Search';
 import Portfolio from './Portfolio';
@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 function Home(props) {
-   sessionStorage.setItem('lastPath', "/");
+   localStorage.setItem('lastPath', "/");
    const [state, setState] = useState({});
    const [loading, setLoading] = useState(true);
    
@@ -40,9 +40,7 @@ function Home(props) {
       })
    }, []);
 
-
    const { portfolios, userInfo} = state;
-   console.log(state);
 
    if (loading) {
       return (<div className="loading">LOADING...</div>)
@@ -55,7 +53,6 @@ function Home(props) {
             </div>
             <Portfolio userPortfolio={portfolios} cash={userInfo.cash}/>
             <News />
-            <Navbar />
          </div>
       )
    }
