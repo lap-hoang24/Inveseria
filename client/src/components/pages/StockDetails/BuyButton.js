@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
-import { useStyles, modalStyle } from '../../component/Modal';
+import { useModalStyles, useInputStyles, useAlertStyles } from '../../component/Styles';
+import TextField from '@material-ui/core/TextField';
+import Alert from '@material-ui/lab/Alert';
 
 
-function BuyButton({ open, symbol, userCash, userId, tickerInfo, history }) {
+
+function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, history }) {
    const [buyOpen, setBuyOpen] = useState(false);
    const [numOfShares, setNumOfShares] = useState(0);
    const [buyPrice, setBuyPrice] = useState();
    const [cashExceed, setCashExceed] = useState(false);
-   const classes = useStyles();
-
-
    const handleBuyOpen = () => { setBuyOpen(true) };
    const handleBuyClose = () => { setBuyOpen(false) };
+   const modalClasses = useModalStyles();
+   const inputClasses = useInputStyles();
+   const alertClasses = useAlertStyles();
+
    const compareCash = (numOfShares) => {
       const buyBtn = document.getElementById('buy-btn-modal');
       let totalPurchase = numOfShares * open;
@@ -30,7 +34,6 @@ function BuyButton({ open, symbol, userCash, userId, tickerInfo, history }) {
 
    useEffect(() => {
       if (buyPrice !== 0 && numOfShares !== 0) {
-
          const params = {
             price: buyPrice,
             numOfShares: numOfShares,
@@ -42,25 +45,43 @@ function BuyButton({ open, symbol, userCash, userId, tickerInfo, history }) {
             .then(response => { history.push('/') })
             .catch(err => console.error(err))
 
-         document.getElementById('numOfShares').value = "";
+         document.getElementById('buy-input').value = "";
       }
    }, [buyPrice])
 
+   let color = percent > 0 ? "green" : "red";
+   let indicator = percent > 0 ? <i className="fas fa-sort-up green"></i> : <i className="fas fa-sort-down red "></i>;
+   
    return (
-      <div>
+      <div id='buy-wrapper'>
          <button type="button" id="buy-btn-disable" className="buy-btn" data="buy" onClick={handleBuyOpen}>BUY</button>
          <Modal open={buyOpen} onClose={handleBuyClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
-            <div style={modalStyle} className={classes.paper} id="buy-modal">
-               <div className="modal-content">
+            <div className={modalClasses.paper} id="buy-modal">
+               <div className="ticker-info-wrapper">
                   <div className="ticker">{symbol}</div>
-                  <div className="price">{open}</div>
+                  <div className="price_percent_indicator-wrapper">
+                     <div className='price'>$ {open}</div>
+                     <div className="indicator">{indicator}</div>
+                     <div className={`percent ${color}`}>{percent}%</div>
+                  </div>
                </div>
-               <p>Please enter number of shares</p>
-               <input id='numOfShares' onChange={(event) => { setNumOfShares(event.target.value); compareCash(event.target.value) }} type="number" autoComplete="off" autoFocus />
-               {cashExceed ? <div> work harder then you can buy more share mother fucker!</div> : ''}
-               <button onClick={() => { setBuyPrice(open) }} className="buy-btn" id="buy-btn-modal">BUY</button>
+
+               <div className="input-wrapper">
+                  <p className={inputClasses.label}>Number of shares</p>
+                  <TextField InputProps={{ className: inputClasses.input }}
+                     className={inputClasses.root}
+                     onChange={(event) => { setNumOfShares(event.target.value); compareCash(event.target.value) }}
+                     id='buy-input'
+                     autoComplete="off" type="number"
+                     autoFocus variant="outlined" />
+                  <button onClick={() => { setBuyPrice(open) }} className="buy-btn" id="buy-btn-modal">BUY</button>
+                  {cashExceed
+                     ? <Alert className={alertClasses.root} severity="error">work harder then you can buy more share mother fucker!</Alert>
+                     : <div className="exceed-warning"></div>
+                  }
+               </div>
             </div>
          </Modal>
       </div>

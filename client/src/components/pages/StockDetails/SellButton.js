@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
-import { useStyles, modalStyle } from '../../component/Modal';
+import { useModalStyles, useInputStyles  } from '../../component/Styles';
 
 
 
@@ -13,7 +13,7 @@ function SellButton({ open, symbol, userPosition, userId, tickerInfo, history })
    const [shareExceed, setShareExceed] = useState(false);
    const handleSellOpen = () => { setSellOpen(true) };
    const handleSellClose = () => { setSellOpen(false) };
-   const classes = useStyles();
+   const modalClasses = useModalStyles();
 
 
    const compareShares = (numOfShares) => {
@@ -51,7 +51,7 @@ function SellButton({ open, symbol, userPosition, userId, tickerInfo, history })
          <Modal open={sellOpen} onClose={handleSellClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
-            <div style={modalStyle} className={classes.paper} id="sell-modal">
+            <div className={modalClasses.paper} id="sell-modal">
                <div className="modal-content">
                   <div className="ticker">{symbol}</div>
                   <div className="price">{open}</div>

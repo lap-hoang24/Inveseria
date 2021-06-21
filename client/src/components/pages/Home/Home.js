@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from 'react'
 import { withCookies } from 'react-cookie';
-import {withRouter} from 'react-router-dom';
 import UserInfo from './UserInfo';
 import Search from './Search';
 import Portfolio from './Portfolio';

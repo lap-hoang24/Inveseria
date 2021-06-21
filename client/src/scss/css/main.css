@@ -34,11 +34,11 @@
   display: block;
 }
 
-* .green-font {
-  color: #52b788;
+* .green {
+  color: #25a244;
 }
 
-* .red-font {
+* .red {
   color: #f94144;
 }
 
@@ -48,6 +48,7 @@
 }
 
 body {
+  color: #161a1d;
   position: relative;
 }
 
@@ -99,7 +100,7 @@ body {
 }
 
 .buy-btn {
-  background-color: #52b788;
+  background-color: #25a244;
 }
 
 .sell-btn {
@@ -199,7 +200,7 @@ body {
   font-size: 1.4rem;
 }
 
-#home-page #portfolio-acount-wrapper {
+#home-page #portfolio-account-wrapper {
   width: 90%;
   border-radius: 10px;
   background-color: #f8f9fa;
@@ -207,7 +208,7 @@ body {
   margin: 0 auto 1rem auto;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info {
+#home-page #portfolio-account-wrapper .ticker-info {
   height: 40px;
   width: 100%;
   display: -webkit-box;
@@ -229,11 +230,11 @@ body {
   padding: 0 1rem;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info:nth-child(odd) {
+#home-page #portfolio-account-wrapper .ticker-info:nth-child(odd) {
   background-color: #eff1f4;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .logo-symbol-wrapper {
+#home-page #portfolio-account-wrapper .ticker-info .logo-symbol-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -249,16 +250,17 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 33.3%;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .logo-symbol-wrapper .logo {
+#home-page #portfolio-account-wrapper .ticker-info .logo-symbol-wrapper .logo {
   height: 30px;
   width: 30px;
   border-radius: 100%;
   margin-right: 0.3rem;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper {
+#home-page #portfolio-account-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -277,15 +279,15 @@ body {
   margin-left: 0.3rem;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .symbol {
+#home-page #portfolio-account-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .symbol {
   font-size: 12px;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .company-name {
+#home-page #portfolio-account-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .company-name {
   font-size: 11px;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .intra-percent-wrapper {
+#home-page #portfolio-account-wrapper .ticker-info .intra-percent-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -301,18 +303,18 @@ body {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  width: 50px;
+  width: 33.3%;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .intra-percent-wrapper .price {
+#home-page #portfolio-account-wrapper .ticker-info .intra-percent-wrapper .price {
   font-size: 13px;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .intra-percent-wrapper .percent {
+#home-page #portfolio-account-wrapper .ticker-info .intra-percent-wrapper .percent {
   font-size: 11px;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .price-percent-wrapper {
+#home-page #portfolio-account-wrapper .ticker-info .price-percent-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -328,14 +330,14 @@ body {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  width: 70px;
+  width: 33.3%;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .price-percent-wrapper .price {
+#home-page #portfolio-account-wrapper .ticker-info .price-percent-wrapper .price {
   font-size: 13px;
 }
 
-#home-page #portfolio-acount-wrapper .ticker-info .price-percent-wrapper .percent {
+#home-page #portfolio-account-wrapper .ticker-info .price-percent-wrapper .percent {
   font-size: 11px;
 }
 
@@ -384,7 +386,7 @@ body {
   font-size: 1.3rem;
 }
 
-#stock-details .price-buy-btn-wrapper {
+#stock-details .price_btn-wrapper {
   width: 90%;
   margin: 0 auto;
   padding: 0.7rem 0 1rem 0;
@@ -405,11 +407,29 @@ body {
           align-items: center;
 }
 
-#stock-details .price-buy-btn-wrapper .price-percent-wrapper .price {
+#stock-details .price_btn-wrapper .price-percent-wrapper .percent_indicator-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#stock-details .price_btn-wrapper .price-percent-wrapper .price {
   font-size: 1.5rem;
 }
 
-#stock-details .price-buy-btn-wrapper .btn-wrapper {
+#stock-details .price_btn-wrapper .btn-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -480,7 +500,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: .2rem 0;
+  padding: .5rem 0;
 }
 
 #watchlist .stock-info:nth-child(even) {
@@ -534,6 +554,14 @@ body {
   padding-right: 1rem;
 }
 
+#watchlist .stock-info .price-percent-wrapper .price {
+  font-size: 14px;
+}
+
+#watchlist .stock-info .price-percent-wrapper .percent {
+  font-size: 12px;
+}
+
 #search-modal {
   overflow: scroll;
 }
@@ -556,10 +584,104 @@ body {
           align-items: flex-start;
 }
 
+#search-modal #found-stock-container {
+  margin-top: .3rem;
+}
+
 #search-modal #found-stock-container .search-result {
   padding: 0.3rem 0.3rem;
 }
 
 #search-modal #found-stock-container .search-result:nth-child(even) {
   background-color: #e9ecef;
+}
+
+#buy-modal .ticker-info-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#buy-modal .ticker-info-wrapper .ticker {
+  padding: 0.2rem 0.5rem;
+  width: 5rem;
+  border-radius: 2px;
+  background-color: #ffba08;
+}
+
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .price {
+  border-radius: 2px;
+  text-align: center;
+  margin-right: .2rem;
+}
+
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .percent {
+  border-radius: 2px;
+  font-size: 13px;
+}
+
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .green {
+  color: #25a244;
+}
+
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .red {
+  color: #f94144;
+}
+
+#buy-modal .input-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin: 1rem 0 0 0;
+}
+
+#buy-modal .input-wrapper #buy-btn-modal {
+  margin: 0.7rem 0 0.7rem 0;
+  padding: 0.3rem 1.5rem;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 7rem;
 }

@@ -1,0 +1,44 @@
+#buy-modal {
+   .ticker-info-wrapper {
+      @include flex(row, space-between, center);
+      .ticker {
+         padding: 0.2rem 0.5rem;
+         width: 5rem;
+         border-radius: 2px;
+         background-color: $signature;
+      }
+
+      .price_percent_indicator-wrapper {
+         @include flex(row, flex-start, center);
+         .price {
+            border-radius: 2px;
+            text-align: center;
+            margin-right: .2rem;
+         }
+         .percent {
+            border-radius: 2px;
+            font-size: 13px;
+         }
+
+         .green {
+            color: $green;
+         }
+
+         .red {
+            color: $red;
+         }
+      }
+   }
+
+   .input-wrapper {
+      @include flex(column, center, flex-start);
+      margin: 1rem 0 0 0;
+
+      #buy-btn-modal {
+         margin: 0.7rem 0 0.7rem 0;
+         padding: 0.3rem 1.5rem;
+         align-self: center;
+         width: 7rem;
+      }
+   }
+}

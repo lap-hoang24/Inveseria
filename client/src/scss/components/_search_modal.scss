@@ -1,7 +1,4 @@
-// #ticker-search {
-//    height: 10px;
-//    width: 100%;
-// }
+
 
 #search-modal {
    overflow: scroll;
@@ -10,6 +7,7 @@
    }
 
    #found-stock-container {
+      margin-top: .3rem;
       .search-result {
          padding: 0.3rem 0.3rem;
          &:nth-child(even) {

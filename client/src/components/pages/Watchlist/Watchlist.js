@@ -5,31 +5,30 @@ import { withCookies } from 'react-cookie';
 function Watchlist({cookies}) {
    localStorage.setItem('lastPath', "/watchlist");
    const [watchlist, setWatchlist] = useState(false);
-   const [randomNum, setRandomNum] = useState();
+   const [randomNum, setRandomNum] = useState(10);
 
    useEffect(() => {
       const userId = cookies.get('id');
-
+      let interval;
       axios.get('/stockApi/getWatchlist?userId=' + userId)
          .then(response => {
             setWatchlist(response.data);
-            console.log(response.data)
-            setInterval(() => {
+            interval = setInterval(() => {
                let randomNumber = Math.floor(Math.random() * 99);
                setRandomNum(randomNumber);
             }, 1500)
          })
          .catch(err => console.error(err));
+
+         return () => {
+            clearInterval(interval);
+         }
    }, [])
-
-
 
    if (watchlist) {
       return (
          <div id="watchlist">
             <div className="heading">Your Watchlist</div>
-
-
             <div id="list-wrapper">
                {watchlist.map(stock => {
                   return (
@@ -39,8 +38,8 @@ function Watchlist({cookies}) {
                            <div className="ticker">{stock.ticker}</div>
                         </div>
                         <div className="price-percent-wrapper">
-                           <div>$ {randomNum ? stock.intraday[randomNum].open : '0'}</div>
-                           <div>{randomNum ? (((stock.intraday[randomNum].open - stock.intraday[randomNum].low) / stock.intraday[randomNum].low) * 100).toFixed(2) : '0.00'} %</div>
+                           <div className="price">$ {randomNum ? stock.intraday[randomNum].open : '0'}</div>
+                           <div className="percent">{randomNum ? (((stock.intraday[randomNum].open - stock.intraday[randomNum].low) / stock.intraday[randomNum].low) * 100).toFixed(2) : '0.00'} %</div>
                         </div>
                      </a>
                   )

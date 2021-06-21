@@ -1,27 +1,14 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react'
+import { Link, withRouter } from 'react-router-dom';
+import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { useStyles, modalStyle } from '../../component/Modal';
-import { withStyles } from '@material-ui/core/styles';
+import { useModalStyles, useInputStyles } from '../../component/Styles';
 import TextField from '@material-ui/core/TextField';
 
-const inputStyles = {
-   input: {
-      height: "40px",
-      width: "100%"
-   },
-   label: {
-      fontStyle: 'italic',
-      fontSize: "14px",
-   },
-   float: {
-      color: 'red'
-   }
-}
 
-function Search({ classes }) {
+function Search() {
    const emptyArray = [{
       _id: 'nothing',
    }]
@@ -33,6 +20,8 @@ function Search({ classes }) {
       setOpen(false);
       setTickerInput('');
    };
+   const inputClasses = useInputStyles();
+   const modalClasses = useModalStyles();
 
    const saveHistory = (event) => {
       let ticker = localStorage.getItem('ticker');
@@ -64,11 +53,12 @@ function Search({ classes }) {
 
    // ==============MODAL BODY AND STYLINGS===========================
 
-   const classe = useStyles();
+
    const body = (
-      <div style={modalStyle} className={classe.paper} id="search-modal">
-         <TextField InputProps={{ classes: { root: classes.input } }}
-            InputLabelProps={{ className: classes.label }}
+      <div className={modalClasses.paper} id="search-modal">
+
+         <TextField InputProps={{ className: inputClasses.input }}
+            className={inputClasses.root}
             value={tickerInput}
             onChange={(event) => { setTickerInput(event.target.value) }}
             id='ticker-search' label="Find stocks..."
@@ -86,13 +76,13 @@ function Search({ classes }) {
                   )
                } else {
                   return (
-                     <div className="search-result" key={'something'}>
+                     <div key={'something'}>
                         <p>search history...</p>
                         {history && history.map(hist => {
                            let ticker = hist.split(' - ');
                            return (
                               <div className="search-result" key={ticker}>
-                                 <a href={`/viewstock/${ticker[0].trim()}`} className="history">{hist}</a>
+                              <a href={`/viewstock/${ticker[0].trim()}`} className="history">{hist}</a>
                               </div>
                            )
                         })}
@@ -123,4 +113,4 @@ function Search({ classes }) {
    )
 }
 
-export default withStyles(inputStyles)(Search);
+export default Search;

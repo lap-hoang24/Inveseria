@@ -16,7 +16,8 @@
       &:nth-child(even) {
          background-color: darken($light-bg, 2%);
       }
-      padding: .2rem 0;
+      padding: .5rem 0;
+      
       .ticker-logo-wrapper {
          @include flex(row, flex-start, center);
          width: 50%;
@@ -33,6 +34,13 @@
          @include flex(column, flex-end, flex-end);
          width: 50%;
          padding-right: 1rem;
+
+         .price {
+            font-size: 14px;
+         }
+         .percent {
+            font-size: 12px;
+         }
       }
    }
 }

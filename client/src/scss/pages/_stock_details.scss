@@ -20,13 +20,16 @@
       border-bottom: 1px solid $primary-color;
    }
 
-   .price-buy-btn-wrapper {
+   .price_btn-wrapper {
       width: 90%;
       margin: 0 auto;
       padding: 0.7rem 0 1rem 0;
 
       @include flex(row, space-between, center);
       .price-percent-wrapper {
+         .percent_indicator-wrapper {
+            @include flex(row, flex-start, center);
+         }
          .price {
             font-size: 1.5rem;
          }

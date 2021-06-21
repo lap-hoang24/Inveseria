@@ -5,6 +5,7 @@
     margin: 0;
     padding: 0;
     font-family: $second-font;
+   
     a {
         text-decoration: none;
         &:visited {
@@ -31,11 +32,11 @@
     }
 
     // ====== GLOBAL CLASSES =============
-
-    .green-font {
+    .green {
         color: $green;
     }
-    .red-font {
+
+    .red {
         color: $red;
     }
 
@@ -46,5 +47,6 @@
 }
 
 body {
+    color: $text-color;
     position: relative;
 }

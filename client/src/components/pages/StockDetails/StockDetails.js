@@ -62,19 +62,27 @@ function StockDetails(props) {
             }
          }).catch(err => console.error(err))
 
-      setInterval(() => {
+      const interval = setInterval(() => {
          randomNum = Math.floor((Math.random() * 50));
          setRandomNumber(randomNum)
       }, 1500)
+
+
+      return () => {
+         clearInterval(interval);
+      }
    }, [])
 
-   const {history} = props;
+   const { history } = props;
    const { tickerInfo, tickerIntra, userPosition, userCash, userId, inWatchlist } = state;
 
    if (tickerIntra && userPosition) {
-      let percent = String(((tickerIntra[randomNumber].open.toFixed(1) - tickerIntra[randomNumber].low.toFixed(1)) / tickerIntra[randomNumber].close) * 100).slice(0, 4);
-      let symbol = tickerIntra[randomNumber].symbol;
       let open = tickerIntra[randomNumber].open;
+      let close = tickerIntra[randomNumber].close;
+      let percent = (((open - close) / close) * 100).toFixed(2);
+      let symbol = tickerIntra[randomNumber].symbol;
+      let color = percent > 0 ? 'green' : 'red';
+      let indicator = percent > 0 ? <i className="fas fa-sort-up green"></i> : <i className="fas fa-sort-down red "></i>;
 
       // ========================RETURN=============================
       return (
@@ -85,15 +93,18 @@ function StockDetails(props) {
                <Favorite ticker={symbol} userId={userId} inWatchlist={inWatchlist} />
             </div>
 
-            <div className="price-buy-btn-wrapper">
+            <div className="price_btn-wrapper">
                <div className="price-percent-wrapper">
                   <div className='price'>$ {open}</div>
-                  <div className="percent">{percent}%</div>
+                  <div className="percent_indicator-wrapper">
+                     <div className={`${color} percent`}>{percent}%</div>
+                     <div className="indicator">{indicator}</div>
+                  </div>
                </div>
 
                <div className="btn-wrapper">
-                  <BuyButton open={open} symbol={symbol} userCash={userCash} tickerInfo={tickerInfo} userId={userId} history={history} />
-                  <SellButton open={open} symbol={symbol} userPosition={userPosition} tickerInfo={tickerInfo} userId={userId} history={history} />
+                  <BuyButton open={open} symbol={symbol} userCash={userCash} tickerInfo={tickerInfo} userId={userId} history={history} percent={percent} />
+                  <SellButton open={open} symbol={symbol} userPosition={userPosition} tickerInfo={tickerInfo} userId={userId} history={history} percent={percent} />
                </div>
             </div>
 
