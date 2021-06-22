@@ -4,17 +4,17 @@ import Slide from "@material-ui/core/Slide";
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const useStyles = makeStyles((theme) => ({
    snack: {
       height: "45px",
    }
 }));
 
-
-function FavoriteSnackbar({ watched, favorite }) {
-   const classes = useStyles();
+function BuySellSnackBar(action, snackStatus) {
    const [open, setOpen] = useState(false);
    const [message, setMessage] = useState('');
+   const classes = useStyles();
 
    const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
@@ -22,19 +22,20 @@ function FavoriteSnackbar({ watched, favorite }) {
       }
       setOpen(false);
    };
+ 
 
    useEffect(() => {
-      if (favorite) {
+      if (snackStatus) {
          setOpen(true);
-         watched ? setMessage('Added to Watchlist') : setMessage('Removed from Watchlist');
+         action === 'sell' ? setMessage('Sold') : setMessage('Bought');
       } else {
          setOpen(false);
       }
-   }, [watched])
+   }, [snackStatus])
 
    return (
       <div>
-         <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1700} TransitionComponent={Slide} onClose={handleClose}>
+         <Snackbar className={classes.root} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1700} TransitionComponent={Slide} onClose={handleClose}>
             <Alert className={classes.snack} onClose={handleClose} severity="success" variant="filled">
                {message}
             </Alert>
@@ -43,4 +44,4 @@ function FavoriteSnackbar({ watched, favorite }) {
    )
 }
 
-export default FavoriteSnackbar
+export default BuySellSnackBar

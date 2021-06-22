@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { Link, withRouter } from 'react-router-dom';
+import React, { useState, useEffect, createRef } from 'react'
 import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -54,7 +53,7 @@ function Search() {
    // ==============MODAL BODY AND STYLINGS===========================
 
 
-   const body = (
+   const searchContent = (
       <div className={modalClasses.paper} id="search-modal">
 
          <TextField InputProps={{ className: inputClasses.input }}
@@ -66,7 +65,7 @@ function Search() {
             autoFocus variant="outlined" />
 
          <div id="found-stock-container">
-            {stocksFound && stocksFound.map(stock => {
+            {stocksFound?.map(stock => {
                if (stock.ticker) {
                   let nameDisplay = stock.companyName.length > 20 ? stock.companyName.slice(0, 20) + "..." : stock.companyName;
                   return (
@@ -78,11 +77,11 @@ function Search() {
                   return (
                      <div key={'something'}>
                         <p>search history...</p>
-                        {history && history.map(hist => {
+                        {history?.map(hist => {
                            let ticker = hist.split(' - ');
                            return (
                               <div className="search-result" key={ticker}>
-                              <a href={`/viewstock/${ticker[0].trim()}`} className="history">{hist}</a>
+                                 <a href={`/viewstock/${ticker[0].trim()}`} className="history">{hist}</a>
                               </div>
                            )
                         })}
@@ -105,8 +104,8 @@ function Search() {
             BackdropProps={{
                timeout: 250,
             }}>
-            <Fade in={open}>
-               {body}
+            <Fade in={open} >
+               {searchContent}
             </Fade>
          </Modal>
       </div>

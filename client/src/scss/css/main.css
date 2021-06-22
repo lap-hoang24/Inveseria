@@ -596,7 +596,7 @@ body {
   background-color: #e9ecef;
 }
 
-#buy-modal .ticker-info-wrapper {
+#buy-modal .ticker-info-wrapper, #sell-modal .ticker-info-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -614,14 +614,14 @@ body {
           align-items: center;
 }
 
-#buy-modal .ticker-info-wrapper .ticker {
+#buy-modal .ticker-info-wrapper .ticker, #sell-modal .ticker-info-wrapper .ticker {
   padding: 0.2rem 0.5rem;
   width: 5rem;
   border-radius: 2px;
   background-color: #ffba08;
 }
 
-#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper {
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper, #sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -639,26 +639,26 @@ body {
           align-items: center;
 }
 
-#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .price {
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .price, #sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .price {
   border-radius: 2px;
   text-align: center;
   margin-right: .2rem;
 }
 
-#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .percent {
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .percent, #sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .percent {
   border-radius: 2px;
   font-size: 13px;
 }
 
-#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .green {
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .green, #sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .green {
   color: #25a244;
 }
 
-#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .red {
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .red, #sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .red {
   color: #f94144;
 }
 
-#buy-modal .input-wrapper {
+#buy-modal .input-wrapper, #sell-modal .input-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -677,7 +677,7 @@ body {
   margin: 1rem 0 0 0;
 }
 
-#buy-modal .input-wrapper #buy-btn-modal {
+#buy-modal .input-wrapper #buy-btn-modal, #buy-modal .input-wrapper #sell-btn-modal, #sell-modal .input-wrapper #buy-btn-modal, #sell-modal .input-wrapper #sell-btn-modal {
   margin: 0.7rem 0 0.7rem 0;
   padding: 0.3rem 1.5rem;
   -ms-flex-item-align: center;

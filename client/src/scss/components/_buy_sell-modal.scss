@@ -1,4 +1,4 @@
-#buy-modal {
+#buy-modal, #sell-modal {
    .ticker-info-wrapper {
       @include flex(row, space-between, center);
       .ticker {
@@ -34,7 +34,7 @@
       @include flex(column, center, flex-start);
       margin: 1rem 0 0 0;
 
-      #buy-btn-modal {
+      #buy-btn-modal, #sell-btn-modal {
          margin: 0.7rem 0 0.7rem 0;
          padding: 0.3rem 1.5rem;
          align-self: center;

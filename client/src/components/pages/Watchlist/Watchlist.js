@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { withCookies } from 'react-cookie';
+import { Link } from "react-router-dom";
 
-function Watchlist({cookies}) {
+function Watchlist({ cookies }) {
    localStorage.setItem('lastPath', "/watchlist");
    const [watchlist, setWatchlist] = useState(false);
    const [randomNum, setRandomNum] = useState(10);
@@ -20,9 +21,9 @@ function Watchlist({cookies}) {
          })
          .catch(err => console.error(err));
 
-         return () => {
-            clearInterval(interval);
-         }
+      return () => {
+         clearInterval(interval);
+      }
    }, [])
 
    if (watchlist) {
@@ -32,7 +33,7 @@ function Watchlist({cookies}) {
             <div id="list-wrapper">
                {watchlist.map(stock => {
                   return (
-                     <a href={`/viewstock/${stock.ticker}`} key={stock._id} className="stock-info">
+                     <Link to={`/viewstock/${stock.ticker}`} key={stock._id} className="stock-info">
                         <div className="ticker-logo-wrapper">
                            <img className="logo" src={stock.logo} alt="" />
                            <div className="ticker">{stock.ticker}</div>
@@ -41,7 +42,7 @@ function Watchlist({cookies}) {
                            <div className="price">$ {randomNum ? stock.intraday[randomNum].open : '0'}</div>
                            <div className="percent">{randomNum ? (((stock.intraday[randomNum].open - stock.intraday[randomNum].low) / stock.intraday[randomNum].low) * 100).toFixed(2) : '0.00'} %</div>
                         </div>
-                     </a>
+                     </Link>
                   )
                })}
             </div>

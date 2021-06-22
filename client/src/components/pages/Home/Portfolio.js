@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Account from './Account';
+import { Link } from 'react-router-dom';
+
+
+
 
 function Portfolio({ userPortfolio, cash }) {
-
    const [state, setState] = useState({ randomNumber: 0, totalAcc: 0 });
 
    useEffect(() => {
@@ -25,7 +28,7 @@ function Portfolio({ userPortfolio, cash }) {
       <div id="portfolio-account-wrapper">
          <Account total={totalAcc} cash={cash} />
          <div id="portfolio">
-            {userPortfolio && userPortfolio.map(portfolio => {
+            {userPortfolio?.map(portfolio => {
                let open = portfolio.intra[randomNumber].open;
                let close = portfolio.intra[randomNumber].low;
                let percentPortfolio = (((open - portfolio.avgPrice) / portfolio.avgPrice) * 100).toFixed(2);
@@ -33,7 +36,7 @@ function Portfolio({ userPortfolio, cash }) {
                let intraColor = percentIntra > 0 ? "green" : "red";
 
                return (
-                  <a href={`/viewstock/${portfolio.ticker}`} key={portfolio._id} className='ticker-info'>
+                  <Link to={`/viewstock/${portfolio.ticker}`} key={portfolio._id} className='ticker-info'>
                      <div className="logo-symbol-wrapper">
                         <img className='logo' src={portfolio.logo} alt="" />
                         <div className="symbol-name-wrapper">
@@ -50,7 +53,7 @@ function Portfolio({ userPortfolio, cash }) {
                         <div className={`price`}>$ {(open * portfolio.numOfShares).toFixed(2)}</div>
                         <div className={`percent`}> % {percentPortfolio}</div>
                      </div>
-                  </a>
+                  </Link>
                )
             })}
          </div>

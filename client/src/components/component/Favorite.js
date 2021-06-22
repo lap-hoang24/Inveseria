@@ -18,10 +18,9 @@ function Favorite({ ticker, userId, inWatchlist }) {
 
    return (
       <div>
-         <div onClick={() => { setFavorite(true) }} className="favorite-btn">
+         <div onClick={() => { setFavorite(!favorite) }} className="favorite-btn">
             {watched ? <i className="fas fa-star"></i> : <i className="far fa-star"></i>}
          </div>
-
          <FavoriteSnackbar watched={watched} favorite={favorite} />
       </div>
    )
