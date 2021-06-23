@@ -44,7 +44,10 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, histor
          }
 
          axios.post('/stockApi/buyStock', params)
-            .then(response => { history.push('/') })
+            .then(response => {
+               history.push('/');
+               sessionStorage.setItem('stockAction', `buy-${tickerInfo.ticker}-${numOfShares}`);
+            })
             .catch(err => console.error(err))
 
          document.getElementById('buy-input').value = "";

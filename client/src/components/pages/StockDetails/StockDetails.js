@@ -6,6 +6,7 @@ import { paintLineChart } from './LineChart';
 import Favorite from '../../component/Favorite';
 import BuyButton from './BuyButton';
 import SellButton from './SellButton';
+import Loading from '../../component/Loading';
 
 
 function StockDetails(props) {
@@ -125,7 +126,7 @@ function StockDetails(props) {
          </div>
       )
    } else {
-      return (<div className="loading">LOADING...</div>)
+      return <Loading />
    }
 }
 export default withCookies(withRouter(StockDetails));

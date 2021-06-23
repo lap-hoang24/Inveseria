@@ -11,9 +11,8 @@ const useStyles = makeStyles((theme) => ({
    }
 }));
 
-function BuySellSnackBar(action, snackStatus) {
+function BuySellSnackBar({ action, message }) {
    const [open, setOpen] = useState(false);
-   const [message, setMessage] = useState('');
    const classes = useStyles();
 
    const handleClose = (event, reason) => {
@@ -22,20 +21,20 @@ function BuySellSnackBar(action, snackStatus) {
       }
       setOpen(false);
    };
- 
+
 
    useEffect(() => {
-      if (snackStatus) {
-         setOpen(true);
-         action === 'sell' ? setMessage('Sold') : setMessage('Bought');
-      } else {
-         setOpen(false);
-      }
-   }, [snackStatus])
+      setTimeout(() => {
+         if (action) {
+            setOpen(true);
+         }
+         sessionStorage.removeItem('stockAction');
+      }, 500)
+   }, [])
 
    return (
       <div>
-         <Snackbar className={classes.root} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1700} TransitionComponent={Slide} onClose={handleClose}>
+         <Snackbar className={classes.root} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1800} TransitionComponent={Slide} onClose={handleClose}>
             <Alert className={classes.snack} onClose={handleClose} severity="success" variant="filled">
                {message}
             </Alert>

@@ -6,7 +6,7 @@ import Fade from '@material-ui/core/Fade';
 import { useModalStyles, useInputStyles, useAlertStyles } from '../../component/Styles';
 import TextField from '@material-ui/core/TextField';
 import Alert from '@material-ui/lab/Alert';
-import BuySellSnackBar from '../../component/BuySellSnackBar';
+
 
 
 
@@ -15,8 +15,6 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, h
    const [sellPrice, setSellPrice] = useState();
    const [numOfShares, setNumOfShares] = useState(0);
    const [sellOpen, setSellOpen] = useState(false);
-   const [snackOpen, setSnackOpen] = useState(false);
-   const [action, setAction] = useState();
    const [shareExceed, setShareExceed] = useState(false);
    const handleSellOpen = () => { setSellOpen(true) };
    const handleSellClose = () => { setSellOpen(false) };
@@ -41,8 +39,6 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, h
 
    useEffect(() => {
       if (sellPrice !== 0 && numOfShares !== 0) {
-         setAction('sell')
-         setSnackOpen(true);
          const params = {
             price: sellPrice,
             numOfShares,
@@ -51,17 +47,13 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, h
          }
          axios.post('/stockApi/sellStock', params)
             .then(response => {
-               setSnackOpen(false);
-               setTimeout(() => {
-                  history.push('/')
-               }, 1000)
+                  history.push('/');
+                  sessionStorage.setItem('stockAction', `sell-${tickerInfo.ticker}-${numOfShares}`);
             })
             .catch(err => console.error(err))
          document.getElementById('sell-input').value = "";
       }
    }, [sellPrice])
-
-
 
    let color = percent > 0 ? "green" : "red";
    let indicator = percent > 0 ? <i className="fas fa-sort-up green"></i> : <i className="fas fa-sort-down red "></i>;
@@ -106,8 +98,6 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, h
                {sellContent}
             </Fade>
          </Modal>
-
-         <BuySellSnackBar action={action} snackStatus={snackOpen} />
       </div>
    )
 }

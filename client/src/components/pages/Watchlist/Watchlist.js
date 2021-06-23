@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { withCookies } from 'react-cookie';
 import { Link } from "react-router-dom";
+import Loading from '../../component/Loading';
 
 function Watchlist({ cookies }) {
    localStorage.setItem('lastPath', "/watchlist");
@@ -49,7 +50,7 @@ function Watchlist({ cookies }) {
          </div>
       )
    } else {
-      return (<div className="loading">Loading...</div>)
+      return <Loading />
    }
 }
 

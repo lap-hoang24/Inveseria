@@ -1,23 +1,38 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { withCookies } from 'react-cookie';
 import UserInfo from './UserInfo';
 import Search from './Search';
 import Portfolio from './Portfolio';
 import News from './News';
 import axios from 'axios';
+import BuySellSnackBar from '../../component/BuySellSnackBar';
+import Loading from '../../component/Loading';
 
 
 function Home(props) {
    localStorage.setItem('lastPath', "/");
    const [state, setState] = useState({});
    const [loading, setLoading] = useState(true);
-   
+   const [action, setAction] = useState();
+   const [message, setMessage] = useState('');
+
 
    useEffect(() => {
       const userId = props.cookies.get('id');
       const userInfo = axios.post('/auth/info', { userId });
       const userPortfo = axios.post('/stockApi/getUserPortfolio', { userId });
-      // const marketNews = axios.get('https://finnhub.io/api/v1/news?category=general&token=c32dffiad3ieculvh350');
+      const stockAction = sessionStorage.getItem('stockAction');
+
+      if (stockAction) {
+         const splitString = stockAction.split('-');
+         if (splitString[0] === 'sell') {
+            setAction(`sell`)
+            setMessage(`Sold ${splitString[2]} ${splitString[1]}`);
+         } else {
+            setAction('buy');
+            setMessage(`Bought ${splitString[2]} ${splitString[1]}`);
+         }
+      }
 
       Promise.all([userInfo, userPortfo]).then(values => {
          let portfolios = values[1].data.portfolios;
@@ -34,15 +49,14 @@ function Home(props) {
             })
          }
 
-         setState({ portfolios, portfoIntra, userInfo});
+         setState({ portfolios, portfoIntra, userInfo });
          setLoading(false);
       })
    }, []);
-
-   const { portfolios, userInfo} = state;
+   const { portfolios, userInfo } = state;
 
    if (loading) {
-      return (<div className="loading">LOADING...</div>)
+      return <Loading />
    } else {
       return (
          <div id="home-page">
@@ -50,8 +64,9 @@ function Home(props) {
                <UserInfo userInfo={userInfo} />
                <Search />
             </div>
-            <Portfolio userPortfolio={portfolios} cash={userInfo.cash}/>
+            <Portfolio userPortfolio={portfolios} cash={userInfo.cash} />
             <News />
+            <BuySellSnackBar action={action} message={message} />
          </div>
       )
    }
