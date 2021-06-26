@@ -29,8 +29,13 @@ const userSchema = mongoose.Schema({
    cash: {
       type: Number,
       required: true,
-      default: 0,
+      default: 10000,
    },
+   watchlist: {
+      type: Array,
+      required: true,
+      default: [],
+   }
 }, {collection: 'users'});
 
 module.exports = mongoose.model('User', userSchema);

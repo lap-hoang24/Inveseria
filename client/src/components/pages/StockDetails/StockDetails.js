@@ -23,7 +23,6 @@ function StockDetails(props) {
 
       Promise.all([stockIntraday, userPos])
          .then(values => {
-            // console.log(values);
             const tickerIntra = [...values[0].data.intraday];
             const tickerInfo = {
                ticker: values[0].data.ticker,

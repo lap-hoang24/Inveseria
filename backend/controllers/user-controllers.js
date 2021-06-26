@@ -1,5 +1,4 @@
 const User = require('../models/User');
-const Account = require('../models/Account');
 
 exports.login = async (req, res) => {
    try {
@@ -19,7 +18,6 @@ exports.login = async (req, res) => {
 
 
 exports.signup = async (req, res) => {
-   // console.log(req)
    let checkUsername = await User.findOne({ username: req.body.username });
    let checkEmail = await User.findOne({ email: req.body.email });
 
@@ -45,7 +43,6 @@ exports.getUserInfo = async (req, res) => {
 
 
 exports.logout = (req, res) => {
-   // req.logout();
    res.clearCookie("id")
    res.redirect('http://localhost:3000/login');
 }

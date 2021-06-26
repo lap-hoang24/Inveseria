@@ -10,6 +10,8 @@ router.get('/getIntraday/:ticker', stockCtrl.getIntraday);
 
 router.get('/getAllStocks', stockCtrl.getAllStocks);
 
+router.get('/getWatchlist', stockCtrl.getWatchlist);
+
 router.post('/getUserPosition/', stockCtrl.getUserPosition);
 
 router.post('/search-ticker', stockCtrl.searchTicker);
@@ -20,7 +22,8 @@ router.post('/sellStock', stockCtrl.sellStock);
 
 router.post('/getUserPortfolio', stockCtrl.getUserPortfolio);
 
-
 router.post('/getPortfoIntra', stockCtrl.getPortfoIntra);
+
+router.post('/setFavorite', stockCtrl.setFavorite);
 
 module.exports = router;

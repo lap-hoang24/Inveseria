@@ -41,7 +41,7 @@ function Portfolio({ userPortfolio, cash }) {
                         <img className='logo' src={portfolio.logo} alt="" />
                         <div className="symbol-name-wrapper">
                            <div className="symbol">{portfolio.ticker}</div>
-                           <div className="company-name">{portfolio.numOfShares > 1 ? `${portfolio.numOfShares} shares` : `${portfolio.numOfShares} share`}</div>
+                           <div className="share">{portfolio.numOfShares > 1 ? `${portfolio.numOfShares} shares` : `${portfolio.numOfShares} share`}</div>
                         </div>
                      </div>
 
