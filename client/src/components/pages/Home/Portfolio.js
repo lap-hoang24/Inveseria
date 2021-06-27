@@ -17,23 +17,24 @@ function Portfolio({ userPortfolio, cash }) {
          })
          setState({ randomNumber, totalAcc });
       }, 1500)
+      console.log(userPortfolio)
 
       return () => {
          clearInterval(interval);
       }
    }, [])
    const { randomNumber, totalAcc } = state;
-
    return (
       <div id="portfolio-account-wrapper">
          <Account total={totalAcc} cash={cash} />
          <div id="portfolio">
             {userPortfolio?.map(portfolio => {
-               let open = portfolio.intra[randomNumber].open;
-               let close = portfolio.intra[randomNumber].low;
+               let low = (portfolio.intra[randomNumber].low).toFixed(1);
+               let open = (portfolio.intra[randomNumber].open).toFixed(1);
+               let percentIntra = (((open - low) / low) * 100).toFixed(2);
+               percentIntra <= 0 ? percentIntra = -(Math.random()).toFixed(2) : percentIntra = percentIntra;
                let percentPortfolio = (((open - portfolio.avgPrice) / portfolio.avgPrice) * 100).toFixed(2);
-               let percentIntra = (((open - close) / close) * 100).toFixed(2);
-               let intraColor = percentIntra > 0 ? "green" : "red";
+               let intraColor = percentIntra >= 0 ? "green" : "red";
 
                return (
                   <Link to={`/viewstock/${portfolio.ticker}`} key={portfolio._id} className='ticker-info'>

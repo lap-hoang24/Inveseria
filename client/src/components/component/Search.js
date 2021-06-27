@@ -3,9 +3,11 @@ import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { useModalStyles, useInputStyles } from '../../component/Styles';
+import { useModalStyles, useInputStyles } from './Styles';
 import TextField from '@material-ui/core/TextField';
 
+
+const trendingStocks = ['TSLA', 'AAPL', 'AMZN', 'SQ', 'NIO', 'NKE', 'GOOG'];
 
 function Search() {
    const emptyArray = [{
@@ -21,6 +23,11 @@ function Search() {
    };
    const inputClasses = useInputStyles();
    const modalClasses = useModalStyles();
+
+
+   const clearHistory = () => {
+      localStorage.removeItem('ticker');
+   }
 
    const saveHistory = (event) => {
       let ticker = localStorage.getItem('ticker');
@@ -64,8 +71,8 @@ function Search() {
             autoComplete="off"
             autoFocus variant="outlined" />
 
-         <div id="found-stock-container">
-            {stocksFound?.map(stock => {
+         <div id="found-stock_history-container">
+            {stocksFound && stocksFound.map(stock => {
                if (stock.ticker) {
                   let nameDisplay = stock.companyName.length > 20 ? stock.companyName.slice(0, 20) + "..." : stock.companyName;
                   return (
@@ -74,19 +81,40 @@ function Search() {
                      </div>
                   )
                } else {
-                  return (
-                     <div key={'something'}>
-                        <p>search history...</p>
-                        {history?.map(hist => {
-                           let ticker = hist.split(' - ');
-                           return (
-                              <div className="search-result" key={ticker}>
-                                 <a href={`/viewstock/${ticker[0].trim()}`} className="history">{hist}</a>
+
+                  {
+                     if (history) {
+                        return (<div id="history" key={'something'}>
+                           <button id="clear-history-btn" onClick={clearHistory}>clear history</button>
+                           {history.map(hist => {
+                              let ticker = hist.split(' - ');
+                              return (
+                                 <div className="search-result" key={ticker}>
+                                    <a href={`/viewstock/${ticker[0].trim()}`} className="history">{hist}</a>
+                                 </div>
+                              )
+                           })}
+                        </div>)
+                     } else {
+                        return (
+                           <div id="trending-stocks">
+                              <div className="trending-message">trending stocks</div>
+                              <div className="search-result">
+                                 <a href="/viewstock/TSLA">TSLA</a>
                               </div>
-                           )
-                        })}
-                     </div>
-                  )
+                              <div className="search-result">
+                                 <a href="/viewstock/AAPL">AAPL</a>
+                              </div>
+                              <div className="search-result">
+                                 <a href="/viewstock/AMZN">AMZN</a>
+                              </div>
+                              <div className="search-result">
+                                 <a href="/viewstock/SQ">SQ</a>
+                              </div>
+                           </div>
+                        )
+                     }
+                  }
                }
             })}
          </div>

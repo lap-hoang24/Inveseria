@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { withCookies } from 'react-cookie';
 import UserInfo from './UserInfo';
-import Search from './Search';
+import Search from '../../component/Search';
 import Portfolio from './Portfolio';
 import News from './News';
 import axios from 'axios';

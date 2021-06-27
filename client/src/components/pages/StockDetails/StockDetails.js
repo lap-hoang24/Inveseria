@@ -77,9 +77,10 @@ function StockDetails(props) {
    const { tickerInfo, tickerIntra, userPosition, userCash, userId, inWatchlist } = state;
 
    if (tickerIntra && userPosition) {
-      let open = tickerIntra[randomNumber].open;
-      let close = tickerIntra[randomNumber].close;
+      let open = (tickerIntra[randomNumber].open).toFixed(1);
+      let close = (tickerIntra[randomNumber].low).toFixed(1);
       let percent = (((open - close) / close) * 100).toFixed(2);
+      percent <= 0 ? percent = -(Math.random()).toFixed(2) : percent = percent;
       let symbol = tickerIntra[randomNumber].symbol;
       let color = percent > 0 ? 'green' : 'red';
       let indicator = percent > 0 ? <i className="fas fa-sort-up green"></i> : <i className="fas fa-sort-down red "></i>;

@@ -1,9 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import Search from '../pages/Home/Search';
-import Home from '../pages/Home/Home';
-import Watchlist from '../pages/Watchlist/Watchlist';
-import Login from '../auth/Login';
+import Search from '../component/Search';
+
 
 function Navbar() {
    return (

@@ -6,12 +6,22 @@
       @include flex(row, center, flex-start);
    }
 
-   #found-stock-container {
+   #found-stock_history-container {
       margin-top: .3rem;
       .search-result {
          padding: 0.3rem 0.3rem;
          &:nth-child(even) {
             background-color: darken($light-bg, 5%);
+         }
+      }
+
+
+      #history {
+         #clear-history-btn {
+            border: none;
+            margin: .5rem 0;
+            padding: .2rem .4rem;
+            font-style: italic;
          }
       }
    }

@@ -281,10 +281,11 @@ body {
 
 #home-page #portfolio-account-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .symbol {
   font-size: 12px;
+  font-weight: bold;
 }
 
-#home-page #portfolio-account-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .company-name {
-  font-size: 11px;
+#home-page #portfolio-account-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .share {
+  font-size: 12px;
 }
 
 #home-page #portfolio-account-wrapper .ticker-info .intra-percent-wrapper {
@@ -584,16 +585,23 @@ body {
           align-items: flex-start;
 }
 
-#search-modal #found-stock-container {
+#search-modal #found-stock_history-container {
   margin-top: .3rem;
 }
 
-#search-modal #found-stock-container .search-result {
+#search-modal #found-stock_history-container .search-result {
   padding: 0.3rem 0.3rem;
 }
 
-#search-modal #found-stock-container .search-result:nth-child(even) {
+#search-modal #found-stock_history-container .search-result:nth-child(even) {
   background-color: #e9ecef;
+}
+
+#search-modal #found-stock_history-container #history #clear-history-btn {
+  border: none;
+  margin: .5rem 0;
+  padding: .2rem .4rem;
+  font-style: italic;
 }
 
 #buy-modal .ticker-info-wrapper, #sell-modal .ticker-info-wrapper {
