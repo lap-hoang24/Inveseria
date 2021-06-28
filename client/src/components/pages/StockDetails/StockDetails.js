@@ -7,6 +7,7 @@ import Favorite from '../../component/Favorite';
 import BuyButton from './BuyButton';
 import SellButton from './SellButton';
 import Loading from '../../component/Loading';
+import Chart from './Chart';
 
 
 function StockDetails(props) {
@@ -35,25 +36,6 @@ function StockDetails(props) {
 
             setState({ tickerInfo, tickerIntra, userPosition, userCash, userId, inWatchlist });
 
-            // let dataSet = tickerIntra.map(intraday => {
-            //    return {
-            //       time: intraday.date.slice(0, 10),
-            //       value: intraday.open
-            //    }
-            // })
-            paintLineChart([
-               { time: '2019-04-11', value: 80.01 },
-               { time: '2019-04-12', value: 96.63 },
-               { time: '2019-04-13', value: 76.64 },
-               { time: '2019-04-14', value: 81.89 },
-               { time: '2019-04-15', value: 74.43 },
-               { time: '2019-04-16', value: 80.01 },
-               { time: '2019-04-17', value: 96.63 },
-               { time: '2019-04-18', value: 76.64 },
-               { time: '2019-04-19', value: 81.89 },
-               { time: '2019-04-20', value: 74.43 },
-            ])
-
             // disable Sell button if user doesnt have any share
             const sellBtn = document.getElementById('sell-btn-disable');
             if (userPosition.noPosition || userPosition.numOfShares === 0) {
@@ -66,7 +48,6 @@ function StockDetails(props) {
          randomNum = Math.floor((Math.random() * 50));
          setRandomNumber(randomNum)
       }, 1500)
-
 
       return () => {
          clearInterval(interval);
@@ -115,10 +96,7 @@ function StockDetails(props) {
                <div>Avg Price: $ {userPosition.avgPrice ? userPosition.avgPrice.toFixed(2) : '0'}</div>
             </div>
 
-            <div className="chart" id='line-chart'>
-               <h5>Chart</h5>
-               {/* LINE CHART GOES HERE FROM CHART.js */}
-            </div>
+            <Chart tickerIntra={tickerIntra} randomNumber={randomNumber} />
 
             <div className="news">
                <h5>News</h5>

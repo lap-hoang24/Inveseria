@@ -124,9 +124,24 @@
 
    #news {
       @include component-container(10px, 90%, $light-bg);
-
-      height: 300px;
       margin: 0 auto 5rem auto;
       padding: 0 0 1rem 0;
+   
+      .news-piece {
+         @include flex(row, space-between, center);
+         padding: 1rem 1rem;
+
+         &:nth-child(odd) {
+            background-color: darken($light-bg, 4%);
+         }
+         .headline {
+            width: 70%;
+         }
+         .news-img {
+            width: 90px;
+            height: 80px;
+            border-radius: 2px;
+         }
+      }
    } // end #news
 }

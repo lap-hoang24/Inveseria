@@ -7,7 +7,8 @@ import { useModalStyles, useInputStyles } from './Styles';
 import TextField from '@material-ui/core/TextField';
 
 
-const trendingStocks = ['TSLA', 'AAPL', 'AMZN', 'SQ', 'NIO', 'NKE', 'GOOG'];
+
+const trendingStocksArr = ['TSLA', 'AAPL', 'AMZN', 'SQ', 'NIO', 'NKE', 'GOOG'];
 
 function Search() {
    const emptyArray = [{
@@ -15,7 +16,9 @@ function Search() {
    }]
    const [tickerInput, setTickerInput] = useState('');
    const [stocksFound, setStocksFound] = useState([]);
+   const [trendingStocks, setTrendingStocks] = useState([]);
    const [open, setOpen] = useState(false);
+   const [history, setHistory] = useState('');
    const handleOpen = () => { setOpen(true) };
    const handleClose = () => {
       setOpen(false);
@@ -23,11 +26,7 @@ function Search() {
    };
    const inputClasses = useInputStyles();
    const modalClasses = useModalStyles();
-
-
-   const clearHistory = () => {
-      localStorage.removeItem('ticker');
-   }
+   let historyItems = localStorage.getItem('ticker') ? localStorage.getItem('ticker').split('/ ') : '';
 
    const saveHistory = (event) => {
       let ticker = localStorage.getItem('ticker');
@@ -42,9 +41,13 @@ function Search() {
       }
    }
 
-   let history = localStorage.getItem('ticker') ? localStorage.getItem('ticker').split('/ ') : '';
+   const clearHistory = () => {
+      localStorage.removeItem('ticker');
+      setHistory('');
+   }
 
    useEffect(() => {
+      setHistory(historyItems);
       axios.post('/stockApi/search-ticker', { companyName: tickerInput })
          .then(response => {
             if (typeof response.data === 'object') {
@@ -56,6 +59,14 @@ function Search() {
          .catch(err => console.error(err));
    }, [tickerInput])
 
+
+   useEffect(() => {
+      axios.post('/stockApi/getTrendingStocks', trendingStocksArr)
+         .then(response => {
+            setTrendingStocks(response.data);
+         })
+         .catch(err => console.error(err));
+   }, [])
 
    // ==============MODAL BODY AND STYLINGS===========================
 
@@ -74,46 +85,29 @@ function Search() {
          <div id="found-stock_history-container">
             {stocksFound && stocksFound.map(stock => {
                if (stock.ticker) {
-                  let nameDisplay = stock.companyName.length > 20 ? stock.companyName.slice(0, 20) + "..." : stock.companyName;
-                  return (
-                     <div className="search-result" key={stock._id}>
-                        <a data={stock._id} onClick={(event) => { saveHistory(event) }} href={"/viewstock/" + stock.ticker}> {stock.ticker} - {nameDisplay}</a>
-                     </div>
-                  )
+                  return <SearchResultItem key={stock._id} saveHistory={saveHistory} stock={stock} />
                } else {
-
-                  {
-                     if (history) {
-                        return (<div id="history" key={'something'}>
-                           <button id="clear-history-btn" onClick={clearHistory}>clear history</button>
-                           {history.map(hist => {
-                              let ticker = hist.split(' - ');
-                              return (
-                                 <div className="search-result" key={ticker}>
-                                    <a href={`/viewstock/${ticker[0].trim()}`} className="history">{hist}</a>
-                                 </div>
-                              )
+                  if (history) {
+                     return (<div id="history">
+                        <button id="clear-history-btn" onClick={clearHistory}>clear history</button>
+                        {history.map(item => {
+                           let ticker = item.split(' - ');
+                           return (
+                              <div className="search-result" key={ticker}>
+                                 <a href={`/viewstock/${ticker[0].trim()}`} className="history">{item}</a>
+                              </div>
+                           )
+                        })}
+                     </div>)
+                  } else {
+                     return (
+                        <div id="trending-stocks">
+                           <div className="trending-message">trending stocks</div>
+                           {trendingStocks && trendingStocks.map(stock => {
+                              return <SearchResultItem key={stock._id} saveHistory={saveHistory} stock={stock} />
                            })}
-                        </div>)
-                     } else {
-                        return (
-                           <div id="trending-stocks">
-                              <div className="trending-message">trending stocks</div>
-                              <div className="search-result">
-                                 <a href="/viewstock/TSLA">TSLA</a>
-                              </div>
-                              <div className="search-result">
-                                 <a href="/viewstock/AAPL">AAPL</a>
-                              </div>
-                              <div className="search-result">
-                                 <a href="/viewstock/AMZN">AMZN</a>
-                              </div>
-                              <div className="search-result">
-                                 <a href="/viewstock/SQ">SQ</a>
-                              </div>
-                           </div>
-                        )
-                     }
+                        </div>
+                     )
                   }
                }
             })}
@@ -139,5 +133,19 @@ function Search() {
       </div>
    )
 }
+
+
+
+function SearchResultItem({ stock, saveHistory }) {
+   let nameDisplay = stock.companyName.length > 30 ? stock.companyName.slice(0, 30) + "..." : stock.companyName;
+   return (
+      <div className="search-result">
+         <a onClick={(event) => { saveHistory(event) }} href={"/viewstock/" + stock.ticker}> {stock.ticker} - {nameDisplay}</a>
+      </div>
+   )
+}
+
+
+
 
 export default Search;

@@ -33,6 +33,12 @@ function Watchlist({ cookies }) {
             <div className="heading">Your Watchlist</div>
             <div id="list-wrapper">
                {watchlist.map(stock => {
+                  let open = (stock.intraday[randomNum].open).toFixed(1);
+                  let low = (stock.intraday[randomNum].low).toFixed(1);
+                  let percent = (((open - low) / low) * 100).toFixed(2);
+                  percent <= 0 ? percent = -(Math.random()).toFixed(2) : percent = percent;
+                  let color = percent > 0 ? 'green' : 'red';
+
                   return (
                      <Link to={`/viewstock/${stock.ticker}`} key={stock._id} className="stock-info">
                         <div className="ticker-logo-wrapper">
@@ -40,8 +46,8 @@ function Watchlist({ cookies }) {
                            <div className="ticker">{stock.ticker}</div>
                         </div>
                         <div className="price-percent-wrapper">
-                           <div className="price">$ {randomNum ? stock.intraday[randomNum].open : '0'}</div>
-                           <div className="percent">{randomNum ? (((stock.intraday[randomNum].open - stock.intraday[randomNum].low) / stock.intraday[randomNum].low) * 100).toFixed(2) : '0.00'} %</div>
+                           <div className="price">$ {open}</div>
+                           <div className={`${color} percent`}>{percent} %</div>
                         </div>
                      </Link>
                   )

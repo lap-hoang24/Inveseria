@@ -33,13 +33,13 @@ function BuySellSnackBar({ action, message }) {
    }, [])
 
    return (
-      <div>
+      <article>
          <Snackbar className={classes.root} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={1800} TransitionComponent={Slide} onClose={handleClose}>
             <Alert className={classes.snack} onClose={handleClose} severity="success" variant="filled">
                {message}
             </Alert>
          </Snackbar>
-      </div>
+      </article>
    )
 }
 

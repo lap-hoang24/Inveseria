@@ -5,12 +5,12 @@ import Search from '../component/Search';
 
 function Navbar() {
    return (
-      <div id="nav-bar">
+      <nav id="nav-bar">
          <Link to="/" className="nav-link"><i className="fas fa-dice-five"></i></Link>
          <Link to="/watchlist" className="nav-link"><i className="fas fa-star"></i></Link>
          <Search />
          <Link to="/login" className="nav-link"><i className="fas fa-bars"></i></Link>
-      </div>
+      </nav>
    )
 }
 

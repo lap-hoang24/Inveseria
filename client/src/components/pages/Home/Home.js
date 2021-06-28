@@ -59,7 +59,7 @@ function Home(props) {
       return <Loading />
    } else {
       return (
-         <div id="home-page">
+         <main id="home-page">
             <div id="user-info_search-wrapper">
                <UserInfo userInfo={userInfo} />
                <Search />
@@ -67,7 +67,7 @@ function Home(props) {
             <Portfolio userPortfolio={portfolios} cash={userInfo.cash} />
             <News />
             <BuySellSnackBar action={action} message={message} />
-         </div>
+         </main>
       )
    }
 }

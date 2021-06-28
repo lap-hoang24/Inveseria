@@ -17,13 +17,15 @@ function Portfolio({ userPortfolio, cash }) {
          })
          setState({ randomNumber, totalAcc });
       }, 1500)
-      console.log(userPortfolio)
-
+      
       return () => {
          clearInterval(interval);
       }
    }, [])
    const { randomNumber, totalAcc } = state;
+
+
+   
    return (
       <div id="portfolio-account-wrapper">
          <Account total={totalAcc} cash={cash} />
