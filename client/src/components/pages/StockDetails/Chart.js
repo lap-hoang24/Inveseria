@@ -30,7 +30,6 @@ function Chart({ tickerIntra }) {
       let valueArray = tickerIntra.map(intraday => {
          return intraday.open;
       })
-      
       let values = valueArray.join(', ');
       setClose(closePrice);
       setValues(values);

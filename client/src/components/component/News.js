@@ -18,8 +18,7 @@ function News() {
 
       axios.get('https://finnhub.io/api/v1/news?category=general&token=c32dffiad3ieculvh350')
          .then(response => {
-            response.data.length = 20;
-            console.log(response.data);
+            response.data.length = 15;
             setNews(response.data);
          })
          .catch(error => console.log(error));
@@ -28,14 +27,17 @@ function News() {
    return (
       <div id="news">
          {news && news.map(piece => {
-            const { headline, image, source, url, category, id, datetime } = piece;
+            const { headline, image, url, category, id, datetime } = piece;
             let time = newsTime(datetime);
 
             return (
                <article key={id} className="news-piece">
                   <p className="headline">{headline}</p>
                   <img className="news-img" src={image} alt="" />
-                  <div>{time}</div>
+                  <div className="time_readmore-wrapper">
+                     <a href={url} className="read-more">Read more...</a>
+                     <div className="time">{time}</div>
+                  </div>
                </article>
             )
          })}

@@ -1,5 +1,3 @@
-
-
 #search-modal {
    overflow: scroll;
    .search-bar {
@@ -7,7 +5,7 @@
    }
 
    #found-stock_history-container {
-      margin-top: .3rem;
+      margin-top: 0.3rem;
       .search-result {
          padding: 0.3rem 0.3rem;
          &:nth-child(even) {
@@ -15,14 +13,11 @@
          }
       }
 
-
-      #history {
-         #clear-history-btn {
-            border: none;
-            margin: .5rem 0;
-            padding: .2rem .4rem;
-            font-style: italic;
-         }
+      .history_trending {
+         border: none;
+         margin: 0.5rem 0;
+         padding: 0.2rem 0.4rem;
+         font-style: italic;
       }
    }
 }

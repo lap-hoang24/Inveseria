@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
 import { withCookies } from 'react-cookie';
 import UserInfo from './UserInfo';
 import Search from '../../component/Search';
 import Portfolio from './Portfolio';
-import News from './News';
+import News from '../../component/News';
 import axios from 'axios';
 import BuySellSnackBar from '../../component/BuySellSnackBar';
 import Loading from '../../component/Loading';

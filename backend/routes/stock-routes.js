@@ -10,6 +10,8 @@ router.get('/getIntraday/:ticker', stockCtrl.getIntraday);
 
 router.get('/getAllStocks', stockCtrl.getAllStocks);
 
+router.post('/getTrendingStocks', stockCtrl.getTrendingStocks);
+
 router.get('/getWatchlist', stockCtrl.getWatchlist);
 
 router.post('/getUserPosition/', stockCtrl.getUserPosition);

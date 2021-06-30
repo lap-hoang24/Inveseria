@@ -29,11 +29,13 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, h
       if (numOfShares > userPosition.numOfShares) {
          setShareExceed(true);
          sellBtn.disabled = true;
-         sellBtn.style.backgroundColor = 'grey';
+         sellBtn.style.backgroundColor = '#e9ecef';
+         sellBtn.style.color = '#6c757d';
       } else {
          setShareExceed(false);
          sellBtn.disabled = false;
          sellBtn.style.backgroundColor = 'red';
+         sellBtn.style.color = 'white';
       }
    }
 

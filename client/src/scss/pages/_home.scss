@@ -65,11 +65,11 @@
       margin: 0 auto 1rem auto;
 
       .ticker-info {
-         height: 40px;
+         // height: 40px;
          width: 100%;
          @include flex(row, space-between, center);
-         margin: 0.2rem auto;
-         padding: 0 1rem;
+         margin: 0 auto;
+         padding: .5rem 1rem;
 
          &:nth-child(odd) {
             background-color: darken($light-bg, 3%);
@@ -79,8 +79,8 @@
             @include flex(row, flex-start, center);
             width: 33.3%;
             .logo {
-               height: 30px;
-               width: 30px;
+               height: 31px;
+               width: 31px;
                border-radius: 100%;
                margin-right: 0.3rem;
             }
@@ -88,11 +88,11 @@
                @include flex(column, center, flex-start);
                margin-left: 0.3rem;
                .symbol {
-                  font-size: 12px;
+                  font-size: 14px;
                   font-weight: bold;
                }
                .share {
-                  font-size: 12px;
+                  font-size: 13px;
                }
             }
          }
@@ -101,10 +101,10 @@
             @include flex(column, center, flex-end);
             width: 33.3%;
             .price {
-               font-size: 13px;
+               font-size: 14px;
             }
             .percent {
-               font-size: 11px;
+               font-size: 12px;
             }
          }
 
@@ -113,35 +113,12 @@
             width: 33.3%;
 
             .price {
-               font-size: 13px;
+               font-size: 14px;
             }
             .percent {
-               font-size: 11px;
+               font-size: 12px;
             }
          }
       }
    } // end #portfolio
-
-   #news {
-      @include component-container(10px, 90%, $light-bg);
-      margin: 0 auto 5rem auto;
-      padding: 0 0 1rem 0;
-   
-      .news-piece {
-         @include flex(row, space-between, center);
-         padding: 1rem 1rem;
-
-         &:nth-child(odd) {
-            background-color: darken($light-bg, 4%);
-         }
-         .headline {
-            width: 70%;
-         }
-         .news-img {
-            width: 90px;
-            height: 80px;
-            border-radius: 2px;
-         }
-      }
-   } // end #news
 }

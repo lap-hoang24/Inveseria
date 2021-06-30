@@ -89,7 +89,7 @@ function Search() {
                } else {
                   if (history) {
                      return (<div id="history">
-                        <button id="clear-history-btn" onClick={clearHistory}>clear history</button>
+                        <button className="history_trending" id="clear-history-btn" onClick={clearHistory}>clear history</button>
                         {history.map(item => {
                            let ticker = item.split(' - ');
                            return (
@@ -102,7 +102,7 @@ function Search() {
                   } else {
                      return (
                         <div id="trending-stocks">
-                           <div className="trending-message">trending stocks</div>
+                           <button className="history_trending">trending stocks...</button>
                            {trendingStocks && trendingStocks.map(stock => {
                               return <SearchResultItem key={stock._id} saveHistory={saveHistory} stock={stock} />
                            })}

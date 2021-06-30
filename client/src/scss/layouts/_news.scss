@@ -1,0 +1,37 @@
+#news {
+   @include component-container(10px, 90%, $light-bg);
+   margin: 0 auto 5rem auto;
+   padding: 0 0 0rem 0;
+
+   .news-piece {
+      @include flex(row, space-between, center);
+      padding: .9rem .9rem;
+
+      &:nth-child(even) {
+         background-color: darken($light-bg, 4%);
+      }
+      &:last-child {
+         border-radius: 0 0 10px 10px;
+      }
+      .headline {
+         width: 65%;
+         text-align: justify;
+         align-self: flex-start;
+         font-size: 0.9rem;
+      }
+      .news-img {
+         width: 30%;
+         border-radius: 2px;
+      }
+
+      .time_readmore-wrapper {
+         @include flex(row, space-between, center);
+         width: 65%;
+         font-size: 0.9rem;
+         .time {
+            font-size: 0.8rem;
+            font-weight: bold;
+         }
+      }
+   }
+} // end #news

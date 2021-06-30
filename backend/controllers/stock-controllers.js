@@ -28,7 +28,7 @@ exports.getIntraday = async (req, res) => {
 // ==================================================================================
 
 exports.getAllStocks = async (req, res) => {
-   let allStocks = await Ticker.find({ intraday: {$in: [[], null]} }, {ticker: 1});
+   let allStocks = await Ticker.find({ intraday: { $in: [[], null] } }, { ticker: 1 });
 
    res.send(allStocks);
 }
@@ -159,7 +159,15 @@ exports.searchTicker = async (req, res) => {
    }
 }
 
+// ==================================================================================
+// .../getTrendingStocks - POST
+// ==================================================================================
 
+exports.getTrendingStocks = async (req, res) => {
+   let trendingStocks = await Ticker.find({ 'ticker': { $in: req.body } }, { ticker: 1, companyName: 1});
+
+   res.send(trendingStocks);
+}
 
 // ==================================================================================
 // .../getUserPortfolio - POST

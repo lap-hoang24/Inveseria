@@ -26,10 +26,12 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, histor
       if (totalPurchase > userCash) {
          setCashExceed(true);
          buyBtn.disabled = true;
-         buyBtn.style.backgroundColor = 'grey';
+         buyBtn.style.backgroundColor = '#e9ecef';
+         buyBtn.style.color = '#6c757d';
       } else {
          setCashExceed(false);
          buyBtn.disabled = false;
+         buyBtn.style.color = 'white';
          buyBtn.style.backgroundColor = 'green';
       }
    }
