@@ -31,6 +31,11 @@ const userSchema = mongoose.Schema({
       required: true,
       default: 10000,
    },
+   acceptedReward: {
+      type: Boolean,
+      required: true,
+      default: false,
+   },
    watchlist: {
       type: Array,
       required: true,

@@ -42,6 +42,14 @@ exports.getUserInfo = async (req, res) => {
 }
 
 
+exports.updateRewardAccept = async (req, res) => {
+   const { userId } = req.body;
+
+   let updatedReward = await User.findByIdAndUpdate(userId, {acceptedReward: true});
+
+   res.send(updatedReward)
+}
+
 exports.logout = (req, res) => {
    res.clearCookie("id")
    res.redirect('http://localhost:3000/login');
@@ -52,7 +60,6 @@ exports.googleRedirect = (req, res) => {
    console.log(req.session);
    res.cookie("id", req.user._id);
    res.redirect('http://localhost:3000/');
-
 }
 
 

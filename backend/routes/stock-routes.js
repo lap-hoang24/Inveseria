@@ -28,4 +28,19 @@ router.post('/getPortfoIntra', stockCtrl.getPortfoIntra);
 
 router.post('/setFavorite', stockCtrl.setFavorite);
 
+router.get('/getAllTransactions', stockCtrl.getAllTransactions);
+
+
+
+
+
+
+
+
+
+
+
+
+router.get('/getLogos', stockCtrl.getLogos);
+
 module.exports = router;

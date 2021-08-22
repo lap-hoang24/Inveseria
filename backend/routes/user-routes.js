@@ -14,6 +14,8 @@ router.post('/info', userCtrl.getUserInfo);
 
 router.get('/logout', userCtrl.logout);
 
+router.post('/updateRewardAccept', userCtrl.updateRewardAccept);
+
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
 router.get('/google/redirect', passport.authenticate('google', { failureRedirect: '/login' }), userCtrl.googleRedirect);

@@ -9,10 +9,6 @@ const transactionSchema = mongoose.Schema({
       type: String,
       required: true,
    },
-   logo: {
-      type: String,
-      required: true,
-   },
    name: {
       type: String,
       required: true,
@@ -32,8 +28,11 @@ const transactionSchema = mongoose.Schema({
    createdAt: {
       type: String,
       required: true,
-      default: new Date().toJSON()
-   }
+   },
+   createdOn: {
+      type: String,
+      required: true,
+   },
 }, { collection: 'transactions' });
 
 module.exports = mongoose.model('Transaction', transactionSchema)
