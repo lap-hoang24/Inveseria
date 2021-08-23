@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Abel", sans-serif;
+  font-family: "Oswald", sans-serif;
 }
 
 * a {
@@ -50,6 +53,12 @@
 body {
   color: #161a1d;
   position: relative;
+}
+
+body .MuiDialogActions-root {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .as {
@@ -280,11 +289,12 @@ body {
 
 #home-page #portfolio-account-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .symbol {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 #home-page #portfolio-account-wrapper .ticker-info .logo-symbol-wrapper .symbol-name-wrapper .share {
   font-size: 13px;
+  font-weight: 300;
 }
 
 #home-page #portfolio-account-wrapper .ticker-info .intra-percent-wrapper {
@@ -881,4 +891,86 @@ body {
   50% {
     opacity: 0.5;
   }
+}
+
+#login-page {
+  height: 100vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#main-wrapper {
+  height: 80%;
+}
+
+#main-wrapper #square {
+  height: 230px;
+  width: 230px;
+  background-color: #2d6a4f;
+}
+
+#main-wrapper #square #square-text {
+  color: #ffffff;
+  font-size: 1.7rem;
+  text-align: right;
+  margin-right: 1rem;
+}
+
+#main-wrapper #google-link {
+  margin-top: 2rem;
+  background-color: #ea4335;
+  padding: .5rem .3rem;
+  text-align: center;
+}
+
+#main-wrapper #google-link a {
+  color: #ffffff;
+}
+
+#main-wrapper #google-link span {
+  margin-right: .3rem;
+}
+
+#main-wrapper #linkedin-link {
+  margin-top: 1rem;
+  background-color: #0077B5;
+  padding: .5rem .3rem;
+  text-align: center;
+}
+
+#main-wrapper #linkedin-link a {
+  color: #ffffff;
+}
+
+#main-wrapper #linkedin-link span {
+  margin-right: .3rem;
+}
+
+#main-wrapper #github-link {
+  margin-top: 1rem;
+  background-color: black;
+  padding: .5rem .3rem;
+  text-align: center;
+}
+
+#main-wrapper #github-link a {
+  color: #ffffff;
+}
+
+#main-wrapper #github-link span {
+  margin-right: .3rem;
 }

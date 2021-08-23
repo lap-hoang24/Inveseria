@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { paintLineChart } from './LineChart';
+// import { paintLineChart } from './LineChart';
 import Dailychart from 'dailychart';
 
 function Chart({ tickerIntra }) {

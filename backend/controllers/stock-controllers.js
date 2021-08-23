@@ -44,6 +44,8 @@ exports.getAllStocks = async (req, res) => {
 exports.buyStock = async (req, res) => {
    const { price, numOfShares, tickerInfo, userId } = req.body;
    let addedPosition, userPosition, updatedNumOfShares, updatedAvgPrice, avgPrice, updatedCash, cashAmount, totalPurchase, updatedUserCash;
+   let createdOn = new Date().toJSON().slice(0, 10);
+   let createdAt = new Date().toJSON();
    // check if user already has this position (ticker)
    // if YES, accumulate
    // if NO, create new posistion
@@ -75,8 +77,7 @@ exports.buyStock = async (req, res) => {
    updatedCash = cashAmount.cash - totalPurchase;
 
    updatedUserCash = await User.updateOne({ _id: userId }, { $set: { cash: updatedCash } });
-   let createdOn = new Date().toJSON().slice(0, 10);
-   let createdAt = new Date().toJSON();
+   
    // add to Transactions
    let info = {
       userId,
@@ -100,6 +101,8 @@ exports.buyStock = async (req, res) => {
 exports.sellStock = async (req, res) => {
    const { price, numOfShares, tickerInfo, userId } = req.body;
    let userPosition, updatedNumOfShares, totalLiquidation, updatedAvgPrice, cashAmount, updatedCash, updatedPosition;
+   let createdOn = new Date().toJSON().slice(0, 10);
+   let createdAt = new Date().toJSON();
 
    userPosition = await Portfolio.findOne({ userId, ticker: tickerInfo.ticker })
 
@@ -121,6 +124,8 @@ exports.sellStock = async (req, res) => {
       numOfShares,
       price,
       action: 'sell',
+      createdAt: createdAt,
+      createdOn: createdOn,
       ticker: tickerInfo.ticker,
       name: tickerInfo.companyName,
       logo: tickerInfo.logo,

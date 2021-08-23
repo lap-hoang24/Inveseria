@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../store/actions/authActions';
 import { withCookies } from 'react-cookie';
@@ -8,7 +8,6 @@ import Navbar from '../layouts/Navbar';
 
 
 class Login extends Component {
-
    state = {
       username: "",
       password: ""
@@ -34,28 +33,47 @@ class Login extends Component {
 
    render() {
 
+      // const LoginForm = (
+      //    <div>
+      //       <form id='login-form' onSubmit={this.handleSubmit} className="row">
+      //          <div className="input-field col s4 offset-s4">
+      //             <input type="text" id="username" onChange={this.handleChange} />
+      //             <label htmlFor="username">Username</label>
+      //          </div>
+      //          <div className="input-field col s4 offset-s4">
+      //             <input type="text" id="password" onChange={this.handleChange} />
+      //             <label htmlFor="password">Password</label>
+      //          </div>
+      //          <button className=" btn col s4 offset-s4 red darken-2">Log In</button>
+
+      //          <Link to="/signup">
+      //             <button className="btn col s4 offset-s4 green darken-2">Sign Up</button>
+      //          </Link>
+
+      //          <button className="btn col s4 offset-s4 green darken-2"> <a href='http://localhost:5000/auth/logout'>Log Out</a></button>
+      //       </form>
+      //    </div>
+      // )
+
       return (
          <div id="login-page">
-            <form id='login-form' onSubmit={this.handleSubmit} className="row">
-               <div className="input-field col s4 offset-s4">
-                  <input type="text" id="username" onChange={this.handleChange} />
-                  <label htmlFor="username">Username</label>
-               </div>
-               <div className="input-field col s4 offset-s4">
-                  <input type="text" id="password" onChange={this.handleChange} />
-                  <label htmlFor="password">Password</label>
-               </div>
-               <button className=" btn col s4 offset-s4 red darken-2">Log In</button>
+            {/* {LoginForm} */}
 
-               <NavLink to="/signup">
-                  <button className="btn col s4 offset-s4 green darken-2">Sign Up</button>
-               </NavLink>
-
-               <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fa fa-google"></span> SignIn with Google</a>
-               <button className="btn col s4 offset-s4 green darken-2"> <a href='http://localhost:5000/auth/logout'>Log Out</a></button>
-            </form>
+            <div id="main-wrapper">
+               <div id="square">
+                  <div id="square-text">Inveseria.</div>
+               </div>
+               <div id='google-link'>
+                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fa fa-google"></span> SignIn with Google</a>
+               </div>
+               <div id='linkedin-link'>
+                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span class="fab fa-linkedin"></span> SignIn with LinkedIn</a>
+               </div>
+               <div id='github-link'>
+                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span class="fab fa-github"></span> SignIn with Github</a>
+               </div>
+            </div>
             <Navbar />
-
          </div>
       )
    }

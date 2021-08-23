@@ -6,8 +6,6 @@ import Fade from '@material-ui/core/Fade';
 import { useModalStyles, useInputStyles } from './Styles';
 import TextField from '@material-ui/core/TextField';
 
-
-
 const trendingStocksArr = ['TSLA', 'AAPL', 'AMZN', 'SQ', 'NIO', 'NKE', 'GOOG'];
 
 function Search() {

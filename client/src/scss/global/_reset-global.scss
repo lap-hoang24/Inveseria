@@ -49,4 +49,8 @@
 body {
     color: $text-color;
     position: relative;
+
+    .MuiDialogActions-root {
+        justify-content: center;
+    }
 }

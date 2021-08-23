@@ -21,6 +21,30 @@ class GetTicker extends React.Component {
   // }
 
 
+  componentDidMount = () => {
+
+    var options = {
+      method: 'GET',
+      // QUOTES
+      url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes',
+      params: {region: 'US', symbols: 'TSLA'},
+      // EARNINGS
+      // url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-earnings',
+      // params: {region: 'US', startDate: '1585155600000', endDate: '1589475600000', size: '10'},
+      headers: {
+        'x-rapidapi-key': '69f9fdd31cmshc73a59ec773b1b3p1abddbjsn35df1740a420',
+        'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+      }
+    };
+
+    axios.default.request(options).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+
+  }
+
 
   addIntraday = async () => {
 

@@ -2,6 +2,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
 
-$primary-font: 'Montserrat', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
 
-$second-font: 'Abel', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400;1,600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+$primary-font: 'Oswald', sans-serif;
+
+// $second-font: 'Abel', sans-serif;
+$second-font: 'Oswald', sans-serif;
+// $second-font: 'Roboto Condensed', sans-serif;
+

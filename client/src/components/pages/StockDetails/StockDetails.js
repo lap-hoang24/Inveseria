@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useParams, withRouter, Link } from "react-router-dom";
 import { withCookies } from 'react-cookie';
-import { paintLineChart } from './LineChart';
+// import { paintLineChart } from './LineChart';
 import Favorite from '../../component/Favorite';
 import BuyButton from './BuyButton';
 import SellButton from './SellButton';

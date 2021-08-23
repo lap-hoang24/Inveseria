@@ -22,9 +22,6 @@ export const paintLineChart = (dataSet) => {
       rightPriceScale: {
          borderVisible: false,
       },
-      timeScale: {
-         borderVisible: false,
-      },
    });
 
 //    chart.applyOptions({

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withCookies } from 'react-cookie';
 import UserInfo from './UserInfo';
 import Search from '../../component/Search';
@@ -6,6 +6,7 @@ import Portfolio from './Portfolio';
 import News from '../../component/News';
 import axios from 'axios';
 import BuySellSnackBar from '../../component/BuySellSnackBar';
+import RewardModal from '../../component/RewardModal';
 import Loading from '../../component/Loading';
 
 
@@ -35,24 +36,14 @@ function Home(props) {
       }
 
       Promise.all([userInfo, userPortfo]).then(values => {
-         let portfolios = values[1].data.portfolios;
-         let portfoIntra = values[1].data.portfoIntra;
+         let portfolios = values[1].data;
          let userInfo = values[0].data;
 
-         if (portfoIntra && portfolios) {
-            portfolios.forEach(portfo => {
-               for (let i = 0; i < portfoIntra.length; i++) {
-                  if (portfo.ticker === portfoIntra[i].ticker) {
-                     portfo.intra = portfoIntra[i].intraday
-                  }
-               }
-            })
-         }
-
-         setState({ portfolios, portfoIntra, userInfo });
+         setState({ portfolios, userInfo });
          setLoading(false);
       })
    }, []);
+
    const { portfolios, userInfo } = state;
 
    if (loading) {
@@ -67,6 +58,7 @@ function Home(props) {
             <Portfolio userPortfolio={portfolios} cash={userInfo.cash} />
             <News />
             <BuySellSnackBar action={action} message={message} />
+            <RewardModal openModal={!userInfo.acceptedReward} userId={userInfo._id} />
          </main>
       )
    }

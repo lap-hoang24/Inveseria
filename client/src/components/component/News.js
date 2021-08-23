@@ -27,7 +27,7 @@ function News() {
    return (
       <div id="news">
          {news && news.map(piece => {
-            const { headline, image, url, category, id, datetime } = piece;
+            const { headline, image, url, id, datetime } = piece;
             let time = newsTime(datetime);
 
             return (
