@@ -1,0 +1,50 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { withCookies } from 'react-cookie';
+
+const Account = props => {
+
+   const [transactions, setTransactions] = useState([]);
+   useEffect(async () => {
+      const userId = props.cookies.get('id');
+      const allTransactions = await axios.get(`/stockApi/getAllTransactions?userId=${userId}`);
+      console.log(allTransactions.data)
+
+      let reversed = allTransactions.data.reverse();
+      
+      setTransactions(reversed);
+   }, [])
+
+   return (
+      <div id="account">
+         {transactions && transactions.map(trans => {
+            return (
+               <div key={trans._id} className="day-transaction">
+                  <div className="date"> {trans._id}</div>
+                  {trans.transaction.map(transac => {
+                     let color = transac.action === "buy" ? "green" : "red";
+                     let action = transac.action === "buy" ? "B" : "S";
+                     return (
+                        <div key={transac._id} className="transaction">
+                           <div className="wrapper">
+                              <div className={`${color} action`}> {action}</div>
+                              <div className="info-wrapper">
+                                 <div className="numOfShares">{transac.numOfShares}</div>
+                                 <div className="ticker">{transac.ticker}</div>
+                                 <div className="price">@{transac.price}</div>
+                              </div>
+                           </div>
+                           <div className="lower-wrapper">
+                              <div className="time">{transac.createdAt.slice(11, 19)}</div>
+                           </div>
+                        </div>
+                     )
+                  })}
+               </div>
+            )
+         })}
+      </div>
+   )
+}
+
+export default withCookies(Account);

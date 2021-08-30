@@ -28,6 +28,7 @@ export const useAlertStyles = makeStyles((theme) => ({
 
 export const useInputStyles = makeStyles({
    input: {
+      padding: "1rem 0px",
       height: "40px",
    },
    root: {

@@ -38,9 +38,6 @@ router.get('/getAllTransactions', stockCtrl.getAllTransactions);
 
 
 
-
-
-
 router.get('/getLogos', stockCtrl.getLogos);
 
 module.exports = router;

@@ -1,0 +1,46 @@
+#account {
+   .day-transaction {
+      margin: 0.5rem 0.5rem;
+      .date {
+         font-size: .8rem;
+         padding: .1rem 0 0.1rem .4rem;
+         
+         background-color: lighten(grey, 35%);
+      }
+
+      .transaction {
+         @include flex(column, center, flex-start);
+         font-size: 0.7rem;
+         padding: 0 .2rem .2rem 0;
+
+         border-bottom: 1px solid lighten(grey, 30%);
+
+         &:last-child {
+            border: none;
+         }
+
+         .action {
+            font-size: 1rem;
+         }
+
+         .wrapper {
+            @include flex(row, center, center);
+         }
+         
+         .info-wrapper {
+            @include flex(row, center, center);
+            letter-spacing: 1px;
+            margin-left: .3rem;
+
+            .price, .numOfShares, .ticker {
+               margin: 0 .1rem;
+               color: black;
+            }
+         }
+         .lower-wrapper {
+            @include flex(row, center, center);
+            font-size: 0.5rem;
+         }
+      }
+   }
+}

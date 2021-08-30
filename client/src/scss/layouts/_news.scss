@@ -2,7 +2,12 @@
    @include component-container(10px, 90%, $light-bg);
    margin: 0 auto 5rem auto;
    padding: 0 0 0rem 0;
-
+   .news-heading {
+      padding: .3rem 0px;
+      text-align: center;
+      font-style: italic;
+      font-weight: 600;
+   }
    .news-piece {
       @include flex(row, space-between, center);
       padding: .9rem .9rem;

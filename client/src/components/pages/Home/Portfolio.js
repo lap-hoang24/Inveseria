@@ -3,8 +3,6 @@ import Account from './Account';
 import { Link } from 'react-router-dom';
 
 
-
-
 function Portfolio({ userPortfolio, cash }) {
    const [state, setState] = useState({ randomNumber: 0, totalAcc: 0 });
 
@@ -14,7 +12,6 @@ function Portfolio({ userPortfolio, cash }) {
          let totalAcc = 0;
          userPortfolio.forEach(portfo => {
             totalAcc += portfo.tickerValue[0].intraday[randomNumber].open * portfo.numOfShares;
-            // console.log(portfo.ticker[0].intraday)
          })
          setState({ randomNumber, totalAcc });
       }, 1500)

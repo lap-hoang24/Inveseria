@@ -567,12 +567,120 @@ body .MuiDialogActions-root {
   font-size: 12px;
 }
 
+#account .day-transaction {
+  margin: 0.5rem 0.5rem;
+}
+
+#account .day-transaction .date {
+  font-size: .8rem;
+  padding: .1rem 0 0.1rem .4rem;
+  background-color: #d9d9d9;
+}
+
+#account .day-transaction .transaction {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  font-size: 0.7rem;
+  padding: 0 .2rem .2rem 0;
+  border-bottom: 1px solid #cdcdcd;
+}
+
+#account .day-transaction .transaction:last-child {
+  border: none;
+}
+
+#account .day-transaction .transaction .action {
+  font-size: 1rem;
+}
+
+#account .day-transaction .transaction .wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#account .day-transaction .transaction .info-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  letter-spacing: 1px;
+  margin-left: .3rem;
+}
+
+#account .day-transaction .transaction .info-wrapper .price, #account .day-transaction .transaction .info-wrapper .numOfShares, #account .day-transaction .transaction .info-wrapper .ticker {
+  margin: 0 .1rem;
+  color: black;
+}
+
+#account .day-transaction .transaction .lower-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.5rem;
+}
+
 #news {
   width: 90%;
   border-radius: 10px;
   background-color: #f8f9fa;
   margin: 0 auto 5rem auto;
   padding: 0 0 0rem 0;
+}
+
+#news .news-heading {
+  padding: .3rem 0px;
+  text-align: center;
+  font-style: italic;
+  font-weight: 600;
 }
 
 #news .news-piece {

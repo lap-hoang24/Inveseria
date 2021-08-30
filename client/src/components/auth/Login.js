@@ -67,10 +67,10 @@ class Login extends Component {
                   <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fa fa-google"></span> SignIn with Google</a>
                </div>
                <div id='linkedin-link'>
-                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span class="fab fa-linkedin"></span> SignIn with LinkedIn</a>
+                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fab fa-linkedin"></span> SignIn with LinkedIn</a>
                </div>
                <div id='github-link'>
-                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span class="fab fa-github"></span> SignIn with Github</a>
+                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fab fa-github"></span> SignIn with Github</a>
                </div>
             </div>
             <Navbar />

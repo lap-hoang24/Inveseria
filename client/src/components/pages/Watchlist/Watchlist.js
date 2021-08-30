@@ -4,6 +4,7 @@ import { withCookies } from 'react-cookie';
 import { Link } from "react-router-dom";
 import Loading from '../../component/Loading';
 import News from '../../component/News';
+import { finnhubToken } from '../../../keys';
 
 
 
@@ -11,6 +12,8 @@ function Watchlist({ cookies }) {
    localStorage.setItem('lastPath', "/watchlist");
    const [watchlist, setWatchlist] = useState(false);
    const [randomNum, setRandomNum] = useState(10);
+   const generalMarketNews = 'https://finnhub.io/api/v1/news?category=general';
+   const newsPeriod = '';
 
    useEffect(() => {
       const userId = cookies.get('id');
@@ -24,6 +27,9 @@ function Watchlist({ cookies }) {
             }, 1500)
          })
          .catch(err => console.error(err));
+
+
+      
 
       return () => {
          clearInterval(interval);
@@ -57,8 +63,7 @@ function Watchlist({ cookies }) {
                })}
             </div>
 
-
-            <News />
+            <News token={finnhubToken} type={generalMarketNews} period={newsPeriod} heading={"Market News"} />
          </div>
       )
    } else {

@@ -8,6 +8,7 @@ import axios from 'axios';
 import BuySellSnackBar from '../../component/BuySellSnackBar';
 import RewardModal from '../../component/RewardModal';
 import Loading from '../../component/Loading';
+import { finnhubToken } from '../../../keys';
 
 
 function Home(props) {
@@ -16,6 +17,8 @@ function Home(props) {
    const [loading, setLoading] = useState(true);
    const [action, setAction] = useState();
    const [message, setMessage] = useState('');
+   const generalMarketNews = 'https://finnhub.io/api/v1/news?category=general';
+   const newsPeriod = '';
 
 
    useEffect(() => {
@@ -56,7 +59,7 @@ function Home(props) {
                <Search />
             </div>
             <Portfolio userPortfolio={portfolios} cash={userInfo.cash} />
-            <News />
+            <News token={finnhubToken} type={generalMarketNews} period={newsPeriod} heading={'Market News'} />
             <BuySellSnackBar action={action} message={message} />
             <RewardModal openModal={!userInfo.acceptedReward} userId={userInfo._id} />
          </main>

@@ -8,6 +8,8 @@ import BuyButton from './BuyButton';
 import SellButton from './SellButton';
 import Loading from '../../component/Loading';
 import Chart from './Chart';
+import News from '../../component/News';
+import { finnhubToken } from '../../../keys';
 
 
 function StockDetails(props) {
@@ -16,11 +18,18 @@ function StockDetails(props) {
    const [state, setState] = useState({})
    const [randomNumber, setRandomNumber] = useState(0);
    let randomNum = 0;
+   const stockNews = `https://finnhub.io/api/v1/company-news?symbol=${ticker}`;
 
    useEffect(() => {
       const userId = props.cookies.get('id');
       const stockIntraday = axios.get('/stockApi/getIntraday/' + ticker);
       const userPos = axios.post('/stockApi/getUserPosition/', { ticker, userId });
+
+
+      // GET STOCK RECOMMENDATION TREND
+      axios.get(`https://finnhub.io/api/v1/stock/recommendation?symbol=${ticker}&token=c32dffiad3ieculvh350`)
+      .then(res => { res.data.length = 6; console.log(res); })
+      .catch(err => { console.error(err) })
 
       Promise.all([stockIntraday, userPos])
          .then(values => {
@@ -98,9 +107,7 @@ function StockDetails(props) {
 
             <Chart tickerIntra={tickerIntra} randomNumber={randomNumber} />
 
-            <div className="news">
-               <h5>News</h5>
-            </div>
+            <News token={finnhubToken} type={stockNews} period={getCurrent3DayPeriod()} heading={`News related to ${ticker}`} />
          </div>
       )
    } else {
@@ -108,3 +115,11 @@ function StockDetails(props) {
    }
 }
 export default withCookies(withRouter(StockDetails));
+
+const getCurrent3DayPeriod = () => {
+   let today = new Date().getTime();
+   let threeDaysMillisec = 1000 * 3600 * 24 * 3;
+   let threeDaysEarlier = new Date(new Date().getTime() - threeDaysMillisec).toLocaleDateString().split('/');
+
+   return `&from${threeDaysEarlier[2]}-${threeDaysEarlier[0]}-${threeDaysEarlier[1]}&to${today[2]}-${today[0]}-${today[1]}`;
+}

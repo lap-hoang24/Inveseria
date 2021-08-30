@@ -46,6 +46,8 @@ exports.buyStock = async (req, res) => {
    let addedPosition, userPosition, updatedNumOfShares, updatedAvgPrice, avgPrice, updatedCash, cashAmount, totalPurchase, updatedUserCash;
    let createdOn = new Date().toJSON().slice(0, 10);
    let createdAt = new Date().toJSON();
+
+
    // check if user already has this position (ticker)
    // if YES, accumulate
    // if NO, create new posistion
@@ -66,7 +68,7 @@ exports.buyStock = async (req, res) => {
          userId,
          avgPrice,
          ticker: tickerInfo.ticker,
-         logo: tickerInfo.logo,
+         // logo: tickerInfo.logo,
          name: tickerInfo.companyName,
          numOfShares,
       })
@@ -77,7 +79,7 @@ exports.buyStock = async (req, res) => {
    updatedCash = cashAmount.cash - totalPurchase;
 
    updatedUserCash = await User.updateOne({ _id: userId }, { $set: { cash: updatedCash } });
-   
+
    // add to Transactions
    let info = {
       userId,
@@ -130,6 +132,7 @@ exports.sellStock = async (req, res) => {
       name: tickerInfo.companyName,
       logo: tickerInfo.logo,
    }
+
    let newTransaction = await Transaction.create(info);
    res.redirect(301, 'http://localhost:3000/');
 }
@@ -186,7 +189,7 @@ exports.getTrendingStocks = async (req, res) => {
 // ==================================================================================
 exports.getUserPortfolio = async (req, res) => {
    const { userId } = req.body;
-   let totalBalance = 0;
+   // let totalBalance = 0;
 
    let portfolios = await Portfolio.aggregate([
       { $match: { userId: mongoose.Types.ObjectId(userId), numOfShares: { $gte: 1 } } },
@@ -273,6 +276,7 @@ exports.getAllTransactions = async (req, res) => {
       { $lookup: { from: 'tickers', localField: 'ticker', foreignField: 'ticker', as: 'tickerLogo' } },
       {
          $project: {
+            "createdOn": 1,
             "numOfShares": 1,
             "price": 1,
             "createdAt": 1,
@@ -282,7 +286,8 @@ exports.getAllTransactions = async (req, res) => {
             "tickerLogo.logo": 1,
          }
       },
-      { $group: { _id: "$createdAt", trans: { $push: "$$ROOT" } } }
+      { $sort: { createdOn: 1 } },
+      { $group: { _id: "$createdOn", transaction: { $push: "$$ROOT" } } }
    ])
 
    res.send(ress);
