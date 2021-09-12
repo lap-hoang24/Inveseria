@@ -46,7 +46,8 @@ function Search() {
 
    useEffect(() => {
       setHistory(historyItems);
-      axios.post('/stockApi/search-ticker', { companyName: tickerInput })
+
+      axios.post('/stockApi/search-ticker', { query: tickerInput })
          .then(response => {
             if (typeof response.data === 'object') {
                setStocksFound(response.data);
@@ -71,12 +72,13 @@ function Search() {
 
    const searchContent = (
       <div className={modalClasses.paper} id="search-modal">
+         <div className="search-heading">search for stock</div>
 
          <TextField InputProps={{ className: inputClasses.input }}
             className={inputClasses.root}
             value={tickerInput}
             onChange={(event) => { setTickerInput(event.target.value) }}
-            id='ticker-search' label="Find stocks..."
+            id='ticker-search'
             autoComplete="off"
             autoFocus variant="outlined" />
 

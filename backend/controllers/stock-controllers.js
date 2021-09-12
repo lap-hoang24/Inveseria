@@ -4,23 +4,11 @@ const Portfolio = require('../models/Portfolio');
 const Transaction = require('../models/Transaction');
 const mongoose = require('mongoose');
 const finnhub = require('finnhub');
-
 const api_key = finnhub.ApiClient.instance.authentications['api_key'];
 api_key.apiKey = "c32dffiad3ieculvh350" // Replace this
 const finnhubClient = new finnhub.DefaultApi()
 
-// ==================================================================================
-// .../addIntraday - POST
-// ==================================================================================
 
-exports.addIntraday = async (req, res) => {
-   let result = await Ticker.updateOne(
-      { ticker: req.body.data[0].symbol },
-      { $set: { intraday: req.body.data } }
-   )
-
-   res.send(result);
-}
 // ==================================================================================
 // .../getIntraday - GET
 // ==================================================================================
@@ -28,15 +16,7 @@ exports.getIntraday = async (req, res) => {
    let stock = await Ticker.findOne({ ticker: req.params.ticker })
    stock ? res.send(stock) : res.send('no stock found')
 }
-// ==================================================================================
-// .../getAllStocks - GET
-// ==================================================================================
 
-exports.getAllStocks = async (req, res) => {
-   let allStocks = await Ticker.find({ intraday: { $in: [[], null] } }, { ticker: 1 });
-
-   res.send(allStocks);
-}
 // ==================================================================================
 // .../buyStock - POST
 // ==================================================================================
@@ -54,9 +34,9 @@ exports.buyStock = async (req, res) => {
 
    userPosition = await Portfolio.findOne({ userId: userId, ticker: tickerInfo.ticker })
 
-   if (userPosition) {
+   if (userPosition.data !== "") {
       updatedNumOfShares = parseInt(numOfShares) + userPosition.numOfShares;
-      updatedAvgPrice = ((price * parseInt(numOfShares)) + (userPosition.avgPrice * userPosition.numOfShares)) / updatedNumOfShares;
+      updatedAvgPrice = ((parseInt(price) * parseInt(numOfShares)) + (userPosition.avgPrice * userPosition.numOfShares)) / updatedNumOfShares;
 
       addedPosition = await Portfolio.updateOne(
          { userId: userId, ticker: tickerInfo.ticker },
@@ -68,7 +48,6 @@ exports.buyStock = async (req, res) => {
          userId,
          avgPrice,
          ticker: tickerInfo.ticker,
-         // logo: tickerInfo.logo,
          name: tickerInfo.companyName,
          numOfShares,
       })
@@ -109,18 +88,21 @@ exports.sellStock = async (req, res) => {
    userPosition = await Portfolio.findOne({ userId, ticker: tickerInfo.ticker })
 
    // recalculate AvgPrice
-   totalLiquidation = (price * parseInt(numOfShares))
+   totalLiquidation = (parseInt(price) * parseInt(numOfShares));
    updatedNumOfShares = userPosition.numOfShares - parseInt(numOfShares);
    updatedAvgPrice = ((userPosition.avgPrice * userPosition.numOfShares) - totalLiquidation) / updatedNumOfShares;
    // add sold shares money to CASH
    cashAmount = await User.findOne({ _id: userId }, { cash: 1 });
    updatedCash = cashAmount.cash + totalLiquidation;
+   // numOfShares = parseInt(numOfShares);
 
    // update user position and user cash amount
    updatedPosition = await Portfolio.updateOne({ userId, ticker: tickerInfo.ticker }, { $set: { numOfShares: updatedNumOfShares, avgPrice: updatedAvgPrice } })
    updatedUserCash = await User.updateOne({ _id: userId }, { $set: { cash: updatedCash } });
 
+
    // add to Transactions
+
    let info = {
       userId,
       numOfShares,
@@ -132,7 +114,6 @@ exports.sellStock = async (req, res) => {
       name: tickerInfo.companyName,
       logo: tickerInfo.logo,
    }
-
    let newTransaction = await Transaction.create(info);
    res.redirect(301, 'http://localhost:3000/');
 }
@@ -163,11 +144,17 @@ exports.getUserPosition = async (req, res) => {
 // ==================================================================================
 
 exports.searchTicker = async (req, res) => {
-   let regexQuery = {
-      companyName: new RegExp(req.body.companyName, 'i'),
-   }
-   if (req.body.companyName != '') {
-      let stocks = await Ticker.find(regexQuery, { ticker: 1, companyName: 1 }).sort({ ticker: 1 });
+   const { query } = req.body;
+
+   if (query != '') {
+      let stocks = await Ticker.find(
+         {
+            $or: [
+               { ticker: { "$regex": query, "$options": 'i' } },
+               { companyName: { "$regex": query, "$options": 'i' } }
+            ]
+         },
+         { ticker: 1, companyName: 1 })
       stocks ? res.send(stocks) : res.send('no stocks found');
    } else {
       res.send('searching...')
@@ -206,15 +193,6 @@ exports.getUserPortfolio = async (req, res) => {
       },
    ])
 
-   // let portfolios = await Portfolio.find({ userId, numOfShares: { $gte: 1 } })
-   // let tickerArr = portfolios.map(portfo => portfo.ticker)
-
-   // let portfoIntra = await Ticker.find({ 'ticker': { $in: tickerArr } }, { ticker: 1, intraday: 1 })
-
-   // portfolios.forEach(port => {
-   //    totalBalance += port.avgPrice * port.numOfShares;
-   // })
-   // const userPorfo = { portfolios, portfoIntra };
    res.send(portfolios);
 }
 
@@ -223,7 +201,7 @@ exports.getUserPortfolio = async (req, res) => {
 // .../getPortfoIntra - POST
 // ==================================================================================
 exports.getPortfoIntra = async (req, res) => {
-   // console.log(req.body);
+
    let portfoIntra = await Ticker.find({ 'ticker': { $in: req.body } }, { ticker: 1, intraday: 1 })
    res.send(portfoIntra);
 }
@@ -247,7 +225,6 @@ exports.setFavorite = async (req, res) => {
 }
 
 
-
 // ==================================================================================
 // .../getWatchlist - GET
 // ==================================================================================
@@ -262,7 +239,6 @@ exports.getWatchlist = async (req, res) => {
 }
 
 
-
 // ==================================================================================
 // .../getAllTransactions - GET
 // ==================================================================================
@@ -271,7 +247,7 @@ exports.getWatchlist = async (req, res) => {
 exports.getAllTransactions = async (req, res) => {
    const { userId } = req.query;
 
-   let ress = await Transaction.aggregate([
+   let response = await Transaction.aggregate([
       { $match: { userId: mongoose.Types.ObjectId(userId) } },
       { $lookup: { from: 'tickers', localField: 'ticker', foreignField: 'ticker', as: 'tickerLogo' } },
       {
@@ -279,6 +255,13 @@ exports.getAllTransactions = async (req, res) => {
             "createdOn": 1,
             "numOfShares": 1,
             "price": 1,
+            "createdOn": 1,
+            // "createdAt": {
+            //    $convert: {
+            //       input: "$createdAt",
+            //       to: "decimal"
+            //    }
+            // },
             "createdAt": 1,
             "action": 1,
             "ticker": 1,
@@ -286,30 +269,61 @@ exports.getAllTransactions = async (req, res) => {
             "tickerLogo.logo": 1,
          }
       },
-      { $sort: { createdOn: 1 } },
-      { $group: { _id: "$createdOn", transaction: { $push: "$$ROOT" } } }
+      { $group: { _id: "$createdOn", transaction: { $push: "$$ROOT" } } },
+      { $sort: { _id: -1 } },
    ])
 
-   res.send(ress);
+   res.send(response);
 }
 
 
-exports.getLogos = async (req, res) => {
-   // get all tickers from ticker collections
-   let allTickers = await Ticker.find({ logo: { $in: ['', null] } }, { ticker: 1, logo: 1 });
-   // let allTickers = await Ticker.find({ticker: 'NVDA'}, { ticker: 1, logo: 1 });
 
-   // loop through all tickers, call to 3rd API to get logo of each Tickers and update it in Ticker collection
+// ==================================================================================
+// .../getAllStocks - GET
+// ==================================================================================
 
-   let i = 0;
-   const interval = setInterval(() => {
-      finnhubClient.companyProfile2({ 'symbol': allTickers[i].ticker }, (error, data, response) => {
+exports.getAllStocks = async (req, res) => {
+   let allStocks = await Ticker.find({}, { ticker: 1 });
 
-         Ticker.findOneAndUpdate({ ticker: allTickers[i].ticker }, { logo: data.logo })
-            .then(resp => { console.log('ok - ' + resp.ticker); i = i + 1; })
-            .catch(error => { console.log(error); });
-      });
-   }, 2500)
-
-   res.send(allTickers)
+   res.send(allStocks);
 }
+
+
+// ==================================================================================
+// .../addIntraday - POST
+// ==================================================================================
+
+exports.addIntraday = async (req, res) => {
+
+   let result = await Ticker.updateOne(
+      { ticker: req.body.ticker },
+      { $set: { intraday: req.body.prices } }
+   )
+
+   res.send(result);
+}
+
+
+exports.getBrokenPrices = async (req, res) => {
+   // console.log(req.body);
+
+   let results = await Portfolio.findOne({ userId: '60aa91691de2e12c57399cad', ticker: 'TSLA' })
+
+   res.send(results);
+}
+
+// exports.getLogos = async (req, res) => {
+//    // get all tickers from ticker collections
+//    let allTickers = await Ticker.find({ logo: { $in: ['', null] } }, { ticker: 1, logo: 1 });
+
+//    let i = 0;
+//    const interval = setInterval(() => {
+//       finnhubClient.companyProfile2({ 'symbol': allTickers[i].ticker }, (error, data, response) => {
+//          Ticker.findOneAndUpdate({ ticker: allTickers[i].ticker }, { logo: data.logo })
+//             .then(resp => { console.log('ok - ' + resp.ticker); i = i + 1; })
+//             .catch(error => { console.log(error); });
+//       });
+//    }, 2500)
+
+//    res.send(allTickers)
+// }

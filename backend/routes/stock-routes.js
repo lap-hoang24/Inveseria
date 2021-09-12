@@ -31,6 +31,7 @@ router.post('/setFavorite', stockCtrl.setFavorite);
 router.get('/getAllTransactions', stockCtrl.getAllTransactions);
 
 
+router.get('/getBrokenPrices', stockCtrl.getBrokenPrices);
 
 
 
@@ -38,6 +39,7 @@ router.get('/getAllTransactions', stockCtrl.getAllTransactions);
 
 
 
-router.get('/getLogos', stockCtrl.getLogos);
+
+// router.get('/getLogos', stockCtrl.getLogos);
 
 module.exports = router;

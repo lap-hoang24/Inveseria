@@ -1,5 +1,11 @@
 #search-modal {
    overflow: scroll;
+
+   .search-heading {
+      margin: 0 0 .4rem 0;
+      font-size: 1.2rem;
+      text-align: center;
+   }
    .search-bar {
       @include flex(row, center, flex-start);
    }

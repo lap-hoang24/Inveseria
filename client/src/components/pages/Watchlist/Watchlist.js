@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { withCookies } from 'react-cookie';
 import { Link } from "react-router-dom";
-import Loading from '../../component/Loading';
-import News from '../../component/News';
+import Loading from '../../add-ons/Loading';
+import News from '../../add-ons/News';
 import { finnhubToken } from '../../../keys';
 
 

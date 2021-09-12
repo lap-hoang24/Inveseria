@@ -23,7 +23,8 @@ const transactionSchema = mongoose.Schema({
    },
    numOfShares: {
       type: Number,
-      required: true
+      required: true,
+      default: 0,
    },
    createdAt: {
       type: String,

@@ -1,45 +1,100 @@
-import { createChart } from 'lightweight-charts';
-
-export const paintLineChart = (dataSet) => {
-   const chart = createChart(document.getElementById('line-chart'), {
-      width: 300,
-      height: 240,
-      localization: {
-         dateFormat: 'yyyy/MM/dd',
-      },
-      grid: {
-         vertLines: {
-            color: 'rgba(197, 203, 206, 0.0)',
+export const oneYearChart = (data, ticker) => {
+   return {
+      series: [{
+         name: ticker,
+         data: data
+      }],
+      chart: {
+         type: 'area',
+         stacked: false,
+         height: 350,
+         zoom: {
+            type: 'x',
+            enabled: true,
+            autoScaleYaxis: true
          },
-         horzLines: {
-            color: 'rgba(197, 203, 206, 0.0)',
+
+         animations: {
+            enabled: true,
+            easing: 'easeout',
+            speed: 500,
+         },
+
+         toolbar: {
+            show: true,
+            autoSelected: 'zoom',
+            zoom: false,
+            zoomin: false,
+            zoomout: false,
+            pan: true,
+            tools: {
+               download: false,
+               customIcons: [
+                  {
+                     icon: '<i class="fas fa-adjust"></i>',
+                     index: 2,
+                     title: 'tooltip of the icon',
+                     class: 'custom-icon',
+                     click: function (chart, options, e) {
+                        console.log("clicked custom-icon")
+                        console.log(chart)
+                     }
+                  }
+               ]
+            },
+         },
+
+
+      },
+      dataLabels: {
+         enabled: false
+      },
+
+      stroke: {
+         show: true,
+         curve: 'smooth',
+         lineCap: 'butt',
+         colors: undefined,
+         width: 2,
+         dashArray: 0,
+      },
+      markers: {
+         size: 0,
+      },
+      title: {
+         text: '1 year',
+         align: 'left'
+      },
+      fill: {
+         type: 'gradient',
+         gradient: {
+            shadeIntensity: 1,
+            inverseColors: false,
+            opacityFrom: 0.5,
+            opacityTo: 0,
+            stops: [0, 90, 100]
          },
       },
-      timeScale: {
-         timeVisible: true,
-         secondsVisible: false,
+      yaxis: {
+         labels: {
+            formatter: function (val) {
+               return (val).toFixed(0);
+            },
+         },
+         title: {
+            text: 'Price'
+         },
       },
-      rightPriceScale: {
-         borderVisible: false,
+      xaxis: {
+         type: 'datetime',
       },
-   });
-
-//    chart.applyOptions({
-//       priceScale: {
-//           position: 'left',
-//           mode: 2,
-//           autoScale: false,
-//           invertScale: true,
-//           alignLabels: false,
-//           borderVisible: false,
-//           borderColor: '#555ffd',
-//           scaleMargins: {
-//               top: 0.30,
-//               bottom: 0.25,
-//           },
-//       },
-//   });
-   const lineSeries = chart.addLineSeries();
-
-   return lineSeries.setData(dataSet);
+      tooltip: {
+         shared: true,
+         y: {
+            formatter: function (val) {
+               return (val).toFixed(0)
+            }
+         }
+      }
+   };
 }

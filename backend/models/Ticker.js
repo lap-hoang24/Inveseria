@@ -11,7 +11,7 @@ const tickerSchema = mongoose.Schema({
    },
    logo: {
       type: String,
-      required: true
+      required: false
    },
    sector: {
       type: String,

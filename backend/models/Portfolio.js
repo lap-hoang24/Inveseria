@@ -11,7 +11,7 @@ const portfolioSchema = mongoose.Schema({
    },
    logo: {
       type: String,
-      required: true,
+      required: false,
    },
    name: {
       type: String,
@@ -24,6 +24,7 @@ const portfolioSchema = mongoose.Schema({
    numOfShares: {
       type: Number,
       required: true,
+      default: 0
    }
 }, { collection: 'portfolios' });
 

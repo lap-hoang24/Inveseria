@@ -1,42 +1,22 @@
 import React, { useEffect, useState } from 'react'
-// import { paintLineChart } from './LineChart';
-import Dailychart from 'dailychart';
-
-function Chart({ tickerIntra }) {
+import { oneYearChart } from './LineChart';
+import ApexCharts from 'apexcharts';
 
 
-   // useEffect(() => {
-   //    let stockData = [];
-   //    let dates = [];
-   //    tickerIntra.forEach(intraday => {
-   //       if (!dates.includes(intraday.date.slice(0, 10))) {
-   //          dates.push(intraday.date.slice(0, 10))
-   //          stockData.push({
-   //             time: intraday.date.slice(0, 10),
-   //             value: intraday.open,
-   //          })
-   //       }
-   //    })
-   //    stockData.reverse();
-   //    paintLineChart(stockData);
-   // }, [])
-
-   const [close, setClose] = useState();
-   const [values, setValues] = useState();
+function Chart({ tickerIntra, ticker }) {
 
    useEffect(() => {
-      Dailychart.create('#line-chart');
-      let closePrice = tickerIntra[0].open;
-      let valueArray = tickerIntra.map(intraday => {
-         return intraday.open;
-      })
-      let values = valueArray.join(', ');
-      setClose(closePrice);
-      setValues(values);
+      let data = tickerIntra.map(intra => [intra.date * 1000, intra.close.toFixed(2)])
+
+      let options = oneYearChart(data, ticker);
+
+      let chart = new ApexCharts(document.querySelector("#line-chart"), options);
+      chart.render();
+
    }, [])
 
    return (
-      <div className="chart" id='line-chart' data-dailychart-values={values} data-dailychart-close={close} data-dailychart-length="99">
+      <div className="chart" id='line-chart' >
       </div>
    )
 }

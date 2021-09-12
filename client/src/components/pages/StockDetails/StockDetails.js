@@ -3,13 +3,15 @@ import axios from 'axios';
 import { useParams, withRouter, Link } from "react-router-dom";
 import { withCookies } from 'react-cookie';
 // import { paintLineChart } from './LineChart';
-import Favorite from '../../component/Favorite';
+import Favorite from '../../add-ons/Favorite';
 import BuyButton from './BuyButton';
 import SellButton from './SellButton';
-import Loading from '../../component/Loading';
+import Loading from '../../add-ons/Loading';
 import Chart from './Chart';
-import News from '../../component/News';
+import News from '../../add-ons/News';
 import { finnhubToken } from '../../../keys';
+
+
 
 
 function StockDetails(props) {
@@ -25,11 +27,10 @@ function StockDetails(props) {
       const stockIntraday = axios.get('/stockApi/getIntraday/' + ticker);
       const userPos = axios.post('/stockApi/getUserPosition/', { ticker, userId });
 
-
       // GET STOCK RECOMMENDATION TREND
-      axios.get(`https://finnhub.io/api/v1/stock/recommendation?symbol=${ticker}&token=c32dffiad3ieculvh350`)
-      .then(res => { res.data.length = 6; console.log(res); })
-      .catch(err => { console.error(err) })
+      // axios.get(`https://finnhub.io/api/v1/stock/recommendation?symbol=${ticker}&token=c32dffiad3ieculvh350`)
+      // .then(res => { res.data.length = 6; console.log(res); })
+      // .catch(err => { console.error(err) })
 
       Promise.all([stockIntraday, userPos])
          .then(values => {
@@ -44,19 +45,15 @@ function StockDetails(props) {
             const inWatchlist = values[1].data.watchlist.includes(ticker) ? true : false;
 
             setState({ tickerInfo, tickerIntra, userPosition, userCash, userId, inWatchlist });
-
-            // disable Sell button if user doesnt have any share
-            const sellBtn = document.getElementById('sell-btn-disable');
-            if (userPosition.noPosition || userPosition.numOfShares === 0) {
-               sellBtn.disabled = true;
-               sellBtn.style.backgroundColor = 'grey';
-            }
          }).catch(err => console.error(err))
 
       const interval = setInterval(() => {
          randomNum = Math.floor((Math.random() * 50));
          setRandomNumber(randomNum)
       }, 1500)
+
+
+
 
       return () => {
          clearInterval(interval);
@@ -71,9 +68,10 @@ function StockDetails(props) {
       let close = (tickerIntra[randomNumber].low).toFixed(1);
       let percent = (((open - close) / close) * 100).toFixed(2);
       percent <= 0 ? percent = -(Math.random()).toFixed(2) : percent = percent;
-      let symbol = tickerIntra[randomNumber].symbol;
+      let symbol = tickerInfo.ticker;
       let color = percent > 0 ? 'green' : 'red';
       let indicator = percent > 0 ? <i className="fas fa-sort-up green"></i> : <i className="fas fa-sort-down red "></i>;
+      let shareString = userPosition.numOfShares > 1 ? 'shares' : 'share';
 
       // ========================RETURN=============================
       return (
@@ -99,13 +97,12 @@ function StockDetails(props) {
                </div>
             </div>
 
-            {/* UserStock Component */}
             <div className="user-position">
-               <div>Your Position: {userPosition.numOfShares ? userPosition.numOfShares : '0'} share(s)</div>
+               <div>Your Position: {userPosition.numOfShares ? userPosition.numOfShares : '0'} {shareString}</div>
                <div>Avg Price: $ {userPosition.avgPrice ? userPosition.avgPrice.toFixed(2) : '0'}</div>
             </div>
 
-            <Chart tickerIntra={tickerIntra} randomNumber={randomNumber} />
+            <Chart tickerIntra={tickerIntra} ticker={tickerInfo.ticker} />
 
             <News token={finnhubToken} type={stockNews} period={getCurrent3DayPeriod()} heading={`News related to ${ticker}`} />
          </div>

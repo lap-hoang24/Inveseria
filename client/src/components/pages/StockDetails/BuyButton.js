@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { useModalStyles, useInputStyles, useAlertStyles } from '../../component/Styles';
+import { useModalStyles, useInputStyles, useAlertStyles } from '../../add-ons/Styles';
 import TextField from '@material-ui/core/TextField';
 import Alert from '@material-ui/lab/Alert';
 
@@ -12,8 +12,9 @@ import Alert from '@material-ui/lab/Alert';
 function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, history }) {
    const [buyOpen, setBuyOpen] = useState(false);
    const [numOfShares, setNumOfShares] = useState(0);
-   const [buyPrice, setBuyPrice] = useState();
+   const [buyPrice, setBuyPrice] = useState(0);
    const [cashExceed, setCashExceed] = useState(false);
+   const buyBtnExec = useRef();
    const modalClasses = useModalStyles();
    const inputClasses = useInputStyles();
    const alertClasses = useAlertStyles();
@@ -21,18 +22,17 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, histor
    const handleBuyClose = () => { setBuyOpen(false) };
 
    const compareCash = (numOfShares) => {
-      const buyBtn = document.getElementById('buy-btn-modal');
       let totalPurchase = numOfShares * open;
       if (totalPurchase > userCash) {
          setCashExceed(true);
-         buyBtn.disabled = true;
-         buyBtn.style.backgroundColor = '#e9ecef';
-         buyBtn.style.color = '#6c757d';
+         buyBtnExec.current.disabled = true;
+         buyBtnExec.current.style.backgroundColor = '#e9ecef';
+         buyBtnExec.current.style.color = '#6c757d';
       } else {
          setCashExceed(false);
-         buyBtn.disabled = false;
-         buyBtn.style.color = 'white';
-         buyBtn.style.backgroundColor = 'green';
+         buyBtnExec.current.disabled = false;
+         buyBtnExec.current.style.color = 'white';
+         buyBtnExec.current.style.backgroundColor = 'green';
       }
    }
 
@@ -40,7 +40,7 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, histor
       if (buyPrice !== 0 && numOfShares !== 0) {
          const params = {
             price: buyPrice,
-            numOfShares: numOfShares,
+            numOfShares,
             tickerInfo,
             userId
          }
@@ -48,11 +48,10 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, histor
          axios.post('/stockApi/buyStock', params)
             .then(response => {
                history.push('/');
+               setNumOfShares('');
                sessionStorage.setItem('stockAction', `buy-${tickerInfo.ticker}-${numOfShares}`);
             })
             .catch(err => console.error(err))
-
-         document.getElementById('buy-input').value = "";
       }
    }, [buyPrice])
 
@@ -75,13 +74,14 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, histor
 
          <div className="input-wrapper">
             <p className={inputClasses.label}>Number of shares</p>
-            <TextField InputProps={{ className: inputClasses.input }}
+            <TextField
+               InputProps={{ className: inputClasses.input }}
                className={inputClasses.root}
                onChange={(event) => { setNumOfShares(event.target.value); compareCash(event.target.value) }}
-               id='buy-input'
+               value={numOfShares}
                autoComplete="off" type="number"
                autoFocus variant="outlined" />
-            <button onClick={() => { setBuyPrice(open) }} className="buy-btn" id="buy-btn-modal">BUY</button>
+            <button onClick={() => { setBuyPrice(open) }} className="buy-btn" id="buy-btn-modal" ref={buyBtnExec}>BUY</button>
             {cashExceed
                ? <Alert className={alertClasses.root} severity="error">work harder then you can buy more share mother fucker!</Alert>
                : <div className="exceed-warning"></div>

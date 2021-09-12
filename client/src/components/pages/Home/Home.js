@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { withCookies } from 'react-cookie';
 import UserInfo from './UserInfo';
-import Search from '../../component/Search';
+import Search from '../../add-ons/Search';
 import Portfolio from './Portfolio';
-import News from '../../component/News';
+import News from '../../add-ons/News';
 import axios from 'axios';
-import BuySellSnackBar from '../../component/BuySellSnackBar';
-import RewardModal from '../../component/RewardModal';
-import Loading from '../../component/Loading';
+import BuySellSnackBar from '../../add-ons/BuySellSnackBar';
+import RewardModal from '../../add-ons/RewardModal';
+import Loading from '../../add-ons/Loading';
 import { finnhubToken } from '../../../keys';
 
 
@@ -53,7 +53,7 @@ function Home(props) {
       return <Loading />
    } else {
       return (
-         <main id="home-page">
+         <main id="home">
             <div id="user-info_search-wrapper">
                <UserInfo userInfo={userInfo} />
                <Search />
