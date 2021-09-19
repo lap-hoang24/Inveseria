@@ -41,7 +41,6 @@ function Home(props) {
       Promise.all([userInfo, userPortfo]).then(values => {
          let portfolios = values[1].data;
          let userInfo = values[0].data;
-
          setState({ portfolios, userInfo });
          setLoading(false);
       })

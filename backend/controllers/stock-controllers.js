@@ -127,7 +127,6 @@ exports.getUserPosition = async (req, res) => {
    let userPosition;
    let position = await Portfolio.findOne({ ticker, userId })
    let accountInfo = await User.findOne({ _id: userId }, { cash: 1, watchlist: 1 });
-   // position ? res.send(userPosition) : res.send({ _doc: { noPosition: true } })
 
    if (position) {
       userPosition = { ...position, userCash: accountInfo.cash, watchlist: accountInfo.watchlist };
@@ -192,7 +191,6 @@ exports.getUserPortfolio = async (req, res) => {
          }
       },
    ])
-
    res.send(portfolios);
 }
 

@@ -20,6 +20,7 @@ function Portfolio({ userPortfolio, cash }) {
          clearInterval(interval);
       }
    }, [])
+   
    const { randomNumber, totalAcc } = state;
 
    return (

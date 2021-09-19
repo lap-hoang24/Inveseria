@@ -11,7 +11,7 @@ import Alert from '@material-ui/lab/Alert';
 
 function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, history }) {
    const [buyOpen, setBuyOpen] = useState(false);
-   const [numOfShares, setNumOfShares] = useState(0);
+   const [numOfShares, setNumOfShares] = useState('');
    const [buyPrice, setBuyPrice] = useState(0);
    const [cashExceed, setCashExceed] = useState(false);
    const buyBtnExec = useRef();
@@ -37,7 +37,7 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, histor
    }
 
    useEffect(() => {
-      if (buyPrice !== 0 && numOfShares !== 0) {
+      if (buyPrice !== 0 && numOfShares !== '') {
          const params = {
             price: buyPrice,
             numOfShares,

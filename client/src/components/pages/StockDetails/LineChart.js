@@ -1,10 +1,10 @@
-export const oneYearChart = (data, ticker) => {
+import ApexCharts from "apexcharts";
+
+export const oneYearChart = (dataObject) => {
    return {
-      series: [{
-         name: ticker,
-         data: data
-      }],
+      series: [dataObject],
       chart: {
+         id: 'stockChart',
          type: 'area',
          stacked: false,
          height: 350,
@@ -13,13 +13,11 @@ export const oneYearChart = (data, ticker) => {
             enabled: true,
             autoScaleYaxis: true
          },
-
          animations: {
             enabled: true,
             easing: 'easeout',
             speed: 500,
          },
-
          toolbar: {
             show: true,
             autoSelected: 'zoom',
@@ -36,20 +34,16 @@ export const oneYearChart = (data, ticker) => {
                      title: 'tooltip of the icon',
                      class: 'custom-icon',
                      click: function (chart, options, e) {
-                        console.log("clicked custom-icon")
-                        console.log(chart)
+
                      }
                   }
                ]
             },
          },
-
-
       },
       dataLabels: {
          enabled: false
       },
-
       stroke: {
          show: true,
          curve: 'smooth',

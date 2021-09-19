@@ -48,10 +48,23 @@
       padding: .5rem 0 .5rem 1rem;
    }
 
-   .chart {
+   #chart {
       @include component-container(10px, 90%, $light-bg);
-      height: 300px;
+      height: 400px;
       margin: 1rem auto;
+
+      #chart-period {
+         @include flex(row, space-around, center);
+         width: 70%;
+         margin: 0 auto;
+
+         .period-btn {
+            border: none;
+            padding: 0 .5rem;
+            background-color: lighten($grey, 75%);
+            border-radius: 3px;
+         }
+      }
    }
 
    .news {

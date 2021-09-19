@@ -13,7 +13,7 @@ import Alert from '@material-ui/lab/Alert';
 
 function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, history }) {
    const [sellPrice, setSellPrice] = useState();
-   const [numOfShares, setNumOfShares] = useState(0);
+   const [numOfShares, setNumOfShares] = useState('');
    const [sellOpen, setSellOpen] = useState(false);
    const [shareExceed, setShareExceed] = useState(false);
    const handleSellOpen = () => { setSellOpen(true) };
@@ -23,9 +23,6 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, h
    const alertClasses = useAlertStyles();
    const sellBtnRef = useRef();
    const sellBtnExec = useRef();
-
-
-
 
    const compareShares = (shareInput) => {
       if (shareInput > userPosition.numOfShares) {
@@ -48,7 +45,7 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, h
          sellBtnRef.current.style.backgroundColor = 'grey';
       }
 
-      if (sellPrice !== 0 && numOfShares !== 0) {
+      if (sellPrice !== 0 && numOfShares !== '') {
          const params = {
             price: sellPrice,
             numOfShares,
