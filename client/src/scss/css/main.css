@@ -457,7 +457,7 @@ body .MuiDialogActions-root {
   border-radius: 10px;
   background-color: #f8f9fa;
   margin: 0 auto;
-  padding: .5rem 0 .5rem 1rem;
+  padding: 0.5rem 0 0.5rem 1rem;
 }
 
 #stock-details #chart {
@@ -489,9 +489,54 @@ body .MuiDialogActions-root {
 
 #stock-details #chart #chart-period .period-btn {
   border: none;
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
   background-color: #e1e1e1;
   border-radius: 3px;
+}
+
+#stock-details #financials {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  margin: 1rem auto;
+  padding: .5rem 0 1rem 0;
+  font-size: 0.9rem;
+}
+
+#stock-details #financials .heading {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0rem 0.3rem 0.3rem 0.7rem;
+}
+
+#stock-details #financials .stats {
+  margin: 0 0.7rem;
+}
+
+#stock-details #financials .stats-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 3px 0;
+  font-weight: 400;
+  border-bottom: dashed 1px #a6a6a6;
+}
+
+#stock-details #financials .stats-line:last-child {
+  border-bottom: none;
 }
 
 #stock-details .news {

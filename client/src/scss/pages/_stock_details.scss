@@ -45,7 +45,7 @@
    .user-position {
       @include component-container(10px, 90%, $light-bg);
       margin: 0 auto;
-      padding: .5rem 0 .5rem 1rem;
+      padding: 0.5rem 0 0.5rem 1rem;
    }
 
    #chart {
@@ -60,11 +60,39 @@
 
          .period-btn {
             border: none;
-            padding: 0 .5rem;
+            padding: 0 0.5rem;
             background-color: lighten($grey, 75%);
             border-radius: 3px;
          }
       }
+   }
+
+   #financials {
+      @include component-container(10px, 90%, $light-bg);
+      margin: 1rem auto;
+      padding: .5rem 0 1rem 0;
+
+      .heading {
+         text-align: center;
+         font-size: 1.1rem;
+         font-weight: 600;
+         margin: 0rem 0.3rem 0.3rem 0.7rem;
+      }
+
+      .stats {
+         margin: 0 0.7rem;
+         &-line {
+            @include flex(row, space-between, center);
+            padding: 3px 0;
+            font-weight: 400;
+            border-bottom: dashed 1px lighten(grey, 15%);
+
+            &:last-child {
+               border-bottom: none;
+            }
+         }
+      }
+      font-size: 0.9rem;
    }
 
    .news {
