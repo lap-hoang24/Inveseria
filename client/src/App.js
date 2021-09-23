@@ -10,6 +10,7 @@ import GetTicker from './components/auth/getTicker'
 import StockDetails from './components/pages/StockDetails/StockDetails';
 import Watchlist from './components/pages/Watchlist/Watchlist';
 import AccountSettings from './components/pages/AccountSettings/AccountSettings';
+import Community from './components/pages/Community/Community';
 import Navbar from './components/layouts/Navbar';
 import ProtectedRoute from './components/add-ons/ProtectedRoute';
 
@@ -24,6 +25,7 @@ export class App extends Component {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/getTicker" component={GetTicker} />
             <ProtectedRoute path='/account' isAuthenticated={true} component={AccountSettings} />
+            <ProtectedRoute path='/community' isAuthenticated={true} component={Community} />
             <ProtectedRoute path='/transactions' isAuthenticated={true} component={Transactions} />
             <ProtectedRoute path="/viewstock/:ticker" isAuthenticated={true} component={StockDetails} />
             <ProtectedRoute path='/watchlist' isAuthenticated={true} component={Watchlist} />

@@ -1,0 +1,72 @@
+#community {
+   height: 100vh;
+
+   #panel {
+      @include component-container(10px, 90%, $light-bg);
+      margin: 1rem 1rem;
+      padding: 0.5rem;
+      font-size: 1.1rem;
+   }
+
+   #chat-screen {
+      @include component-container(10px, 90%, $light-bg);
+      @include flex(column, space-between, flex-start);
+      height: 75vh;
+      margin: 0 auto;
+      overflow: scroll;
+
+      #chat-wrapper {
+         @include flex(column, flex-end, center);
+         height: calc(100% - 30px);
+         width: 100%;
+
+         .chat {
+            @include flex(row, flex-start, center);
+            width: 90%;
+            margin: .5rem;
+         }
+
+
+         .owner {
+            text-align: left;
+         }
+         .not-owner {
+            // @include flex(row, flex-end, center);
+
+         }
+
+
+         .user-picture {
+            width: 20px;
+            height:20px;
+            border-radius: 100%;
+         }
+      }
+
+      #chat-input {
+         margin: 0px auto;
+         height: 30px;
+         width: 100%;
+
+         input {
+            border-radius: 20px;
+            border: dashed 1px grey;
+            height: 30px;
+            width: 100%;
+            padding-left: 1rem;
+            letter-spacing: 1px;
+         }
+         ::placeholder {
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+         }
+      }
+
+      .chat {
+         padding: 0.2rem;
+
+         width: 80%;
+      }
+   }
+}

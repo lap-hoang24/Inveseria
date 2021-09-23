@@ -747,7 +747,208 @@ body .MuiDialogActions-root {
 }
 
 #account-settings {
-  color: red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#account-settings #info-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 1rem 0;
+}
+
+#account-settings #info-wrapper img {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  margin-right: .5rem;
+}
+
+#account-settings #info-wrapper .username {
+  font-size: 1.3rem;
+}
+
+#account-settings #link-wrapper {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  margin-top: 2rem;
+}
+
+#account-settings #link-wrapper .link {
+  padding: .5rem 0;
+}
+
+#account-settings #link-wrapper .link .fa-typo3 {
+  margin: 0 .7rem;
+  padding: .5rem 0;
+}
+
+#account-settings #funaf {
+  margin: 1rem 0;
+}
+
+#account-settings #funaf .action {
+  text-align: center;
+  padding: .5rem 0;
+  font-size: 1.3rem;
+}
+
+#community {
+  height: 100vh;
+}
+
+#community #panel {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  margin: 1rem 1rem;
+  padding: 0.5rem;
+  font-size: 1.1rem;
+}
+
+#community #chat-screen {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  height: 75vh;
+  margin: 0 auto;
+  overflow: scroll;
+}
+
+#community #chat-screen #chat-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: calc(100% - 30px);
+  width: 100%;
+}
+
+#community #chat-screen #chat-wrapper .chat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 90%;
+  margin: .5rem;
+}
+
+#community #chat-screen #chat-wrapper .owner {
+  text-align: left;
+}
+
+#community #chat-screen #chat-wrapper .user-picture {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+#community #chat-screen #chat-input {
+  margin: 0px auto;
+  height: 30px;
+  width: 100%;
+}
+
+#community #chat-screen #chat-input input {
+  border-radius: 20px;
+  border: dashed 1px grey;
+  height: 30px;
+  width: 100%;
+  padding-left: 1rem;
+  letter-spacing: 1px;
+}
+
+#community #chat-screen #chat-input ::-webkit-input-placeholder {
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+#community #chat-screen #chat-input :-ms-input-placeholder {
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+#community #chat-screen #chat-input ::-ms-input-placeholder {
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+#community #chat-screen #chat-input ::placeholder {
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+#community #chat-screen .chat {
+  padding: 0.2rem;
+  width: 80%;
 }
 
 #news {
@@ -826,8 +1027,8 @@ body .MuiDialogActions-root {
 }
 
 #news .news-piece .time_readmore-wrapper .time {
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 0.7rem;
+  font-weight: 300;
 }
 
 #search-modal {
@@ -1109,64 +1310,64 @@ body .MuiDialogActions-root {
           align-items: center;
 }
 
-#main-wrapper {
+#login-page #main-wrapper {
   height: 80%;
 }
 
-#main-wrapper #square {
+#login-page #main-wrapper #square {
   height: 230px;
   width: 230px;
   background-color: #2d6a4f;
 }
 
-#main-wrapper #square #square-text {
+#login-page #main-wrapper #square #square-text {
   color: #ffffff;
   font-size: 1.7rem;
   text-align: right;
   margin-right: 1rem;
 }
 
-#main-wrapper #google-link {
+#login-page #main-wrapper #google-link {
   margin-top: 2rem;
   background-color: #ea4335;
-  padding: .5rem .3rem;
+  padding: 0.5rem 0.3rem;
   text-align: center;
 }
 
-#main-wrapper #google-link a {
+#login-page #main-wrapper #google-link a {
   color: #ffffff;
 }
 
-#main-wrapper #google-link span {
-  margin-right: .3rem;
+#login-page #main-wrapper #google-link span {
+  margin-right: 0.3rem;
 }
 
-#main-wrapper #linkedin-link {
+#login-page #main-wrapper #linkedin-link {
   margin-top: 1rem;
-  background-color: #0077B5;
-  padding: .5rem .3rem;
+  background-color: #0077b5;
+  padding: 0.5rem 0.3rem;
   text-align: center;
 }
 
-#main-wrapper #linkedin-link a {
+#login-page #main-wrapper #linkedin-link a {
   color: #ffffff;
 }
 
-#main-wrapper #linkedin-link span {
-  margin-right: .3rem;
+#login-page #main-wrapper #linkedin-link span {
+  margin-right: 0.3rem;
 }
 
-#main-wrapper #github-link {
+#login-page #main-wrapper #github-link {
   margin-top: 1rem;
   background-color: black;
-  padding: .5rem .3rem;
+  padding: 0.5rem 0.3rem;
   text-align: center;
 }
 
-#main-wrapper #github-link a {
+#login-page #main-wrapper #github-link a {
   color: #ffffff;
 }
 
-#main-wrapper #github-link span {
-  margin-right: .3rem;
+#login-page #main-wrapper #github-link span {
+  margin-right: 0.3rem;
 }

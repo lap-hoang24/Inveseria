@@ -19,7 +19,7 @@ function PricePercentButtons({ intraday, symbol, userCash, userPosition, tickerI
    }, [])
 
    let open = (intraday[randomNumber].open).toFixed(1);
-   let close = (intraday[randomNumber].low).toFixed(1);
+   let close = (intraday[randomNumber].close).toFixed(1);
    let percent = (((open - close) / close) * 100).toFixed(2);
    percent <= 0 ? percent = -(Math.random()).toFixed(2) : percent = percent;
    let color = percent > 0 ? 'green' : 'red';

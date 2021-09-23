@@ -29,9 +29,9 @@ function Portfolio({ userPortfolio, cash }) {
 
          <div id="portfolio">
             {userPortfolio?.map(portfolio => {
-               let low = (portfolio.tickerValue[0].intraday[randomNumber].low).toFixed(1);
+               let close = (portfolio.tickerValue[0].intraday[randomNumber].close).toFixed(1);
                let open = (portfolio.tickerValue[0].intraday[randomNumber].open).toFixed(1);
-               let percentIntra = (((open - low) / low) * 100).toFixed(2);
+               let percentIntra = (((close - open) / open) * 100).toFixed(2);
                percentIntra <= 0 ? percentIntra = -(Math.random()).toFixed(2) : percentIntra = percentIntra;
                let percentPortfolio = (((open - portfolio.avgPrice) / portfolio.avgPrice) * 100).toFixed(2);
                let intraColor = percentIntra >= 0 ? "green" : "red";

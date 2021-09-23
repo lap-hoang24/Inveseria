@@ -19,8 +19,8 @@ function List({ watchlist }) {
       <div id="list-wrapper">
          {watchlist.map(stock => {
             let open = (stock.intraday[randomNumber].open).toFixed(1);
-            let low = (stock.intraday[randomNumber].low).toFixed(1);
-            let percent = (((open - low) / low) * 100).toFixed(2);
+            let close = (stock.intraday[randomNumber].close).toFixed(1);
+            let percent = (((open - close) / close) * 100).toFixed(2);
             percent <= 0 ? percent = -(Math.random()).toFixed(2) : percent = percent;
             let color = percent > 0 ? 'green' : 'red';
 

@@ -30,7 +30,7 @@ const Transactions = props => {
          {transactions && transactions.map(trans => {
             return (
                <div key={trans._id} className="day-transaction">
-                  <div className="date"> {trans._id}</div>
+                  <div className="date"> {trans._id.split('-').reverse().join('-')}</div>
                   {trans.transaction.map(transac => {
                      let color = transac.action === "buy" ? "green" : "red";
                      let action = transac.action === "buy" ? <i className="fas fa-plus"></i> : <i className="fas fa-minus"></i>;

@@ -9,7 +9,7 @@ function Navbar() {
          <Link to="/" className="nav-link"><i className="fas fa-dice-five"></i></Link>
          <Link to="/watchlist" className="nav-link"><i className="fas fa-star"></i></Link>
          <Search />
-         <Link to="/login" className="nav-link"><i className="fas fa-bars"></i></Link>
+         <Link to="/community" className="nav-link"><i className="fas fa-bars"></i></Link>
       </nav>
    )
 }

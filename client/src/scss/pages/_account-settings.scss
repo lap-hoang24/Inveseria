@@ -1,4 +1,42 @@
 #account-settings {
-   color: red;
+   @include flex(column, flex-start, center);
+   #info-wrapper {
+      @include flex(row, flex-start, center);
+      margin: 1rem 0;
+      img {
+         height: 50px;
+         width: 50px;
+         border-radius: 100%;
+
+         margin-right: .5rem;
+      }
+
+      .username {
+         font-size: 1.3rem;
+      }
+
+   }
+
+   #link-wrapper {
+      @include component-container(10px, 90%, $light-bg);
+      margin-top: 2rem;
+      .link {
+         padding: .5rem 0;
+         .fa-typo3 {
+            margin: 0 .7rem;
+            padding: .5rem 0;
+         }
+      }
+   }
+
+   #funaf {
+      margin: 1rem 0;
+
+      .action {
+         text-align: center;
+         padding: .5rem 0;
+         font-size: 1.3rem;
+      }
+   }
    
 }
