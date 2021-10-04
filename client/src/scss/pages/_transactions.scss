@@ -46,6 +46,7 @@
          .lower-wrapper {
             @include flex(row, center, center);
             font-size: .5rem;
+            margin-left: 1.3rem;
          }
       }
    }

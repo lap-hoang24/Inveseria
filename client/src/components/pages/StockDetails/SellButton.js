@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -9,9 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 
 
-
-
-function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, history }) {
+function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo }) {
    const [sellPrice, setSellPrice] = useState();
    const [numOfShares, setNumOfShares] = useState('');
    const [sellOpen, setSellOpen] = useState(false);
@@ -23,6 +22,7 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, h
    const alertClasses = useAlertStyles();
    const sellBtnRef = useRef();
    const sellBtnExec = useRef();
+   const history = useHistory();
 
    const compareShares = (shareInput) => {
       if (shareInput > userPosition.numOfShares) {
@@ -52,11 +52,19 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, h
             tickerInfo,
             userId
          }
-         axios.post('/stockApi/sellStock', params)
+         
+         axios.post(process.env.REACT_APP_API_URL + '/stockApi/sellStock', params)
             .then(response => {
-               history.push('/');
+               history.push({
+                  pathname: '/',
+                  state: {
+                     action: 'Sold',
+                     ticker: tickerInfo.ticker,
+                     numOfShares,
+                     price: sellPrice,
+                  }
+               });
                setNumOfShares('');
-               sessionStorage.setItem('stockAction', `sell-${tickerInfo.ticker}-${numOfShares}`);
             })
             .catch(err => console.error(err))
       }

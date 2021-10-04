@@ -9,7 +9,7 @@ function Favorite({ ticker, userId, inWatchlist }) {
 
    useEffect(() => {
       if(favorite !== false) {
-         axios.post('/stockApi/setFavorite', { ticker, userId, status: !watched })
+         axios.post(process.env.REACT_APP_API_URL + '/stockApi/setFavorite', { ticker, userId, status: !watched })
          .then(response => { setFavorite(false) })
          .catch(err => { console.error(err) });
          setWatched(!watched);

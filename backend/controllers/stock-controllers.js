@@ -115,7 +115,7 @@ exports.sellStock = async (req, res) => {
       logo: tickerInfo.logo,
    }
    let newTransaction = await Transaction.create(info);
-   res.redirect(301, 'http://localhost:3000/');
+   res.status(200).send(newTransaction);
 }
 
 // ==================================================================================
@@ -204,7 +204,6 @@ exports.getPortfoIntra = async (req, res) => {
    res.send(portfoIntra);
 }
 
-
 // ==================================================================================
 // .../setFavorite - POST 
 // ==================================================================================
@@ -254,12 +253,6 @@ exports.getAllTransactions = async (req, res) => {
             "numOfShares": 1,
             "price": 1,
             "createdOn": 1,
-            // "createdAt": {
-            //    $convert: {
-            //       input: "$createdAt",
-            //       to: "decimal"
-            //    }
-            // },
             "createdAt": 1,
             "action": 1,
             "ticker": 1,
@@ -309,19 +302,3 @@ exports.getBrokenPrices = async (req, res) => {
 
    res.send(results);
 }
-
-// exports.getLogos = async (req, res) => {
-//    // get all tickers from ticker collections
-//    let allTickers = await Ticker.find({ logo: { $in: ['', null] } }, { ticker: 1, logo: 1 });
-
-//    let i = 0;
-//    const interval = setInterval(() => {
-//       finnhubClient.companyProfile2({ 'symbol': allTickers[i].ticker }, (error, data, response) => {
-//          Ticker.findOneAndUpdate({ ticker: allTickers[i].ticker }, { logo: data.logo })
-//             .then(resp => { console.log('ok - ' + resp.ticker); i = i + 1; })
-//             .catch(error => { console.log(error); });
-//       });
-//    }, 2500)
-
-//    res.send(allTickers)
-// }

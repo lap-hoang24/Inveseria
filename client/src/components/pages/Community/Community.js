@@ -9,7 +9,7 @@ function Community(props) {
 
    useEffect(() => {
       if (content !== '') {
-         axios.post('/chatApi/sendChat', { content, userId })
+         axios.post(process.env.REACT_APP_API_URL + '/chatApi/sendChat', { content, userId })
             .then(response => {
                setContent('');
                setSend(false);
@@ -17,11 +17,10 @@ function Community(props) {
             .catch(err => console.error(err));
       }
 
+
       axios.get('/chatApi/getAllChats')
          .then(response => {
             setChats(response.data);
-
-            console.log(response.data);
          })
          .catch(err => console.error(err));
    }, [send])
@@ -34,19 +33,18 @@ function Community(props) {
                {chats && chats.map(chat => {
                   if (chat.userId === userId) {
                      return (
-                        <div className="chat owner">
+                        <div key={chat._id} className="chat owner">
                            <img className='user-picture' src={chat.userInfo[0].picture} alt="" />
                            <span className='chat-content'>{chat.content}</span>
                         </div>)
                   } else {
                      return (
-                        <div className="chat not-owner">
+                        <div key={chat._id}  className="chat not-owner">
                            <img className='user-picture' src={chat.userInfo[0].picture} alt="" />
                            <span className='chat-content'>{chat.content}</span>
                         </div>)
                   }
                })}
-
 
             </div>
             <div id="chat-input" >

@@ -12,7 +12,6 @@ function PricePercentButtons({ intraday, symbol, userCash, userPosition, tickerI
          setRandomNumber(randomNum)
       }, 1500)
 
-
       return () => {
          clearInterval(interval);
       }

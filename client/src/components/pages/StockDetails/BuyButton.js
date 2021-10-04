@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -7,9 +8,7 @@ import { useModalStyles, useInputStyles, useAlertStyles } from '../../add-ons/St
 import TextField from '@material-ui/core/TextField';
 import Alert from '@material-ui/lab/Alert';
 
-
-
-function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, history }) {
+function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo }) {
    const [buyOpen, setBuyOpen] = useState(false);
    const [numOfShares, setNumOfShares] = useState('');
    const [buyPrice, setBuyPrice] = useState(0);
@@ -20,6 +19,7 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, histor
    const alertClasses = useAlertStyles();
    const handleBuyOpen = () => { setBuyOpen(true) };
    const handleBuyClose = () => { setBuyOpen(false) };
+   const history = useHistory();
 
    const compareCash = (numOfShares) => {
       let totalPurchase = numOfShares * open;
@@ -45,11 +45,18 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, histor
             userId
          }
 
-         axios.post('/stockApi/buyStock', params)
+         axios.post(process.env.REACT_APP_API_URL + '/stockApi/buyStock', params)
             .then(response => {
-               history.push('/');
+               history.push({
+                  pathname: '/',
+                  state: {
+                     action: 'Bought',
+                     ticker: tickerInfo.ticker,
+                     numOfShares,
+                     price: buyPrice,
+                  }
+               });
                setNumOfShares('');
-               sessionStorage.setItem('stockAction', `buy-${tickerInfo.ticker}-${numOfShares}`);
             })
             .catch(err => console.error(err))
       }

@@ -653,6 +653,7 @@ body .MuiDialogActions-root {
       -ms-flex-align: center;
           align-items: center;
   font-size: .5rem;
+  margin-left: 1.3rem;
 }
 
 #watchlist .heading {
@@ -810,16 +811,6 @@ body .MuiDialogActions-root {
   padding: .5rem 0;
 }
 
-#account-settings #funaf {
-  margin: 1rem 0;
-}
-
-#account-settings #funaf .action {
-  text-align: center;
-  padding: .5rem 0;
-  font-size: 1.3rem;
-}
-
 #community {
   height: 100vh;
 }
@@ -894,7 +885,8 @@ body .MuiDialogActions-root {
       -ms-flex-align: center;
           align-items: center;
   width: 90%;
-  margin: .5rem;
+  margin: 0.5rem;
+  overflow-x: hidden;
 }
 
 #community #chat-screen #chat-wrapper .owner {

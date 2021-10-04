@@ -8,25 +8,14 @@ const Transactions = props => {
    useEffect(async () => {
       let transactionsArr;
       const userId = props.cookies.get('id');
-      const allTransactions = await axios.get(`/stockApi/getAllTransactions?userId=${userId}`);
-      console.log(allTransactions.data)
+      const allTransactions = await axios.get(process.env.REACT_APP_API_URL + `/stockApi/getAllTransactions?userId=${userId}`);
       transactionsArr = allTransactions.data;
-
-      // let arrLength = allTransactions.data.length;
-
-      // if(new Date(allTransactions.data[0]._id).getTime() < new Date(allTransactions.data[arrLength - 1]._id).getTime()) {
-      //    transactionsArr = allTransactions.data.reverse();
-      // } else {
-      //    transactionsArr = allTransactions.data;
-      // }
-
-      
       setTransactions(transactionsArr);
    }, [])
 
    return (
       <div id="transactions">
-      <div className="heading">All transactions</div>
+         <div className="heading">All transactions</div>
          {transactions && transactions.map(trans => {
             return (
                <div key={trans._id} className="day-transaction">
@@ -37,7 +26,7 @@ const Transactions = props => {
                      return (
                         <div key={transac._id} className="transaction">
                            <div className="wrapper">
-                              <div className={`${color} action`}> {action}</div>
+                              <div className={`${color} action`}>{action}</div>
                               <div className="info-wrapper">
                                  <div className="numOfShares">{transac.numOfShares}</div>
                                  <div className="ticker">{transac.ticker}</div>

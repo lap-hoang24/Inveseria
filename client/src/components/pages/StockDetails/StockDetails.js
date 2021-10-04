@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { useParams, withRouter, Link } from "react-router-dom";
+import { useParams, withRouter, Link, useHistory } from "react-router-dom";
 import { withCookies } from 'react-cookie';
 import Favorite from '../../add-ons/Favorite';
 import Loading from '../../add-ons/Loading';
@@ -16,11 +16,11 @@ function StockDetails(props) {
    const { ticker } = useParams();
    const [state, setState] = useState({})
    const stockNews = `https://finnhub.io/api/v1/company-news?symbol=${ticker}`;
-
+   console.log(process.env);
    useEffect(() => {
       const userId = props.cookies.get('id');
-      const stockIntraday = axios.get('/stockApi/getIntraday/' + ticker);
-      const userPos = axios.post('/stockApi/getUserPosition/', { ticker, userId });
+      const stockIntraday = axios.get(process.env.REACT_APP_API_URL + '/stockApi/getIntraday/' + ticker);
+      const userPos = axios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPosition/', { ticker, userId });
 
       Promise.all([stockIntraday, userPos])
          .then(values => {
@@ -39,7 +39,7 @@ function StockDetails(props) {
          .catch(err => console.error(err))
    }, [])
 
-   const { history } = props;
+
    const { tickerInfo, tickerIntra, userPosition, userCash, userId, inWatchlist } = state;
 
    if (tickerIntra && userPosition) {
@@ -54,7 +54,7 @@ function StockDetails(props) {
                <div className="ticker">{symbol}</div>
                <Favorite ticker={symbol} userId={userId} inWatchlist={inWatchlist} />
             </div>
-            <PricePercentButtons intraday={tickerIntra} symbol={symbol} userCash={userCash} tickerInfo={tickerInfo} userId={userId} history={history} userPosition={userPosition} />
+            <PricePercentButtons intraday={tickerIntra} symbol={symbol} userCash={userCash} tickerInfo={tickerInfo} userId={userId} userPosition={userPosition} />
 
             <div className="user-position">
                <div>Your Position: {userPosition.numOfShares ? userPosition.numOfShares : '0'} {shareString}</div>

@@ -5,7 +5,6 @@ import axios from 'axios';
 const greetings = ['Hi', 'Hello', 'Yo', 'Wassup', 'Hola', 'Salut', 'Chào'];
 
 
-
 const AccountSettings = (props) => {
    const [userInfo, setUserInfo] = useState({});
    const [randomNum, setRandomNum] = useState(0);
@@ -13,13 +12,12 @@ const AccountSettings = (props) => {
    useEffect(() => {
       const userId = props.cookies.get('id');
 
-      axios.post('/auth/info', { userId })
+      axios.post(process.env.REACT_APP_API_URL + '/auth/info', { userId })
          .then(response => {
             setRandomNum(Math.ceil(Math.random() * 6));
             setUserInfo(response.data)
          })
          .catch(err => { console.log(err) });
-      console.log('a')
    }, [])
 
    return (
@@ -32,13 +30,9 @@ const AccountSettings = (props) => {
          <div id="link-wrapper">
             <Link className="link" to='/transactions'><i class="fab fa-typo3"></i>Transactions</Link>
          </div>
-
-
-         <div id="funaf">
-            <div className="action">watch something fun!</div>
-            <iframe width="350" height="250" src="https://www.youtube.com/embed/2dNlRSIRspg" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+         <div id="signout">
+            <button>Sign Out</button>
          </div>
-
       </div>
    )
 }

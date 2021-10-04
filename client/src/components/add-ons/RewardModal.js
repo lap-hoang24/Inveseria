@@ -14,7 +14,7 @@ const RewardModal = ({ openModal, userId }) => {
 
 
    const handleAccept = () => {
-      axios.post('/auth/updateRewardAccept', { userId })
+      axios.post(process.env.REACT_APP_API_URL + '/auth/updateRewardAccept', { userId })
          .then(response => { console.log(response) })
          .catch(err => console.error(err));
 

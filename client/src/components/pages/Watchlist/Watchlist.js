@@ -16,7 +16,7 @@ function Watchlist({ cookies }) {
 
    useEffect(() => {
       const userId = cookies.get('id');
-      axios.get('/stockApi/getWatchlist?userId=' + userId)
+      axios.get(process.env.REACT_APP_API_URL + '/stockApi/getWatchlist?userId=' + userId)
          .then(response => {
             setWatchlist(response.data);
          })

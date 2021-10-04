@@ -30,7 +30,6 @@ router.post('/setFavorite', stockCtrl.setFavorite);
 
 router.get('/getAllTransactions', stockCtrl.getAllTransactions);
 
-
 router.get('/getBrokenPrices', stockCtrl.getBrokenPrices);
 
 

@@ -47,7 +47,7 @@ function Search() {
    useEffect(() => {
       setHistory(historyItems);
 
-      axios.post('/stockApi/search-ticker', { query: tickerInput })
+      axios.post(process.env.REACT_APP_API_URL + '/stockApi/search-ticker', { query: tickerInput })
          .then(response => {
             if (typeof response.data === 'object') {
                setStocksFound(response.data);
@@ -60,7 +60,7 @@ function Search() {
 
 
    useEffect(() => {
-      axios.post('/stockApi/getTrendingStocks', trendingStocksArr)
+      axios.post(process.env.REACT_APP_API_URL + '/stockApi/getTrendingStocks', trendingStocksArr)
          .then(response => {
             setTrendingStocks(response.data);
          })

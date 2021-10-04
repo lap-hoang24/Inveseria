@@ -1,6 +1,6 @@
 import ApexCharts from "apexcharts";
 
-export const oneYearChart = (dataObject) => {
+export const oneYearChart = (dataObject, lineColor) => {
    return {
       series: [dataObject],
       chart: {
@@ -48,7 +48,7 @@ export const oneYearChart = (dataObject) => {
          show: true,
          curve: 'smooth',
          lineCap: 'butt',
-         colors: undefined,
+         colors: [lineColor],
          width: 2,
          dashArray: 0,
       },
@@ -64,7 +64,7 @@ export const oneYearChart = (dataObject) => {
          gradient: {
             shadeIntensity: 1,
             inverseColors: false,
-            opacityFrom: 0.5,
+            opacityFrom: 0.1,
             opacityTo: 0,
             stops: [0, 90, 100]
          },

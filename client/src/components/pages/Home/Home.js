@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import UserInfo from './UserInfo';
 import Search from '../../add-ons/Search';
@@ -19,23 +20,18 @@ function Home(props) {
    const [message, setMessage] = useState('');
    const generalMarketNews = 'https://finnhub.io/api/v1/news?category=general';
    const newsPeriod = '';
-
+   const history = useHistory();
 
    useEffect(() => {
       const userId = props.cookies.get('id');
-      const userInfo = axios.post('/auth/info', { userId });
-      const userPortfo = axios.post('/stockApi/getUserPortfolio', { userId });
-      const stockAction = sessionStorage.getItem('stockAction');
+      const userInfo = axios.post(process.env.REACT_APP_API_URL + '/auth/info', { userId });
+      const userPortfo = axios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPortfolio', { userId });
+      const buySellData = history.location.state;
 
-      if (stockAction) {
-         const splitString = stockAction.split('-');
-         if (splitString[0] === 'sell') {
-            setAction(`sell`)
-            setMessage(`Sold ${splitString[2]} ${splitString[1]}`);
-         } else {
-            setAction('buy');
-            setMessage(`Bought ${splitString[2]} ${splitString[1]}`);
-         }
+      if (buySellData) {
+         const { action, numOfShares, ticker, price } = buySellData;
+         setAction(action);
+         setMessage(`${action} ${numOfShares} ${ticker} at $${price}`);
       }
 
       Promise.all([userInfo, userPortfo]).then(values => {
@@ -45,6 +41,15 @@ function Home(props) {
          setLoading(false);
       })
    }, []);
+
+//    PORT=5000
+
+// MONGODB=mongodb+srv://Inveseria:Inveseria@cluster0.7zcky.mongodb.net/Inveseria?retryWrites=true&w=majority
+
+// CLIENT_ID=789728722377-n89qr26q6im0lalssann58o9fabobhb0.apps.googleusercontent.com
+
+// CLIENT_SECRET=42siTGR0C14mnKVEF1ER1LPe
+
 
    const { portfolios, userInfo } = state;
 
