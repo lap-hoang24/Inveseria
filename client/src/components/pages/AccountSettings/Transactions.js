@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { withCookies } from 'react-cookie';
 
 const Transactions = props => {
-
+   const lastPath = localStorage.getItem('lastPath');
    const [transactions, setTransactions] = useState([]);
    useEffect(async () => {
       let transactionsArr;
@@ -15,6 +16,7 @@ const Transactions = props => {
 
    return (
       <div id="transactions">
+         <Link to={lastPath} className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></Link>
          <div className="heading">All transactions</div>
          {transactions && transactions.map(trans => {
             return (

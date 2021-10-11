@@ -788,7 +788,7 @@ body .MuiDialogActions-root {
   height: 50px;
   width: 50px;
   border-radius: 100%;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 #account-settings #info-wrapper .username {
@@ -803,12 +803,36 @@ body .MuiDialogActions-root {
 }
 
 #account-settings #link-wrapper .link {
-  padding: .5rem 0;
+  padding: 0.5rem 0;
 }
 
-#account-settings #link-wrapper .link .fa-typo3 {
-  margin: 0 .7rem;
-  padding: .5rem 0;
+#account-settings #link-wrapper .link .fa-list-alt {
+  margin: 0 0.7rem;
+  padding: 0.5rem 0;
+}
+
+#account-settings #pie-chart {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  height: 300px;
+  margin: 1rem auto;
+}
+
+#account-settings #signout {
+  width: 90%;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+#account-settings #signout button {
+  color: #ffffff;
+  margin: 0 auto;
+  width: 80%;
+  border: none;
+  background-color: #f53402;
+  padding: 0.25rem 0;
+  border-radius: 5px;
 }
 
 #community {
@@ -822,6 +846,7 @@ body .MuiDialogActions-root {
   margin: 1rem 1rem;
   padding: 0.5rem;
   font-size: 1.1rem;
+  text-align: center;
 }
 
 #community #chat-screen {
@@ -843,8 +868,9 @@ body .MuiDialogActions-root {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  height: 75vh;
+  min-height: 75vh;
   margin: 0 auto;
+  padding-bottom: 5rem;
   overflow: scroll;
 }
 
@@ -884,34 +910,63 @@ body .MuiDialogActions-root {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 90%;
-  margin: 0.5rem;
-  overflow-x: hidden;
+  width: 98%;
+  margin: 0.2rem;
+  overflow: hidden;
 }
 
-#community #chat-screen #chat-wrapper .owner {
-  text-align: left;
+#community #chat-screen #chat-wrapper .chat .user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-#community #chat-screen #chat-wrapper .user-picture {
-  width: 20px;
-  height: 20px;
+#community #chat-screen #chat-wrapper .chat .user .user-picture {
+  width: 17px;
+  height: 17px;
   border-radius: 100%;
+}
+
+#community #chat-screen #chat-wrapper .chat .user .username {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 3px;
+}
+
+#community #chat-screen #chat-wrapper .chat .chat-content {
+  font-size: 0.8rem;
+  width: 100%;
+  word-wrap: break-word;
+  margin-left: 20px;
 }
 
 #community #chat-screen #chat-input {
   margin: 0px auto;
   height: 30px;
   width: 100%;
+  border: dashed 1px grey;
+  border-radius: 20px;
 }
 
 #community #chat-screen #chat-input input {
-  border-radius: 20px;
-  border: dashed 1px grey;
+  border: none;
   height: 30px;
-  width: 100%;
+  width: 90%;
   padding-left: 1rem;
   letter-spacing: 1px;
+  background-color: transparent;
 }
 
 #community #chat-screen #chat-input ::-webkit-input-placeholder {
@@ -936,6 +991,11 @@ body .MuiDialogActions-root {
   font-style: italic;
   font-weight: 300;
   letter-spacing: 1px;
+}
+
+#community #chat-screen #chat-input button {
+  border: none;
+  background-color: transparent;
 }
 
 #community #chat-screen .chat {

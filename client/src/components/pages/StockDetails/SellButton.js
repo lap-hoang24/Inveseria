@@ -4,7 +4,7 @@ import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { useModalStyles, useInputStyles, useAlertStyles } from '../../add-ons/Styles';
+import { useModalStyles, useInputStyles, useAlertStyles } from '../../global/Styles';
 import TextField from '@material-ui/core/TextField';
 import Alert from '@material-ui/lab/Alert';
 

@@ -27,14 +27,13 @@ exports.buyStock = async (req, res) => {
    let createdOn = new Date().toJSON().slice(0, 10);
    let createdAt = new Date().toJSON();
 
-
    // check if user already has this position (ticker)
    // if YES, accumulate
    // if NO, create new posistion
 
    userPosition = await Portfolio.findOne({ userId: userId, ticker: tickerInfo.ticker })
 
-   if (userPosition.data !== "") {
+   if (userPosition) {
       updatedNumOfShares = parseInt(numOfShares) + userPosition.numOfShares;
       updatedAvgPrice = ((parseInt(price) * parseInt(numOfShares)) + (userPosition.avgPrice * userPosition.numOfShares)) / updatedNumOfShares;
 

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useParams, withRouter, Link, useHistory } from "react-router-dom";
 import { withCookies } from 'react-cookie';
-import Favorite from '../../add-ons/Favorite';
-import Loading from '../../add-ons/Loading';
+import Favorite from '../../global/Favorite';
+import Loading from '../../global/Loading';
 import PricePercentButtons from './PricePercentButtons';
 import Chart from './Chart';
 // import Financials from './Financials';
-import News from '../../add-ons/News';
+import News from '../../global/News';
 import { finnhubToken } from '../../../keys';
 
 
@@ -16,7 +16,6 @@ function StockDetails(props) {
    const { ticker } = useParams();
    const [state, setState] = useState({})
    const stockNews = `https://finnhub.io/api/v1/company-news?symbol=${ticker}`;
-   console.log(process.env);
    useEffect(() => {
       const userId = props.cookies.get('id');
       const stockIntraday = axios.get(process.env.REACT_APP_API_URL + '/stockApi/getIntraday/' + ticker);

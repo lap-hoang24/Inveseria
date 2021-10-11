@@ -8,26 +8,44 @@
          width: 50px;
          border-radius: 100%;
 
-         margin-right: .5rem;
+         margin-right: 0.5rem;
       }
 
       .username {
          font-size: 1.3rem;
       }
-
    }
 
    #link-wrapper {
       @include component-container(10px, 90%, $light-bg);
       margin-top: 2rem;
       .link {
-         padding: .5rem 0;
-         .fa-typo3 {
-            margin: 0 .7rem;
-            padding: .5rem 0;
+         padding: 0.5rem 0;
+         .fa-list-alt {
+            margin: 0 0.7rem;
+            padding: 0.5rem 0;
          }
       }
    }
 
-   
+   #pie-chart {
+      @include component-container(10px, 90%, $light-bg);
+      height: 300px;
+      margin: 1rem auto;
+   }
+
+   #signout {
+      width: 90%;
+      margin: 1rem auto;
+      text-align: center;
+      button {
+         color: $white;
+         margin: 0 auto;
+         width: 80%;
+         border: none;
+         background-color: lighten(#dc2f02, 5%);
+         padding: 0.25rem 0;
+         border-radius: 5px;
+      }
+   }
 }

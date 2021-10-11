@@ -6,13 +6,15 @@
       margin: 1rem 1rem;
       padding: 0.5rem;
       font-size: 1.1rem;
+      text-align: center;
    }
 
    #chat-screen {
       @include component-container(10px, 90%, $light-bg);
       @include flex(column, space-between, flex-start);
-      height: 75vh;
+      min-height: 75vh;
       margin: 0 auto;
+      padding-bottom: 5rem;
       overflow: scroll;
 
       #chat-wrapper {
@@ -22,19 +24,30 @@
 
          .chat {
             @include flex(row, flex-start, center);
-            width: 90%;
-            margin: 0.5rem;
-            overflow-x: hidden;
-         }
+            width: 98%;
+            margin: 0.2rem;
+            overflow: hidden;
+            // border-bottom: 1px dashed lighten($grey, 70%);
+            .user {
+               @include flex(row, flex-start, center);
+               .user-picture {
+                  width: 17px;
+                  height: 17px;
+                  border-radius: 100%;
+               }
 
-         .owner {
-            text-align: left;
-         }
-
-         .user-picture {
-            width: 20px;
-            height: 20px;
-            border-radius: 100%;
+               .username {
+                  font-size: 0.8rem;
+                  font-weight: 500;
+                  margin-left: 3px;
+               }
+            }
+            .chat-content {
+               font-size: 0.8rem;
+               width: 100%;
+               word-wrap: break-word;
+               margin-left: 20px;
+            }
          }
       }
 
@@ -42,19 +55,25 @@
          margin: 0px auto;
          height: 30px;
          width: 100%;
+         border: dashed 1px grey;
+         border-radius: 20px;
 
          input {
-            border-radius: 20px;
-            border: dashed 1px grey;
+            border: none;
             height: 30px;
-            width: 100%;
+            width: 90%;
             padding-left: 1rem;
             letter-spacing: 1px;
+            background-color: transparent;
          }
          ::placeholder {
             font-style: italic;
             font-weight: 300;
             letter-spacing: 1px;
+         }
+         button {
+            border: none;
+            background-color: transparent;
          }
       }
 

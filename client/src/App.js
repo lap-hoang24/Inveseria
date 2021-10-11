@@ -12,7 +12,7 @@ import Watchlist from './components/pages/Watchlist/Watchlist';
 import AccountSettings from './components/pages/AccountSettings/AccountSettings';
 import Community from './components/pages/Community/Community';
 import Navbar from './components/layouts/Navbar';
-import ProtectedRoute from './components/add-ons/ProtectedRoute';
+import ProtectedRoute from './components/global/ProtectedRoute';
 
 
 export class App extends Component {

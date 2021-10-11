@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Search from '../add-ons/Search';
+import Search from '../global/Search';
 
 
 function Navbar() {

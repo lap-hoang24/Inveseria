@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import UserInfo from './UserInfo';
-import Search from '../../add-ons/Search';
+import Search from '../../global/Search';
 import Portfolio from './Portfolio';
-import News from '../../add-ons/News';
+import News from '../../global/News';
 import axios from 'axios';
-import BuySellSnackBar from '../../add-ons/BuySellSnackBar';
-import RewardModal from '../../add-ons/RewardModal';
-import Loading from '../../add-ons/Loading';
+import BuySellSnackBar from '../../global/BuySellSnackBar';
+import RewardModal from '../../global/RewardModal';
+import Loading from '../../global/Loading';
 import { finnhubToken } from '../../../keys';
 
 
