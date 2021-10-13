@@ -36,11 +36,21 @@ const userSchema = mongoose.Schema({
       required: true,
       default: false,
    },
+   didSearch: {
+      type: Boolean,
+      required: true,
+      default: false,
+   },
+   buyWatchStock: {
+      type: Boolean,
+      required: true,
+      default: false,
+   },
    watchlist: {
       type: Array,
       required: true,
       default: [],
    }
-}, {collection: 'users'});
+}, { collection: 'users' });
 
 module.exports = mongoose.model('User', userSchema);

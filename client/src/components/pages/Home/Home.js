@@ -42,15 +42,6 @@ function Home(props) {
       })
    }, []);
 
-//    PORT=5000
-
-// MONGODB=mongodb+srv://Inveseria:Inveseria@cluster0.7zcky.mongodb.net/Inveseria?retryWrites=true&w=majority
-
-// CLIENT_ID=789728722377-n89qr26q6im0lalssann58o9fabobhb0.apps.googleusercontent.com
-
-// CLIENT_SECRET=42siTGR0C14mnKVEF1ER1LPe
-
-
    const { portfolios, userInfo } = state;
 
    if (loading) {

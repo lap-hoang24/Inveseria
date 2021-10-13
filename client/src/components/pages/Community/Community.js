@@ -26,8 +26,6 @@ function Community(props) {
       axios.get('/chatApi/getAllChats')
          .then(response => {
             setChats(response.data);
-
-            console.log(response.data)
          })
          .catch(err => console.error(err));
    }, [send])

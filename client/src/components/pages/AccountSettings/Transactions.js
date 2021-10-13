@@ -6,6 +6,7 @@ import { withCookies } from 'react-cookie';
 const Transactions = props => {
    const lastPath = localStorage.getItem('lastPath');
    const [transactions, setTransactions] = useState([]);
+
    useEffect(async () => {
       let transactionsArr;
       const userId = props.cookies.get('id');
@@ -16,8 +17,12 @@ const Transactions = props => {
 
    return (
       <div id="transactions">
-         <Link to={lastPath} className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></Link>
-         <div className="heading">All transactions</div>
+
+         <div className="heading">
+            <Link to={lastPath} className="back-btn"><i className="fas fa-chevron-circle-left"></i></Link>
+            <div className='header'>All Transactions</div>
+            <div className="dummy"></div>
+         </div>
          {transactions && transactions.map(trans => {
             return (
                <div key={trans._id} className="day-transaction">

@@ -4,8 +4,8 @@
       @include flex(row, flex-start, center);
       margin: 1rem 0;
       img {
-         height: 50px;
-         width: 50px;
+         height: 40px;
+         width: 40px;
          border-radius: 100%;
 
          margin-right: 0.5rem;
@@ -28,10 +28,9 @@
       }
    }
 
-   #pie-chart {
+   #user-info {
       @include component-container(10px, 90%, $light-bg);
-      height: 300px;
-      margin: 1rem auto;
+
    }
 
    #signout {
