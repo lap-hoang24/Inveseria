@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 
 
-function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo }) {
+function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, jwt }) {
    const [sellPrice, setSellPrice] = useState();
    const [numOfShares, setNumOfShares] = useState('');
    const [sellOpen, setSellOpen] = useState(false);
@@ -23,6 +23,13 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo })
    const sellBtnRef = useRef();
    const sellBtnExec = useRef();
    const history = useHistory();
+
+   const authAxios = axios.create({
+      baseURL: process.env.REACT_APP_API_URL,
+      headers: {
+         Authorization: `Bearer ${jwt}`
+      }
+   })
 
    const compareShares = (shareInput) => {
       if (shareInput > userPosition.numOfShares) {
@@ -52,8 +59,8 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo })
             tickerInfo,
             userId
          }
-         
-         axios.post(process.env.REACT_APP_API_URL + '/stockApi/sellStock', params)
+
+         authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/sellStock', params)
             .then(response => {
                history.push({
                   pathname: '/',

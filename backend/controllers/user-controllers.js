@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 
 exports.login = async (req, res) => {
    try {
@@ -45,9 +46,19 @@ exports.getUserInfo = async (req, res) => {
 exports.updateRewardAccept = async (req, res) => {
    const { userId } = req.body;
 
-   let updatedReward = await User.findByIdAndUpdate(userId, {acceptedReward: true});
+   let updatedReward = await User.findByIdAndUpdate(userId, { acceptedReward: true });
 
    res.send(updatedReward)
+}
+
+
+
+exports.updateDidSearch = async (req, res) => {
+   const { userId } = req.body;
+
+   let updateDidSearch = await User.findByIdAndUpdate(userId, { didSearch: true });
+
+   res.send(updateDidSearch);
 }
 
 exports.logout = (req, res) => {
@@ -57,8 +68,11 @@ exports.logout = (req, res) => {
 
 exports.googleRedirect = (req, res) => {
    // Successful authentication, redirect success.
-   console.log(req.session);
-   res.cookie("id", req.user._id);
+   const userId = req.user._id;
+   const accessToken = jwt.sign({ userId }, process.env.JWT_SECRET);
+
+   res.cookie("jwt", accessToken);
+   res.cookie("id", userId);
    res.redirect('http://localhost:3000/');
 }
 

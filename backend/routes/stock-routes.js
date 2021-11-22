@@ -2,9 +2,11 @@ const express = require('express');
 router = express.Router();
 const stockCtrl = require('../controllers/stock-controllers');
 
+const checkAuth = require('../middlewares/checkAuth');
+
 // @ route = /stockApi/...
 
-router.post('/addIntraday', stockCtrl.addIntraday);
+router.post('/addIntraday', checkAuth ,stockCtrl.addIntraday);
 
 router.get('/getIntraday/:ticker', stockCtrl.getIntraday);
 
@@ -18,13 +20,13 @@ router.post('/getUserPosition/', stockCtrl.getUserPosition);
 
 router.post('/search-ticker', stockCtrl.searchTicker);
 
-router.post('/buyStock', stockCtrl.buyStock);
+router.post('/buyStock', checkAuth, stockCtrl.buyStock);
 
-router.post('/sellStock', stockCtrl.sellStock);
+router.post('/sellStock', checkAuth, stockCtrl.sellStock);
 
-router.post('/getUserPortfolio', stockCtrl.getUserPortfolio);
+router.post('/getUserPortfolio', checkAuth ,stockCtrl.getUserPortfolio);
 
-router.post('/getPortfoIntra', stockCtrl.getPortfoIntra);
+router.post('/getPortfoIntra', checkAuth ,stockCtrl.getPortfoIntra);
 
 router.post('/setFavorite', stockCtrl.setFavorite);
 

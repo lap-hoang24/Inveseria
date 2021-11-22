@@ -2,21 +2,26 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { withCookies } from 'react-cookie';
 import List from './List';
+import PortfolioWatchlistEmpty from '../../global/PortfolioWatchlistEmpty';
 import Loading from '../../global/Loading';
 import News from '../../global/News';
 import { finnhubToken } from '../../../keys';
 
-
+const ownAxios = axios.create();
 
 function Watchlist({ cookies }) {
    localStorage.setItem('lastPath', "/watchlist");
-   const [watchlist, setWatchlist] = useState(false);
+   const [watchlist, setWatchlist] = useState([]);
    const generalMarketNews = 'https://finnhub.io/api/v1/news?category=general';
    const newsPeriod = '';
 
    useEffect(() => {
       const userId = cookies.get('id');
-      axios.get(process.env.REACT_APP_API_URL + '/stockApi/getWatchlist?userId=' + userId)
+      const jwt = cookies.get('jwt');
+      ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+
+      
+      ownAxios.get(process.env.REACT_APP_API_URL + '/stockApi/getWatchlist?userId=' + userId)
          .then(response => {
             setWatchlist(response.data);
          })
@@ -27,7 +32,7 @@ function Watchlist({ cookies }) {
       return (
          <div id="watchlist">
             <div className="heading">Your Watchlist</div>
-            <List watchlist={watchlist} />
+            {watchlist.length > 0 ? <List watchlist={watchlist} /> : <PortfolioWatchlistEmpty component={'Watchlist'} />}
             <News token={finnhubToken} type={generalMarketNews} period={newsPeriod} heading={"Market News"} />
          </div>
       )

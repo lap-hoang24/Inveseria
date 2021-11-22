@@ -5,7 +5,7 @@
     margin: 0;
     padding: 0;
     font-family: $second-font;
-   
+
     a {
         text-decoration: none;
         &:visited {
@@ -52,5 +52,12 @@ body {
 
     .MuiDialogActions-root {
         justify-content: center;
+    }
+
+    #empty {
+        @include component-container(10px, 90%, $light-bg);
+        padding: 1.7rem;
+        font-style: italic;
+        margin: 1rem auto;
     }
 }

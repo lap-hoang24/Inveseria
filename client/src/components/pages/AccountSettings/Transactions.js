@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { withCookies } from 'react-cookie';
+const ownAxios = axios.create();
+
 
 const Transactions = props => {
    const lastPath = localStorage.getItem('lastPath');
@@ -10,7 +12,10 @@ const Transactions = props => {
    useEffect(async () => {
       let transactionsArr;
       const userId = props.cookies.get('id');
-      const allTransactions = await axios.get(process.env.REACT_APP_API_URL + `/stockApi/getAllTransactions?userId=${userId}`);
+      const jwt = props.cookies.get('jwt');
+      ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+
+      const allTransactions = await ownAxios.get(process.env.REACT_APP_API_URL + `/stockApi/getAllTransactions?userId=${userId}`);
       transactionsArr = allTransactions.data;
       setTransactions(transactionsArr);
    }, [])

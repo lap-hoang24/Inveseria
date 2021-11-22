@@ -3,7 +3,7 @@ import BuyButton from './BuyButton'
 import SellButton from './SellButton'
 import PricePercent from './PricePercent';
 
-function PricePercentButtons({ intraday, symbol, userCash, userPosition, tickerInfo, userId, history }) {
+function PricePercentButtons({ intraday, symbol, userCash, userPosition, tickerInfo, userId, history, jwt }) {
    const [randomNumber, setRandomNumber] = useState(0);
 
    useEffect(() => {
@@ -28,8 +28,8 @@ function PricePercentButtons({ intraday, symbol, userCash, userPosition, tickerI
       <div className="price_btn-wrapper">
          <PricePercent open={open} percent={percent} color={color} indicator={indicator} />
          <div className="btn-wrapper">
-            <BuyButton open={open} symbol={symbol} userCash={userCash} tickerInfo={tickerInfo} userId={userId} history={history} percent={percent} />
-            <SellButton open={open} symbol={symbol} userPosition={userPosition} tickerInfo={tickerInfo} userId={userId} history={history} percent={percent} />
+            <BuyButton open={open} symbol={symbol} userCash={userCash} tickerInfo={tickerInfo} userId={userId} history={history} percent={percent} jwt={jwt} />
+            <SellButton open={open} symbol={symbol} userPosition={userPosition} tickerInfo={tickerInfo} userId={userId} history={history} percent={percent}  jwt={jwt}/>
          </div>
       </div>
    )

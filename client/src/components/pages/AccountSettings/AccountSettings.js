@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import { PieChart } from './PieChart';
 import axios from 'axios';
-
 import ApexCharts from "apexcharts";
 const greetings = ['Hi', 'Hello', 'Yo', 'Wassup', 'Hola', 'Salut', 'Chào'];
+
+const ownAxios = axios.create();
 
 
 const AccountSettings = (props) => {
@@ -15,8 +16,13 @@ const AccountSettings = (props) => {
 
    useEffect(() => {
       const userId = props.cookies.get('id');
-      const userInfo = axios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPortfolio', { userId });
-      const userPortfo = axios.post(process.env.REACT_APP_API_URL + '/auth/info', { userId });
+      const jwt = props.cookies.get('jwt');
+      ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+
+      
+      const userInfo = ownAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPortfolio', { userId });
+      const userPortfo = ownAxios.post(process.env.REACT_APP_API_URL + '/auth/info', { userId });
+
 
       Promise.all([userInfo, userPortfo]).then(values => {
          let portfolios = values[0].data;

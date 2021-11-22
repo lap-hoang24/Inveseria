@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import FavoriteSnackbar from './FavoriteSnackbar';
+const ownAxios = axios.create();
 
-
-function Favorite({ ticker, userId, inWatchlist }) {
+function Favorite({ ticker, userId, inWatchlist, jwt }) {
    const [favorite, setFavorite] = useState(false);
    const [watched, setWatched] = useState(inWatchlist);
-
+   ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+   
    useEffect(() => {
       if(favorite !== false) {
          axios.post(process.env.REACT_APP_API_URL + '/stockApi/setFavorite', { ticker, userId, status: !watched })

@@ -9,6 +9,8 @@ import Chart from './Chart';
 // import Financials from './Financials';
 import News from '../../global/News';
 import { finnhubToken } from '../../../keys';
+const ownAxios = axios.create();
+
 
 
 function StockDetails(props) {
@@ -16,10 +18,14 @@ function StockDetails(props) {
    const { ticker } = useParams();
    const [state, setState] = useState({})
    const stockNews = `https://finnhub.io/api/v1/company-news?symbol=${ticker}`;
+   const jwt = props.cookies.get('jwt');
+   
+   ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+   
    useEffect(() => {
       const userId = props.cookies.get('id');
-      const stockIntraday = axios.get(process.env.REACT_APP_API_URL + '/stockApi/getIntraday/' + ticker);
-      const userPos = axios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPosition/', { ticker, userId });
+      const stockIntraday = ownAxios.get(process.env.REACT_APP_API_URL + '/stockApi/getIntraday/' + ticker);
+      const userPos = ownAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPosition/', { ticker, userId });
 
       Promise.all([stockIntraday, userPos])
          .then(values => {
@@ -51,9 +57,9 @@ function StockDetails(props) {
             <div className="top-wrapper">
                <Link to={lastPath} className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></Link>
                <div className="ticker">{symbol}</div>
-               <Favorite ticker={symbol} userId={userId} inWatchlist={inWatchlist} />
+               <Favorite ticker={symbol} userId={userId} inWatchlist={inWatchlist} jwt={jwt}/>
             </div>
-            <PricePercentButtons intraday={tickerIntra} symbol={symbol} userCash={userCash} tickerInfo={tickerInfo} userId={userId} userPosition={userPosition} />
+            <PricePercentButtons intraday={tickerIntra} symbol={symbol} userCash={userCash} tickerInfo={tickerInfo} userId={userId} userPosition={userPosition} jwt={jwt} />
 
             <div className="user-position">
                <div>Your Position: {userPosition.numOfShares ? userPosition.numOfShares : '0'} {shareString}</div>

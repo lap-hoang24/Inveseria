@@ -3,6 +3,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400;1,600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+.as {
+  background-color: red;
+}
+
+.as #nothing {
+  color: blue;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -61,12 +69,13 @@ body .MuiDialogActions-root {
           justify-content: center;
 }
 
-.as {
-  background-color: red;
-}
-
-.as #nothing {
-  color: blue;
+body #empty {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  padding: 1.7rem;
+  font-style: italic;
+  margin: 1rem auto;
 }
 
 #nav-bar {
@@ -349,6 +358,43 @@ body .MuiDialogActions-root {
 
 #home #portfolio-account-wrapper .ticker-info .price-percent-wrapper .percent {
   font-size: 12px;
+}
+
+#home #did-search {
+  position: absolute;
+  padding: 1.3rem 1.3rem 2rem 1.3rem;
+  background: #2d6a4f;
+  color: #ffffff;
+  top: 2.5rem;
+  right: 1.5rem;
+  border-radius: 10px;
+  z-index: 99;
+}
+
+#home #did-search .arrow {
+  padding: .4rem;
+  top: -5px;
+  right: 1rem;
+  position: absolute;
+  background: #2d6a4f;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  z-index: 10;
+}
+
+#home #did-search .confirm-did-search {
+  position: absolute;
+  bottom: .5rem;
+  right: 1rem;
+  font-size: .7rem;
+  padding: .2rem;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+}
+
+#home .show {
+  display: none;
 }
 
 #stock-details {

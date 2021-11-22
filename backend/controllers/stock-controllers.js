@@ -22,7 +22,9 @@ exports.getIntraday = async (req, res) => {
 // ==================================================================================
 
 exports.buyStock = async (req, res) => {
+
    const { price, numOfShares, tickerInfo, userId } = req.body;
+   
    let addedPosition, userPosition, updatedNumOfShares, updatedAvgPrice, avgPrice, updatedCash, cashAmount, totalPurchase, updatedUserCash;
    let createdOn = new Date().toJSON().slice(0, 10);
    let createdAt = new Date().toJSON();
@@ -71,7 +73,7 @@ exports.buyStock = async (req, res) => {
    }
    let newTransaction = await Transaction.create(info);
 
-   res.status(200).send(addedPosition);
+   res.status(200).send(newTransaction);
 }
 
 // ==================================================================================
