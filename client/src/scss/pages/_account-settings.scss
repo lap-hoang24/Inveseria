@@ -30,7 +30,12 @@
 
    #user-info {
       @include component-container(10px, 90%, $light-bg);
+      margin: 1rem auto;
 
+      div {
+         margin-left: .5rem;
+         padding: .3rem 0;
+      }
    }
 
    #signout {

@@ -33,8 +33,11 @@ exports.signup = async (req, res) => {
 }
 
 exports.getUserInfo = async (req, res) => {
+
+   const userId = req.user;
+
    try {
-      let user = await User.findOne({ _id: req.body.userId });
+      let user = await User.findOne({ _id: userId });
 
       user ? res.send(user) : res.send("user not found, please try again")
    } catch (err) {
@@ -44,7 +47,7 @@ exports.getUserInfo = async (req, res) => {
 
 
 exports.updateRewardAccept = async (req, res) => {
-   const { userId } = req.body;
+   const userId  = req.user;
 
    let updatedReward = await User.findByIdAndUpdate(userId, { acceptedReward: true });
 
@@ -54,7 +57,7 @@ exports.updateRewardAccept = async (req, res) => {
 
 
 exports.updateDidSearch = async (req, res) => {
-   const { userId } = req.body;
+   const userId = req.user;
 
    let updateDidSearch = await User.findByIdAndUpdate(userId, { didSearch: true });
 
@@ -71,7 +74,7 @@ exports.googleRedirect = (req, res) => {
    const userId = req.user._id;
    const accessToken = jwt.sign({ userId }, process.env.JWT_SECRET);
 
-   res.cookie("jwt", accessToken);
+   res.cookie("jwt", accessToken, { maxAge: 60 * 60 * 1000 });
    res.cookie("id", userId);
    res.redirect('http://localhost:3000/');
 }

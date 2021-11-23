@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import authAxios from '../api/axiosAuth';
 
-const DidSearch = ({ show, userId }) => {
+
+const DidSearch = ({ show }) => {
    const [showIt, setShowIt] = useState(show);
    let didSearch = showIt ? 'show' : '';
 
-
    const didSearchClick = () => {
-      axios.post(`${process.env.REACT_APP_API_URL}/auth/updateDidSearch`, { userId })
+      authAxios.post(`${process.env.REACT_APP_API_URL}/auth/updateDidSearch`)
          .then(response => {
             setShowIt(true)
          })

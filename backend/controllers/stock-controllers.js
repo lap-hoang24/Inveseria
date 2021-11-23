@@ -22,9 +22,9 @@ exports.getIntraday = async (req, res) => {
 // ==================================================================================
 
 exports.buyStock = async (req, res) => {
+   const userId  = req.user;
+   const { price, numOfShares, tickerInfo } = req.body;
 
-   const { price, numOfShares, tickerInfo, userId } = req.body;
-   
    let addedPosition, userPosition, updatedNumOfShares, updatedAvgPrice, avgPrice, updatedCash, cashAmount, totalPurchase, updatedUserCash;
    let createdOn = new Date().toJSON().slice(0, 10);
    let createdAt = new Date().toJSON();
@@ -81,7 +81,8 @@ exports.buyStock = async (req, res) => {
 // ==================================================================================
 
 exports.sellStock = async (req, res) => {
-   const { price, numOfShares, tickerInfo, userId } = req.body;
+   const userId  = req.user;
+   const { price, numOfShares, tickerInfo } = req.body;
    let userPosition, updatedNumOfShares, totalLiquidation, updatedAvgPrice, cashAmount, updatedCash, updatedPosition;
    let createdOn = new Date().toJSON().slice(0, 10);
    let createdAt = new Date().toJSON();
@@ -124,7 +125,8 @@ exports.sellStock = async (req, res) => {
 // ==================================================================================
 
 exports.getUserPosition = async (req, res) => {
-   const { ticker, userId } = req.body;
+   const userId  = req.user;
+   const { ticker } = req.body;
    let userPosition;
    let position = await Portfolio.findOne({ ticker, userId })
    let accountInfo = await User.findOne({ _id: userId }, { cash: 1, watchlist: 1 });
@@ -175,8 +177,7 @@ exports.getTrendingStocks = async (req, res) => {
 // .../getUserPortfolio - POST
 // ==================================================================================
 exports.getUserPortfolio = async (req, res) => {
-   const { userId } = req.body;
-   // let totalBalance = 0;
+   const userId  = req.user;
 
    let portfolios = await Portfolio.aggregate([
       { $match: { userId: mongoose.Types.ObjectId(userId), numOfShares: { $gte: 1 } } },
@@ -209,7 +210,8 @@ exports.getPortfoIntra = async (req, res) => {
 // .../setFavorite - POST 
 // ==================================================================================
 exports.setFavorite = async (req, res) => {
-   const { ticker, status, userId } = req.body;
+   const userId  = req.user;
+   const { ticker, status } = req.body;
    let result;
 
    if (status === true) {
@@ -227,7 +229,7 @@ exports.setFavorite = async (req, res) => {
 // .../getWatchlist - GET
 // ==================================================================================
 exports.getWatchlist = async (req, res) => {
-   const { userId } = req.query;
+   const userId  = req.user;
 
    let watchlist = await User.findOne({ _id: userId }, { watchlist: 1 });
 
@@ -243,7 +245,7 @@ exports.getWatchlist = async (req, res) => {
 
 
 exports.getAllTransactions = async (req, res) => {
-   const { userId } = req.query;
+   const userId  = req.user;
 
    let response = await Transaction.aggregate([
       { $match: { userId: mongoose.Types.ObjectId(userId) } },
@@ -274,32 +276,32 @@ exports.getAllTransactions = async (req, res) => {
 // .../getAllStocks - GET
 // ==================================================================================
 
-exports.getAllStocks = async (req, res) => {
-   let allStocks = await Ticker.find({}, { ticker: 1 });
+// exports.getAllStocks = async (req, res) => {
+//    let allStocks = await Ticker.find({}, { ticker: 1 });
 
-   res.send(allStocks);
-}
+//    res.send(allStocks);
+// }
 
 
 // ==================================================================================
 // .../addIntraday - POST
 // ==================================================================================
 
-exports.addIntraday = async (req, res) => {
+// exports.addIntraday = async (req, res) => {
 
-   let result = await Ticker.updateOne(
-      { ticker: req.body.ticker },
-      { $set: { intraday: req.body.prices } }
-   )
+//    let result = await Ticker.updateOne(
+//       { ticker: req.body.ticker },
+//       { $set: { intraday: req.body.prices } }
+//    )
 
-   res.send(result);
-}
+//    res.send(result);
+// }
 
 
-exports.getBrokenPrices = async (req, res) => {
-   // console.log(req.body);
+// exports.getBrokenPrices = async (req, res) => {
+//    // console.log(req.body);
 
-   let results = await Portfolio.findOne({ userId: '60aa91691de2e12c57399cad', ticker: 'TSLA' })
+//    let results = await Portfolio.findOne({ userId: '60aa91691de2e12c57399cad', ticker: 'TSLA' })
 
-   res.send(results);
-}
+//    res.send(results);
+// }

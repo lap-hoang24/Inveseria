@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import { withCookies } from 'react-cookie';
-import { PieChart } from './PieChart';
-import axios from 'axios';
-import ApexCharts from "apexcharts";
+import { withCookies, useCookies } from 'react-cookie';
+import authAxios from '../../api/axiosAuth';
 const greetings = ['Hi', 'Hello', 'Yo', 'Wassup', 'Hola', 'Salut', 'Chào'];
-
-const ownAxios = axios.create();
 
 
 const AccountSettings = (props) => {
    localStorage.setItem('lastPath', "/account");
    const [userInfo, setUserInfo] = useState({});
    const [randomNum, setRandomNum] = useState(0);
+   const history = useHistory();
 
+   const signOut = () => {
+      props.cookies.set('jwt', '');
+
+      return history.push('/');
+   }
    useEffect(() => {
-      const userId = props.cookies.get('id');
-      const jwt = props.cookies.get('jwt');
-      ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
-
-      
-      const userInfo = ownAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPortfolio', { userId });
-      const userPortfo = ownAxios.post(process.env.REACT_APP_API_URL + '/auth/info', { userId });
+      const userInfo = authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPortfolio');
+      const userPortfo = authAxios.post(process.env.REACT_APP_API_URL + '/auth/info');
 
 
       Promise.all([userInfo, userPortfo]).then(values => {
@@ -61,7 +59,7 @@ const AccountSettings = (props) => {
          </div>
 
          <div id="signout">
-            <button>Sign Out</button>
+            <button onClick={signOut}>Sign Out</button>
          </div>
       </div>
    )

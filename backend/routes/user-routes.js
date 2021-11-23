@@ -1,6 +1,6 @@
 const express = require('express');
 router = express.Router();
-const userCtrl= require('../controllers/user-controllers');
+const userCtrl = require('../controllers/user-controllers');
 const passport = require('passport');
 const checkAuth = require('../middlewares/checkAuth');
 
@@ -10,13 +10,13 @@ router.post('/login', userCtrl.login);
 
 router.post('/signup', userCtrl.signup);
 
-router.post('/info', checkAuth ,userCtrl.getUserInfo);
+router.post('/info', checkAuth, userCtrl.getUserInfo);
 
-router.get('/logout', userCtrl.logout);
+router.get('/logout', checkAuth, userCtrl.logout);
 
-router.post('/updateRewardAccept', userCtrl.updateRewardAccept);
+router.post('/updateRewardAccept', checkAuth, userCtrl.updateRewardAccept);
 
-router.post('/updateDidSearch', userCtrl.updateDidSearch);
+router.post('/updateDidSearch', checkAuth, userCtrl.updateDidSearch);
 
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 

@@ -6,17 +6,17 @@ const checkAuth = require('../middlewares/checkAuth');
 
 // @ route = /stockApi/...
 
-router.post('/addIntraday', checkAuth ,stockCtrl.addIntraday);
+// router.post('/addIntraday', checkAuth ,stockCtrl.addIntraday);
 
-router.get('/getIntraday/:ticker', stockCtrl.getIntraday);
+router.get('/getIntraday/:ticker', checkAuth ,stockCtrl.getIntraday);
 
-router.get('/getAllStocks', stockCtrl.getAllStocks);
+// router.get('/getAllStocks', checkAuth ,stockCtrl.getAllStocks);
 
 router.post('/getTrendingStocks', stockCtrl.getTrendingStocks);
 
-router.get('/getWatchlist', stockCtrl.getWatchlist);
+router.get('/getWatchlist', checkAuth ,stockCtrl.getWatchlist);
 
-router.post('/getUserPosition/', stockCtrl.getUserPosition);
+router.post('/getUserPosition/', checkAuth ,stockCtrl.getUserPosition);
 
 router.post('/search-ticker', stockCtrl.searchTicker);
 
@@ -28,11 +28,11 @@ router.post('/getUserPortfolio', checkAuth ,stockCtrl.getUserPortfolio);
 
 router.post('/getPortfoIntra', checkAuth ,stockCtrl.getPortfoIntra);
 
-router.post('/setFavorite', stockCtrl.setFavorite);
+router.post('/setFavorite', checkAuth ,stockCtrl.setFavorite);
 
-router.get('/getAllTransactions', stockCtrl.getAllTransactions);
+router.get('/getAllTransactions', checkAuth , stockCtrl.getAllTransactions);
 
-router.get('/getBrokenPrices', stockCtrl.getBrokenPrices);
+// router.get('/getBrokenPrices', stockCtrl.getBrokenPrices);
 
 
 

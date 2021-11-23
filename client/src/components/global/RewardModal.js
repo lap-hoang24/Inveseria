@@ -5,17 +5,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import axios from 'axios';
+import authAxios from '../api/axiosAuth';
 
-const ownAxios = axios.create();
-
-
-const RewardModal = ({ openModal, userId, jwt }) => {
+const RewardModal = ({ openModal }) => {
    const [open, setOpen] = useState(openModal);
-   ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 
    const handleAccept = () => {
-      ownAxios.post(process.env.REACT_APP_API_URL + '/auth/updateRewardAccept', { userId })
+      authAxios.post(process.env.REACT_APP_API_URL + '/auth/updateRewardAccept')
          .then(response => { console.log(response) })
          .catch(err => console.error(err));
 

@@ -883,6 +883,12 @@ body #empty {
   width: 90%;
   border-radius: 10px;
   background-color: #f8f9fa;
+  margin: 1rem auto;
+}
+
+#account-settings #user-info div {
+  margin-left: .5rem;
+  padding: .3rem 0;
 }
 
 #account-settings #signout {

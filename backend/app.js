@@ -10,7 +10,6 @@ const cors = require('cors');
 const PORT = process.env.PORT || 5000;
 const userRoutes = require('./routes/user-routes');
 const stockRoutes = require('./routes/stock-routes');
-const chatRoutes = require('./routes/chat-routes');
 
 // database connection
 
@@ -60,7 +59,6 @@ app.use(function (req, res, next) {
 // import routes
 app.use('/auth', userRoutes);
 app.use('/stockApi', stockRoutes);
-app.use('/chatApi', chatRoutes);
 
 
 app.listen(PORT, () => {

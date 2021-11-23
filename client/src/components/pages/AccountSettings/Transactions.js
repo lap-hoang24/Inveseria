@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { withCookies } from 'react-cookie';
-const ownAxios = axios.create();
+import authAxios from '../../api/axiosAuth';
 
 
 const Transactions = props => {
@@ -11,11 +10,8 @@ const Transactions = props => {
 
    useEffect(async () => {
       let transactionsArr;
-      const userId = props.cookies.get('id');
-      const jwt = props.cookies.get('jwt');
-      ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 
-      const allTransactions = await ownAxios.get(process.env.REACT_APP_API_URL + `/stockApi/getAllTransactions?userId=${userId}`);
+      const allTransactions = await authAxios.get(process.env.REACT_APP_API_URL + `/stockApi/getAllTransactions`);
       transactionsArr = allTransactions.data;
       setTransactions(transactionsArr);
    }, [])

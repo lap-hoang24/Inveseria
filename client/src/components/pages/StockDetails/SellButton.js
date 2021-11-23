@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { useModalStyles, useInputStyles, useAlertStyles } from '../../global/Styles';
 import TextField from '@material-ui/core/TextField';
 import Alert from '@material-ui/lab/Alert';
+import authAxios from '../../api/axiosAuth';
 
 
-
-function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, jwt }) {
+function SellButton({ open, percent, symbol, userPosition, tickerInfo }) {
    const [sellPrice, setSellPrice] = useState();
    const [numOfShares, setNumOfShares] = useState('');
    const [sellOpen, setSellOpen] = useState(false);
@@ -24,12 +23,6 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, j
    const sellBtnExec = useRef();
    const history = useHistory();
 
-   const authAxios = axios.create({
-      baseURL: process.env.REACT_APP_API_URL,
-      headers: {
-         Authorization: `Bearer ${jwt}`
-      }
-   })
 
    const compareShares = (shareInput) => {
       if (shareInput > userPosition.numOfShares) {
@@ -53,11 +46,11 @@ function SellButton({ open, percent, symbol, userPosition, userId, tickerInfo, j
       }
 
       if (sellPrice !== 0 && numOfShares !== '') {
+         
          const params = {
             price: sellPrice,
             numOfShares,
             tickerInfo,
-            userId
          }
 
          authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/sellStock', params)

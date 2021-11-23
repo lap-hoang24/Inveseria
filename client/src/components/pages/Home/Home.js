@@ -5,33 +5,29 @@ import UserInfo from './UserInfo';
 import Search from '../../global/Search';
 import Portfolio from './Portfolio';
 import News from '../../global/News';
-import axios from 'axios';
 import BuySellSnackBar from '../../global/BuySellSnackBar';
 import RewardModal from '../../global/RewardModal';
 import DidSearch from '../../global/DidSearch';
 import Loading from '../../global/Loading';
 import { finnhubToken } from '../../../keys';
+import authAxios from '../../api/axiosAuth';
+import { LINK_GENERAL_MARKET_NEWS } from '../../global/Constants'
 
-const ownAxios = axios.create();
 
 function Home(props) {
-   const userId = props.cookies.get('id');
-   const jwt = props.cookies.get('jwt');
-   ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 
    localStorage.setItem('lastPath', "/");
    const [state, setState] = useState({});
    const [loading, setLoading] = useState(true);
    const [action, setAction] = useState();
    const [message, setMessage] = useState('');
-   const generalMarketNews = 'https://finnhub.io/api/v1/news?category=general';
    const newsPeriod = '';
    const history = useHistory();
 
    useEffect(() => {
 
-      const userInfo = ownAxios.post(process.env.REACT_APP_API_URL + '/auth/info', { userId });
-      const userPortfo = ownAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPortfolio', { userId });
+      const userInfo = authAxios.post(process.env.REACT_APP_API_URL + '/auth/info');
+      const userPortfo = authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPortfolio');
       const buySellData = history.location.state;
 
       if (buySellData) {
@@ -60,10 +56,10 @@ function Home(props) {
                <Search />
             </div>
             <Portfolio userPortfolio={portfolios} cash={userInfo.cash} />
-            <News token={finnhubToken} type={generalMarketNews} period={newsPeriod} heading={'Market News'} />
+            <News token={finnhubToken} type={LINK_GENERAL_MARKET_NEWS} period={newsPeriod} heading={'Market News'} />
             <BuySellSnackBar action={action} message={message} />
-            <RewardModal openModal={!userInfo.acceptedReward} userId={userInfo._id} jwt={jwt}/>
-            <DidSearch show={userInfo.didSearch} userId={userInfo._id} jwt={jwt}/>
+            <RewardModal openModal={!userInfo.acceptedReward} />
+            <DidSearch show={userInfo.didSearch} />
          </main>
       )
    }

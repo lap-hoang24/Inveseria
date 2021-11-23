@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { useModalStyles, useInputStyles, useAlertStyles } from '../../global/Styles';
 import TextField from '@material-ui/core/TextField';
 import Alert from '@material-ui/lab/Alert';
+import authAxios from '../../api/axiosAuth';
 
-const ownAxios = axios.create();
 
-function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, jwt }) {
+function BuyButton({ open, percent, symbol, userCash, tickerInfo}) {
    const [buyOpen, setBuyOpen] = useState(false);
    const [numOfShares, setNumOfShares] = useState('');
    const [buyPrice, setBuyPrice] = useState(0);
@@ -23,7 +22,6 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, jwt })
    const handleBuyClose = () => { setBuyOpen(false) };
    const history = useHistory();
 
-   ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 
    const compareCash = (numOfShares) => {
       let totalPurchase = numOfShares * open;
@@ -46,10 +44,9 @@ function BuyButton({ open, percent, symbol, userCash, userId, tickerInfo, jwt })
             price: buyPrice,
             numOfShares,
             tickerInfo,
-            userId
          }
 
-         ownAxios.post(process.env.REACT_APP_API_URL + '/stockApi/buyStock', params)
+         authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/buyStock', params)
             .then(response => {
                history.push({
                   pathname: '/',

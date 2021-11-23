@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-import { useParams, withRouter, Link, useHistory } from "react-router-dom";
+import { useParams, withRouter, Link } from "react-router-dom";
 import { withCookies } from 'react-cookie';
 import Favorite from '../../global/Favorite';
 import Loading from '../../global/Loading';
@@ -9,8 +8,7 @@ import Chart from './Chart';
 // import Financials from './Financials';
 import News from '../../global/News';
 import { finnhubToken } from '../../../keys';
-const ownAxios = axios.create();
-
+import authAxios from '../../api/axiosAuth';
 
 
 function StockDetails(props) {
@@ -18,14 +16,10 @@ function StockDetails(props) {
    const { ticker } = useParams();
    const [state, setState] = useState({})
    const stockNews = `https://finnhub.io/api/v1/company-news?symbol=${ticker}`;
-   const jwt = props.cookies.get('jwt');
-   
-   ownAxios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
-   
+
    useEffect(() => {
-      const userId = props.cookies.get('id');
-      const stockIntraday = ownAxios.get(process.env.REACT_APP_API_URL + '/stockApi/getIntraday/' + ticker);
-      const userPos = ownAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPosition/', { ticker, userId });
+      const stockIntraday = authAxios.get(process.env.REACT_APP_API_URL + '/stockApi/getIntraday/' + ticker);
+      const userPos = authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPosition/', { ticker });
 
       Promise.all([stockIntraday, userPos])
          .then(values => {
@@ -39,13 +33,13 @@ function StockDetails(props) {
             const userCash = values[1].data.userCash;
             const inWatchlist = values[1].data.watchlist.includes(ticker) ? true : false;
 
-            setState({ tickerInfo, tickerIntra, userPosition, userCash, userId, inWatchlist });
+            setState({ tickerInfo, tickerIntra, userPosition, userCash, inWatchlist });
          })
          .catch(err => console.error(err))
    }, [])
 
 
-   const { tickerInfo, tickerIntra, userPosition, userCash, userId, inWatchlist } = state;
+   const { tickerInfo, tickerIntra, userPosition, userCash, inWatchlist } = state;
 
    if (tickerIntra && userPosition) {
       let symbol = tickerInfo.ticker;
@@ -57,9 +51,9 @@ function StockDetails(props) {
             <div className="top-wrapper">
                <Link to={lastPath} className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></Link>
                <div className="ticker">{symbol}</div>
-               <Favorite ticker={symbol} userId={userId} inWatchlist={inWatchlist} jwt={jwt}/>
+               <Favorite ticker={symbol} inWatchlist={inWatchlist} />
             </div>
-            <PricePercentButtons intraday={tickerIntra} symbol={symbol} userCash={userCash} tickerInfo={tickerInfo} userId={userId} userPosition={userPosition} jwt={jwt} />
+            <PricePercentButtons intraday={tickerIntra} symbol={symbol} userCash={userCash} tickerInfo={tickerInfo} userPosition={userPosition} />
 
             <div className="user-position">
                <div>Your Position: {userPosition.numOfShares ? userPosition.numOfShares : '0'} {shareString}</div>
