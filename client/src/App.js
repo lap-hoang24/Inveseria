@@ -14,7 +14,6 @@ import Navbar from './components/layouts/Navbar';
 import ProtectedRoute from './components/global/ProtectedRoute';
 
 
-
 export class App extends Component {
   render() {
     return (

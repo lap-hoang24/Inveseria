@@ -1,15 +1,15 @@
 .loading {
    @include flex(row, center, center);
-   height: 100vh;
-   width: 100vw;
+   height: 75vh;
+   width: 100%;
    // background-color: darken($light-bg, 5%);
    background-color: $primary-color;
 
    .lds-grid {
       display: inline-block;
       position: relative;
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
    }
    .lds-grid div {
       position: absolute;

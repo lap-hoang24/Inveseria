@@ -5,7 +5,7 @@
       text-align: center;
       padding: 1rem 0;
    }
-
+   height: 100vh;
    #list-wrapper {
       @include component-container(10px, 90%, $light-bg);
       margin: 0 auto 1rem auto;

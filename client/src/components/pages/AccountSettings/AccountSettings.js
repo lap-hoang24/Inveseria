@@ -15,8 +15,9 @@ const AccountSettings = (props) => {
    const signOut = () => {
       props.cookies.set('jwt', '');
 
-      return history.push('/');
+      return history.push('/login');
    }
+
    useEffect(() => {
       const userInfo = authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPortfolio');
       const userPortfo = authAxios.post(process.env.REACT_APP_API_URL + '/auth/info');
