@@ -6,17 +6,19 @@ const DidSearch = ({ show }) => {
    const [showIt, setShowIt] = useState(show);
    let didSearch = showIt ? 'show' : '';
 
+
+   console.log(didSearch)
    const didSearchClick = () => {
-      authAxios.post(`${process.env.REACT_APP_API_URL}/auth/updateDidSearch`)
+      authAxios.post(`/auth/updateDidSearch`)
          .then(response => {
             setShowIt(true)
          })
          .catch(err => console.error(err));
    }
 
-   useEffect(() => {
+   // useEffect(() => {
 
-   }, [showIt])
+   // }, [showIt])
 
 
    return (

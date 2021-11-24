@@ -1,11 +1,9 @@
 * {
     // ====== GLOBAL RESET =============
-
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: $second-font;
-
     a {
         text-decoration: none;
         &:visited {
@@ -44,14 +42,50 @@
         color: $white;
         font-size: $nav-icon;
     }
+
+    @media (min-width: 400px) {
+        #root {
+            margin: auto;
+            position: relative;
+            overflow: scroll;
+            height: 700px;
+            max-width: 350px;
+            border: 10px solid $primary-color;
+            border-radius: 30px;
+        }
+
+        .App {
+            min-height: 100%;
+        }
+
+        #root::-webkit-scrollbar {
+            display: none;
+        }
+
+        #nav-bar {
+            max-width: 90%;
+        }
+    }
 }
 
 body {
     color: $text-color;
     position: relative;
-
+    height: 100vh;
     .MuiDialogActions-root {
         justify-content: center;
+    }
+
+    .MuiDialog-paperWidthSm {
+        max-width: 330px;
+    }
+
+    .MuiDialog-scrollPaper {
+        display: block;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -5%);
     }
 
     #empty {

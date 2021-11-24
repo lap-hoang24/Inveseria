@@ -1,19 +1,15 @@
 #nav-bar {
    height: 50px;
-   width: 90%;
+   width: 333px;
    background-color: $primary-color;
    @include flex(row, space-around, center);
 
    position: fixed;
    margin: 0 auto;
-   left: 4%;
-   bottom: 10px;
-   border-radius: 40px;
-
+   top: 640px;
 
    .nav-link {
       color: $white;
       font-size: $nav-icon;
    }
 }
-

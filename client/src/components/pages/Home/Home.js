@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import UserInfo from './UserInfo';
 import Search from '../../global/Search';
@@ -22,13 +22,13 @@ function Home(props) {
    const [action, setAction] = useState();
    const [message, setMessage] = useState('');
    const newsPeriod = '';
-   const history = useHistory();
+   const location = useLocation();
 
    useEffect(() => {
 
-      const userInfo = authAxios.post(process.env.REACT_APP_API_URL + '/auth/info');
-      const userPortfo = authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPortfolio');
-      const buySellData = history.location.state;
+      const userInfo = authAxios.post('/auth/info');
+      const userPortfo = authAxios.post('/stockApi/getUserPortfolio');
+      const buySellData = location.state;
 
       if (buySellData) {
          const { action, numOfShares, ticker, price } = buySellData;

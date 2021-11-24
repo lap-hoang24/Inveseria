@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
@@ -14,22 +14,20 @@ import Navbar from './components/layouts/Navbar';
 import ProtectedRoute from './components/global/ProtectedRoute';
 
 
-
 export class App extends Component {
   render() {
     return (
       <div className="App">
         <Router>
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/getTicker" component={GetTicker} />
-            <ProtectedRoute path='/account' isAuthenticated={true} component={AccountSettings} />
-            <ProtectedRoute path='/transactions' isAuthenticated={true} component={Transactions} />
-            <ProtectedRoute path="/viewstock/:ticker" isAuthenticated={true} component={StockDetails} />
-            <ProtectedRoute path='/watchlist' isAuthenticated={true} component={Watchlist} />
-            <ProtectedRoute path='/' isAuthenticated={true} component={Home} />
-          </Switch>
+          <Routes>
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<Signup />} />
+            <Route path='/account' isAuthenticated={true} element={<AccountSettings />} />
+            <Route path='/transactions' isAuthenticated={true} element={<Transactions />} />
+            <Route path="/viewstock/:ticker" isAuthenticated={true} element={<StockDetails />} />
+            <Route path='/watchlist' isAuthenticated={true} element={<Watchlist />} />
+            <Route path='/' isAuthenticated={true} element={<Home />} />
+          </Routes>
           <Navbar />
         </Router>
       </div>

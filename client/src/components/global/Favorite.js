@@ -8,7 +8,7 @@ function Favorite({ ticker, userId, inWatchlist, jwt }) {
    
    useEffect(() => {
       if(favorite !== false) {
-         authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/setFavorite', { ticker, status: !watched })
+         authAxios.post('/stockApi/setFavorite', { ticker, status: !watched })
          .then(response => { setFavorite(false) })
          .catch(err => { console.error(err) });
          setWatched(!watched);

@@ -1,22 +1,21 @@
 .loading {
    @include flex(row, center, center);
-   height: 100vh;
-   width: 100vw;
-   // background-color: darken($light-bg, 5%);
-   background-color: $primary-color;
+   height: 65vh;
+   width: 93%;
+   background-color: $white;
 
    .lds-grid {
       display: inline-block;
       position: relative;
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
    }
    .lds-grid div {
       position: absolute;
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background: #fff;
+      background: $primary-color;
       animation: lds-grid 1.2s linear infinite;
    }
    .lds-grid div:nth-child(1) {
@@ -74,3 +73,4 @@
       }
    }
 }
+// nothing important, just to test 

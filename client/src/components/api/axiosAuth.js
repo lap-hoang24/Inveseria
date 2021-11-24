@@ -1,11 +1,13 @@
 import axios from 'axios';
 const cookies = document.cookie;
 const cookieArray = cookies.split(';');
-let jwt;
+let sliceFromIndex, jwt;
+
+sliceFromIndex = cookieArray.length > 1 ? 5 : 4;
 
 for (const cookie of cookieArray) {
    if (cookie.includes('jwt=')) {
-      jwt = cookie.slice(5);
+      jwt = cookie.slice(sliceFromIndex);
    }
 }
 

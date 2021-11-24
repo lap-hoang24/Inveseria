@@ -58,15 +58,50 @@
   font-size: 1.5rem;
 }
 
+@media (min-width: 400px) {
+  * #root {
+    margin: auto;
+    position: relative;
+    overflow: scroll;
+    height: 700px;
+    max-width: 350px;
+    border: 10px solid #2d6a4f;
+    border-radius: 30px;
+  }
+  * .App {
+    min-height: 100%;
+  }
+  * #root::-webkit-scrollbar {
+    display: none;
+  }
+  * #nav-bar {
+    max-width: 90%;
+  }
+}
+
 body {
   color: #161a1d;
   position: relative;
+  height: 100vh;
 }
 
 body .MuiDialogActions-root {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+body .MuiDialog-paperWidthSm {
+  max-width: 330px;
+}
+
+body .MuiDialog-scrollPaper {
+  display: block;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -5%);
+          transform: translate(-50%, -5%);
 }
 
 body #empty {
@@ -80,7 +115,7 @@ body #empty {
 
 #nav-bar {
   height: 50px;
-  width: 90%;
+  width: 333px;
   background-color: #2d6a4f;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -98,9 +133,7 @@ body #empty {
           align-items: center;
   position: fixed;
   margin: 0 auto;
-  left: 4%;
-  bottom: 10px;
-  border-radius: 40px;
+  top: 640px;
 }
 
 #nav-bar .nav-link {
@@ -128,6 +161,7 @@ body #empty {
 #home {
   position: relative;
   width: 100%;
+  height: 100vh;
 }
 
 #home #user-info_search-wrapper {
@@ -244,7 +278,7 @@ body #empty {
       -ms-flex-align: center;
           align-items: center;
   margin: 0 auto;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 #home #portfolio-account-wrapper .ticker-info:nth-child(odd) {
@@ -362,17 +396,38 @@ body #empty {
 
 #home #did-search {
   position: absolute;
-  padding: 1.3rem 1.3rem 2rem 1.3rem;
+  padding: 0.8rem;
+  height: 5.5rem;
   background: #2d6a4f;
   color: #ffffff;
   top: 2.5rem;
   right: 1.5rem;
   border-radius: 10px;
   z-index: 99;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#home #did-search .message {
+  border-bottom: 1px dashed #ffffff;
+  padding-bottom: 5px;
 }
 
 #home #did-search .arrow {
-  padding: .4rem;
+  padding: 0.4rem;
   top: -5px;
   right: 1rem;
   position: absolute;
@@ -383,18 +438,20 @@ body #empty {
 }
 
 #home #did-search .confirm-did-search {
-  position: absolute;
-  bottom: .5rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  bottom: 0.5rem;
   right: 1rem;
-  font-size: .7rem;
-  padding: .2rem;
+  font-size: 0.8rem;
+  padding: 0.2rem;
   background: transparent;
   border: none;
   color: #ffffff;
+  cursor: pointer;
 }
 
 #home .show {
-  display: none;
+  display: none !important;
 }
 
 #stock-details {
@@ -498,6 +555,10 @@ body #empty {
           align-items: center;
 }
 
+#stock-details .price_btn-wrapper .btn-wrapper button {
+  cursor: pointer;
+}
+
 #stock-details .user-position {
   width: 90%;
   border-radius: 10px;
@@ -538,6 +599,7 @@ body #empty {
   padding: 0 0.5rem;
   background-color: #e1e1e1;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 #stock-details #financials {
@@ -724,6 +786,10 @@ body #empty {
   margin-left: 1.3rem;
 }
 
+#watchlist {
+  height: 100vh;
+}
+
 #watchlist .heading {
   font-size: 1.7rem;
   text-align: center;
@@ -753,7 +819,7 @@ body #empty {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
 }
 
 #watchlist .stock-info:nth-child(even) {
@@ -1157,10 +1223,16 @@ body #empty {
 
 #search-modal {
   overflow: scroll;
+  max-width: 310px;
+  max-height: 470px;
+}
+
+#search-modal::-webkit-scrollbar {
+  display: none;
 }
 
 #search-modal .search-heading {
-  margin: 0 0 .4rem 0;
+  margin: 0 0 0.4rem 0;
   font-size: 1.2rem;
   text-align: center;
 }
@@ -1195,6 +1267,10 @@ body #empty {
   background-color: #e9ecef;
 }
 
+#search-modal #found-stock_history-container #clear-history-btn {
+  cursor: pointer;
+}
+
 #search-modal #found-stock_history-container .history_trending {
   border: none;
   margin: 0.5rem 0;
@@ -1202,7 +1278,14 @@ body #empty {
   font-style: italic;
 }
 
-#buy-modal .ticker-info-wrapper, #sell-modal .ticker-info-wrapper {
+#buy-modal,
+#sell-modal {
+  max-width: 310px;
+  max-height: 400px;
+}
+
+#buy-modal .ticker-info-wrapper,
+#sell-modal .ticker-info-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1220,7 +1303,8 @@ body #empty {
           align-items: center;
 }
 
-#buy-modal .ticker-info-wrapper .ticker, #sell-modal .ticker-info-wrapper .ticker {
+#buy-modal .ticker-info-wrapper .ticker,
+#sell-modal .ticker-info-wrapper .ticker {
   padding: 0.2rem 0.5rem;
   width: 5rem;
   border-radius: 2px;
@@ -1228,7 +1312,8 @@ body #empty {
   text-align: center;
 }
 
-#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper, #sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper {
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper,
+#sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1246,26 +1331,31 @@ body #empty {
           align-items: center;
 }
 
-#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .price, #sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .price {
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .price,
+#sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .price {
   border-radius: 2px;
   text-align: center;
-  margin-right: .2rem;
+  margin-right: 0.2rem;
 }
 
-#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .percent, #sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .percent {
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .percent,
+#sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .percent {
   border-radius: 2px;
   font-size: 13px;
 }
 
-#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .green, #sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .green {
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .green,
+#sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .green {
   color: #25a244;
 }
 
-#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .red, #sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .red {
+#buy-modal .ticker-info-wrapper .price_percent_indicator-wrapper .red,
+#sell-modal .ticker-info-wrapper .price_percent_indicator-wrapper .red {
   color: #f94144;
 }
 
-#buy-modal .input-wrapper, #sell-modal .input-wrapper {
+#buy-modal .input-wrapper,
+#sell-modal .input-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1284,7 +1374,10 @@ body #empty {
   margin: 1rem 0 0 0;
 }
 
-#buy-modal .input-wrapper #buy-btn-modal, #buy-modal .input-wrapper #sell-btn-modal, #sell-modal .input-wrapper #buy-btn-modal, #sell-modal .input-wrapper #sell-btn-modal {
+#buy-modal .input-wrapper #buy-btn-modal,
+#buy-modal .input-wrapper #sell-btn-modal,
+#sell-modal .input-wrapper #buy-btn-modal,
+#sell-modal .input-wrapper #sell-btn-modal {
   margin: 0.7rem 0 0.7rem 0;
   padding: 0.3rem 1.5rem;
   -ms-flex-item-align: center;
@@ -1309,16 +1402,16 @@ body #empty {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: #2d6a4f;
+  height: 65vh;
+  width: 93%;
+  background-color: #ffffff;
 }
 
 .loading .lds-grid {
   display: inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
 }
 
 .loading .lds-grid div {
@@ -1326,7 +1419,7 @@ body #empty {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #fff;
+  background: #2d6a4f;
   -webkit-animation: lds-grid 1.2s linear infinite;
           animation: lds-grid 1.2s linear infinite;
 }
@@ -1466,18 +1559,18 @@ body #empty {
   margin-right: 0.3rem;
 }
 
-#login-page #main-wrapper #linkedin-link {
+#login-page #main-wrapper #anonymous-link {
   margin-top: 1rem;
   background-color: #0077b5;
   padding: 0.5rem 0.3rem;
   text-align: center;
 }
 
-#login-page #main-wrapper #linkedin-link a {
+#login-page #main-wrapper #anonymous-link a {
   color: #ffffff;
 }
 
-#login-page #main-wrapper #linkedin-link span {
+#login-page #main-wrapper #anonymous-link span {
   margin-right: 0.3rem;
 }
 

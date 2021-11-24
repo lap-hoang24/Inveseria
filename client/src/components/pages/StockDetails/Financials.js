@@ -17,6 +17,8 @@ function Financials({ ticker }) {
          .then(response => { setResults(response); console.log(response) })
          .catch(error => console.error(error))
 
+
+         
    }, [])
 
    if (results.status === 200) {
@@ -25,7 +27,7 @@ function Financials({ ticker }) {
       return (
          <div id="financials">
             <div className="heading">key stats</div>
-            <div className="stats">
+            {/* <div className="stats">
                <div className="stats-line"><span className="key">P/E Ratio</span><span className="value">{summaryDetail.trailingPE.fmt}</span></div>
                <div className="stats-line"><span className="key">All time high</span><span className="value">$ {summaryDetail.fiftyTwoWeekHigh.fmt}</span></div>
                <div className="stats-line"><span className="key">Trading volume</span><span className="value">{summaryDetail.volume.longFmt}</span></div>
@@ -35,7 +37,7 @@ function Financials({ ticker }) {
                <div className="stats-line"><span className="key">Shares Outstanding</span><span className="value">{timeSeries.annualBasicAverageShares[3].reportedValue.raw.toLocaleString()}</span></div>
                <div className="stats-line"><span className="key">Total Revenue (TTM)</span><span className="value">$ {timeSeries.trailingTotalRevenue[0].reportedValue.raw.toLocaleString()}</span></div>
                <div className="stats-line"><span className="key">Total Income (TTM)</span><span className="value">$ {timeSeries.trailingNetIncome[0].reportedValue.raw.toLocaleString()}</span></div>
-            </div>
+            </div> */}
          </div>
       )
    } else {

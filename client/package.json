@@ -11,17 +11,22 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "apexcharts": "^3.28.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "dailychart": "^1.3.1",
     "finnhub": "^1.2.6",
+    "g": "^2.0.1",
     "lightweight-charts": "^3.3.0",
+    "netlify-cli": "^8.0.3",
     "react": "^17.0.2",
     "react-cookie": "^4.0.3",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",
+    "react-router": "^6.0.2",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "typescript": "^4.5.2",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
@@ -30,7 +35,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",

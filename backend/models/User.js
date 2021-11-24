@@ -5,6 +5,14 @@ const userSchema = mongoose.Schema({
       type: String,
       required: false,
    },
+   githubId: {
+      type: String,
+      required: false,
+   },
+   linkedinId: {
+      type: String,
+      required: false,
+   },
    username: {
       type: String,
       required: false,

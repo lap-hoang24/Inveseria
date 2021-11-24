@@ -10,8 +10,24 @@ export const useModalStyles = makeStyles((theme) => ({
       borderRadius: '5px',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
-      top: '50%',
+      top: '40%',
       left: '50%',
+      transform: 'translate(-50%, -50%)',
+   },
+}))
+
+
+
+export const useRewardModalStyles = makeStyles((theme) => ({
+   paper: {
+      width: '100%',
+      position: 'absolute',
+      backgroundColor: theme.palette.background.paper,
+      borderRadius: '5px',
+      // boxShadow: theme.shadows[5],
+      // padding: theme.spacing(2, 4, 3),
+      top: '0px',
+      left: '0px',
       transform: 'translate(-50%, -50%)',
    },
 }))

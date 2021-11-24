@@ -15,7 +15,7 @@ function Watchlist({ cookies }) {
 
    useEffect(() => {
       
-      authAxios.get(process.env.REACT_APP_API_URL + '/stockApi/getWatchlist')
+      authAxios.get('/stockApi/getWatchlist')
          .then(response => {
             setWatchlist(response.data);
          })

@@ -11,7 +11,7 @@ const Transactions = props => {
    useEffect(async () => {
       let transactionsArr;
 
-      const allTransactions = await authAxios.get(process.env.REACT_APP_API_URL + `/stockApi/getAllTransactions`);
+      const allTransactions = await authAxios.get(`/stockApi/getAllTransactions`);
       transactionsArr = allTransactions.data;
       setTransactions(transactionsArr);
    }, [])

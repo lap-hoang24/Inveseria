@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
 import authAxios from '../../api/axiosAuth';
 
 
-function BuyButton({ open, percent, symbol, userCash, tickerInfo}) {
+function BuyButton({ open, percent, symbol, userCash, tickerInfo }) {
    const [buyOpen, setBuyOpen] = useState(false);
    const [numOfShares, setNumOfShares] = useState('');
    const [buyPrice, setBuyPrice] = useState(0);
@@ -20,7 +20,7 @@ function BuyButton({ open, percent, symbol, userCash, tickerInfo}) {
    const alertClasses = useAlertStyles();
    const handleBuyOpen = () => { setBuyOpen(true) };
    const handleBuyClose = () => { setBuyOpen(false) };
-   const history = useHistory();
+   const navigate = useNavigate();
 
 
    const compareCash = (numOfShares) => {
@@ -46,17 +46,16 @@ function BuyButton({ open, percent, symbol, userCash, tickerInfo}) {
             tickerInfo,
          }
 
-         authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/buyStock', params)
+         authAxios.post('/stockApi/buyStock', params)
             .then(response => {
-               history.push({
-                  pathname: '/',
+               navigate('/', {
                   state: {
                      action: 'Bought',
                      ticker: tickerInfo.ticker,
                      numOfShares,
                      price: buyPrice,
                   }
-               });
+               })
                setNumOfShares('');
             })
             .catch(err => console.error(err))
@@ -83,7 +82,7 @@ function BuyButton({ open, percent, symbol, userCash, tickerInfo}) {
          <div className="input-wrapper">
             <p className={inputClasses.label}>Number of shares</p>
             <TextField
-               InputProps={{ className: inputClasses.input }}
+               InputProps={{ className: inputClasses.input, inputProps: { min: 0 } }}
                className={inputClasses.root}
                onChange={(event) => { setNumOfShares(event.target.value); compareCash(event.target.value) }}
                value={numOfShares}
@@ -91,7 +90,7 @@ function BuyButton({ open, percent, symbol, userCash, tickerInfo}) {
                autoFocus variant="outlined" />
             <button onClick={() => { setBuyPrice(open) }} className="buy-btn" id="buy-btn-modal" ref={buyBtnExec}>BUY</button>
             {cashExceed
-               ? <Alert className={alertClasses.root} severity="error">work harder then you can buy more share mother fucker!</Alert>
+               ? <Alert className={alertClasses.root} severity="error">work harder then you can buy more share, maybe!</Alert>
                : <div className="exceed-warning"></div>
             }
          </div>

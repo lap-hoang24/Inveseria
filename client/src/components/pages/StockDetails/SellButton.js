@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -21,7 +21,7 @@ function SellButton({ open, percent, symbol, userPosition, tickerInfo }) {
    const alertClasses = useAlertStyles();
    const sellBtnRef = useRef();
    const sellBtnExec = useRef();
-   const history = useHistory();
+   const navigate = useNavigate();
 
 
    const compareShares = (shareInput) => {
@@ -46,24 +46,23 @@ function SellButton({ open, percent, symbol, userPosition, tickerInfo }) {
       }
 
       if (sellPrice !== 0 && numOfShares !== '') {
-         
+
          const params = {
             price: sellPrice,
             numOfShares,
             tickerInfo,
          }
 
-         authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/sellStock', params)
+         authAxios.post('/stockApi/sellStock', params)
             .then(response => {
-               history.push({
-                  pathname: '/',
+               navigate('/', {
                   state: {
                      action: 'Sold',
                      ticker: tickerInfo.ticker,
                      numOfShares,
                      price: sellPrice,
                   }
-               });
+               })
                setNumOfShares('');
             })
             .catch(err => console.error(err))
@@ -87,14 +86,15 @@ function SellButton({ open, percent, symbol, userPosition, tickerInfo }) {
          <div className="input-wrapper">
             <p className={inputClasses.label}>Number of shares</p>
             <TextField
-               InputProps={{ className: inputClasses.input }}
+               InputProps={{ className: inputClasses.input, inputProps: { min: 0 } }}
                className={inputClasses.root}
                onChange={(event) => { setNumOfShares(event.target.value); compareShares(event.target.value) }}
                value={numOfShares}
+               min='0'
                autoComplete="off" type="number"
                autoFocus variant="outlined" />
             <button onClick={() => { setSellPrice(open) }} className="sell-btn" id="sell-btn-modal" ref={sellBtnExec}>SELL</button>
-            {shareExceed ? <Alert className={alertClasses.root} severity="error">you can't fucking sell what you dont own mother fucker!</Alert> : <div className="exceed-warning"></div>}
+            {shareExceed ? <Alert className={alertClasses.root} severity="error">you can't sell what you dont own!</Alert> : <div className="exceed-warning"></div>}
          </div>
       </div>
    )

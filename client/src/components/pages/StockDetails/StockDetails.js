@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, withRouter, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { withCookies } from 'react-cookie';
 import Favorite from '../../global/Favorite';
 import Loading from '../../global/Loading';
 import PricePercentButtons from './PricePercentButtons';
 import Chart from './Chart';
-// import Financials from './Financials';
+import Financials from './Financials';
 import News from '../../global/News';
 import { finnhubToken } from '../../../keys';
 import authAxios from '../../api/axiosAuth';
@@ -18,8 +18,8 @@ function StockDetails(props) {
    const stockNews = `https://finnhub.io/api/v1/company-news?symbol=${ticker}`;
 
    useEffect(() => {
-      const stockIntraday = authAxios.get(process.env.REACT_APP_API_URL + '/stockApi/getIntraday/' + ticker);
-      const userPos = authAxios.post(process.env.REACT_APP_API_URL + '/stockApi/getUserPosition/', { ticker });
+      const stockIntraday = authAxios.get('/stockApi/getIntraday/' + ticker);
+      const userPos = authAxios.post('/stockApi/getUserPosition/', { ticker });
 
       Promise.all([stockIntraday, userPos])
          .then(values => {
@@ -49,7 +49,7 @@ function StockDetails(props) {
       return (
          <div id="stock-details">
             <div className="top-wrapper">
-               <Link to={lastPath} className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></Link>
+               <a href={lastPath} className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></a>
                <div className="ticker">{symbol}</div>
                <Favorite ticker={symbol} inWatchlist={inWatchlist} />
             </div>
@@ -60,7 +60,7 @@ function StockDetails(props) {
                <div>Average Price: $ {userPosition.avgPrice ? userPosition.avgPrice.toFixed(2) : '0'}</div>
             </div>
             <Chart tickerIntra={tickerIntra} ticker={tickerInfo.ticker} />
-            {/* <Financials ticker={tickerInfo.ticker} /> */}
+            <Financials ticker={tickerInfo.ticker} />
             <News token={finnhubToken} type={stockNews} period={getCurrent3DayPeriod()} heading={`News related to ${ticker}`} />
          </div>
       )
@@ -68,7 +68,7 @@ function StockDetails(props) {
       return <Loading />
    }
 }
-export default withCookies(withRouter(StockDetails));
+export default withCookies(StockDetails);
 
 const getCurrent3DayPeriod = () => {
    let today = new Date(new Date().getTime()).toLocaleDateString().split('/');
