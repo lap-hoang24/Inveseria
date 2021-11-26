@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -21,7 +21,7 @@ function SellButton({ open, percent, symbol, userPosition, tickerInfo }) {
    const alertClasses = useAlertStyles();
    const sellBtnRef = useRef();
    const sellBtnExec = useRef();
-   const history = useHistory();
+   const history = useNavigate();
 
 
    const compareShares = (shareInput) => {
