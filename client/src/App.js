@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
@@ -19,7 +19,7 @@ export class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Switch>
+          <Routes>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/getTicker" component={GetTicker} />
@@ -28,7 +28,7 @@ export class App extends Component {
             <ProtectedRoute path="/viewstock/:ticker" isAuthenticated={true} component={StockDetails} />
             <ProtectedRoute path='/watchlist' isAuthenticated={true} component={Watchlist} />
             <ProtectedRoute path='/' isAuthenticated={true} component={Home} />
-          </Switch>
+          </Routes>
           <Navbar />
         </Router>
       </div>
