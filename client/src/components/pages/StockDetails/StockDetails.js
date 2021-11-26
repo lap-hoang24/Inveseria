@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, withRouter, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { withCookies } from 'react-cookie';
 import Favorite from '../../global/Favorite';
 import Loading from '../../global/Loading';
@@ -49,7 +49,7 @@ function StockDetails(props) {
       return (
          <div id="stock-details">
             <div className="top-wrapper">
-               <Link to={lastPath} className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></Link>
+               <a href={lastPath} className="back-btn"><i className="fas fa-2x fa-chevron-circle-left"></i></a>
                <div className="ticker">{symbol}</div>
                <Favorite ticker={symbol} inWatchlist={inWatchlist} />
             </div>
@@ -68,7 +68,7 @@ function StockDetails(props) {
       return <Loading />
    }
 }
-export default withCookies(withRouter(StockDetails));
+export default withCookies(StockDetails);
 
 const getCurrent3DayPeriod = () => {
    let today = new Date(new Date().getTime()).toLocaleDateString().split('/');
