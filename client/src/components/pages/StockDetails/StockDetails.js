@@ -5,7 +5,7 @@ import Favorite from '../../global/Favorite';
 import Loading from '../../global/Loading';
 import PricePercentButtons from './PricePercentButtons';
 import Chart from './Chart';
-// import Financials from './Financials';
+import Financials from './Financials';
 import News from '../../global/News';
 import { finnhubToken } from '../../../keys';
 import authAxios from '../../api/axiosAuth';
@@ -60,7 +60,7 @@ function StockDetails(props) {
                <div>Average Price: $ {userPosition.avgPrice ? userPosition.avgPrice.toFixed(2) : '0'}</div>
             </div>
             <Chart tickerIntra={tickerIntra} ticker={tickerInfo.ticker} />
-            {/* <Financials ticker={tickerInfo.ticker} /> */}
+            <Financials ticker={tickerInfo.ticker} />
             <News token={finnhubToken} type={stockNews} period={getCurrent3DayPeriod()} heading={`News related to ${ticker}`} />
          </div>
       )

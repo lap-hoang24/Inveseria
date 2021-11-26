@@ -1,4 +1,3 @@
-
 #watchlist {
    .heading {
       font-size: 1.7rem;
@@ -6,6 +5,7 @@
       padding: 1rem 0;
    }
    height: 100vh;
+   
    #list-wrapper {
       @include component-container(10px, 90%, $light-bg);
       margin: 0 auto 1rem auto;
@@ -16,8 +16,8 @@
       &:nth-child(even) {
          background-color: darken($light-bg, 2%);
       }
-      padding: .5rem 0;
-      
+      padding: 0.5rem 0;
+
       .ticker-logo-wrapper {
          @include flex(row, flex-start, center);
          width: 50%;

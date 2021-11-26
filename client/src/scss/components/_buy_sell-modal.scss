@@ -1,4 +1,8 @@
-#buy-modal, #sell-modal {
+#buy-modal,
+#sell-modal {
+   max-width: 350px;
+   max-height: 400px;
+
    .ticker-info-wrapper {
       @include flex(row, space-between, center);
       .ticker {
@@ -14,7 +18,7 @@
          .price {
             border-radius: 2px;
             text-align: center;
-            margin-right: .2rem;
+            margin-right: 0.2rem;
          }
          .percent {
             border-radius: 2px;
@@ -35,7 +39,8 @@
       @include flex(column, center, flex-start);
       margin: 1rem 0 0 0;
 
-      #buy-btn-modal, #sell-btn-modal {
+      #buy-btn-modal,
+      #sell-btn-modal {
          margin: 0.7rem 0 0.7rem 0;
          padding: 0.3rem 1.5rem;
          align-self: center;

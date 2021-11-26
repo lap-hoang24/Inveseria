@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+
+
 exports.login = async (req, res) => {
    try {
       // console.log(req);
@@ -47,7 +49,7 @@ exports.getUserInfo = async (req, res) => {
 
 
 exports.updateRewardAccept = async (req, res) => {
-   const userId  = req.user;
+   const userId = req.user;
 
    let updatedReward = await User.findByIdAndUpdate(userId, { acceptedReward: true });
 
@@ -73,11 +75,39 @@ exports.googleRedirect = (req, res) => {
    // Successful authentication, redirect success.
    const userId = req.user._id;
    const accessToken = jwt.sign({ userId }, process.env.JWT_SECRET);
-
+   req.user = userId;
    res.cookie("jwt", accessToken, { maxAge: 60 * 60 * 1000 });
-   res.cookie("id", userId);
    res.redirect('http://localhost:3000/');
 }
 
 
+exports.githubAuth = (req, res) => {
+   res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.githubClientId}`);
+}
 
+
+exports.githubRedirect = async (req, res) => {
+   const userId = req.user;
+
+   const accessToken = jwt.sign({ userId }, process.env.JWT_SECRET);
+
+   res.cookie("jwt", accessToken, { maxAge: 60 * 60 * 1000 });
+
+   res.redirect('http://localhost:3000/');
+}
+
+
+exports.anonymousSignin = async (req, res) => {
+   const anonymousGuest = {
+      username: 'Guest',
+      email: 'anonymous@gmail.com',
+      picture: 'https://media.istockphoto.com/vectors/mask-superhero-carnival-mask-icon-vector-vector-id1152496819?k=20&m=1152496819&s=612x612&w=0&h=HQD7jeQkoZnaZTshIM9FeDRDBUd-rJo8RqQ9EDqlNB0=',
+   }
+
+   let newUser = await User.create(anonymousGuest);
+   const accessToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET);
+
+   res.cookie("jwt", accessToken, { maxAge: 60 * 60 * 1000 });
+
+   res.redirect('http://localhost:3000/');
+}

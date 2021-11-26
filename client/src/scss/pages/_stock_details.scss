@@ -39,6 +39,10 @@
       }
       .btn-wrapper {
          @include flex(row, space-between, center);
+
+         button {
+            cursor: pointer;
+         }
       }
    }
 
@@ -63,6 +67,7 @@
             padding: 0 0.5rem;
             background-color: lighten($grey, 75%);
             border-radius: 3px;
+            cursor: pointer;
          }
       }
    }

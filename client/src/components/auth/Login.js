@@ -64,13 +64,13 @@ class Login extends Component {
                   <div id="square-text">Inveseria.</div>
                </div>
                <div id='google-link'>
-                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fa fa-google"></span> SignIn with Google</a>
-               </div>
-               <div id='linkedin-link'>
-                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fab fa-linkedin"></span> SignIn with LinkedIn</a>
+                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fa fa-google"></span> Sign In with Google</a>
                </div>
                <div id='github-link'>
-                  <a href="http://localhost:5000/auth/google" className="col s4 offset-s4 btn btn-danger"><span className="fab fa-github"></span> SignIn with Github</a>
+                  <a href="http://localhost:5000/auth/github" className="col s4 offset-s4 btn btn-danger"><span className="fab fa-github"></span> Sign In with Github</a>
+               </div>
+               <div id='anonymous-link'>
+                  <a href="http://localhost:5000/auth/anonymous" className="col s4 offset-s4 btn btn-danger"><span class="fas fa-mask"></span> Sign In Anonymously</a>
                </div>
             </div>
             <Navbar />

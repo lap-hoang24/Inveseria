@@ -58,6 +58,7 @@
         .App {
             min-height: 100%;
         }
+        
         #root::-webkit-scrollbar {
             display: none;
         }
@@ -74,6 +75,19 @@ body {
     height: 100vh;
     .MuiDialogActions-root {
         justify-content: center;
+    }
+
+    .MuiDialog-paperWidthSm {
+        max-width: 350px;
+    }
+
+
+    .MuiDialog-scrollPaper {
+        display: block;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -5%);
     }
 
     #empty {

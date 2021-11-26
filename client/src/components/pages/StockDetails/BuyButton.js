@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
 import authAxios from '../../api/axiosAuth';
 
 
-function BuyButton({ open, percent, symbol, userCash, tickerInfo}) {
+function BuyButton({ open, percent, symbol, userCash, tickerInfo }) {
    const [buyOpen, setBuyOpen] = useState(false);
    const [numOfShares, setNumOfShares] = useState('');
    const [buyPrice, setBuyPrice] = useState(0);
@@ -83,7 +83,7 @@ function BuyButton({ open, percent, symbol, userCash, tickerInfo}) {
          <div className="input-wrapper">
             <p className={inputClasses.label}>Number of shares</p>
             <TextField
-               InputProps={{ className: inputClasses.input }}
+               InputProps={{ className: inputClasses.input, inputProps: { min: 0 } }}
                className={inputClasses.root}
                onChange={(event) => { setNumOfShares(event.target.value); compareCash(event.target.value) }}
                value={numOfShares}
@@ -91,7 +91,7 @@ function BuyButton({ open, percent, symbol, userCash, tickerInfo}) {
                autoFocus variant="outlined" />
             <button onClick={() => { setBuyPrice(open) }} className="buy-btn" id="buy-btn-modal" ref={buyBtnExec}>BUY</button>
             {cashExceed
-               ? <Alert className={alertClasses.root} severity="error">work harder then you can buy more share mother fucker!</Alert>
+               ? <Alert className={alertClasses.root} severity="error">work harder then you can buy more share, maybe!</Alert>
                : <div className="exceed-warning"></div>
             }
          </div>

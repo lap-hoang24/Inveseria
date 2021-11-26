@@ -69,7 +69,7 @@
          width: 100%;
          @include flex(row, space-between, center);
          margin: 0 auto;
-         padding: .5rem 1rem;
+         padding: 0.5rem 1rem;
 
          &:nth-child(odd) {
             background-color: darken($light-bg, 3%);
@@ -125,18 +125,23 @@
 
    #did-search {
       position: absolute;
-      padding: 1.3rem 1.3rem 2rem 1.3rem;
+      padding: 0.8rem;
+      height: 5.5rem;
       background: $primary-color;
       color: $white;
       top: 2.5rem;
       right: 1.5rem;
       border-radius: 10px;
       z-index: 99;
+      @include flex(column, space-between, center);
 
-
+      .message {
+         border-bottom: 1px dashed $white;
+         padding-bottom: 5px;
+      }
 
       .arrow {
-         padding: .4rem;
+         padding: 0.4rem;
          top: -5px;
          right: 1rem;
          position: absolute;
@@ -146,18 +151,20 @@
       }
 
       .confirm-did-search {
-         position: absolute;
-         bottom: .5rem;
+         // position: absolute;
+         align-self: flex-end;
+         bottom: 0.5rem;
          right: 1rem;
-         font-size: .7rem;
-         padding: .2rem;
+         font-size: 0.8rem;
+         padding: 0.2rem;
          background: transparent;
          border: none;
          color: $white;
+         cursor: pointer;
       }
-   }
 
+   }
    .show {
-      display: none;
+      display: none !important;
    }
 }

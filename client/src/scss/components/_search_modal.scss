@@ -1,11 +1,14 @@
 #search-modal {
+   &::-webkit-scrollbar {
+      display: none;
+   }
+
    overflow: scroll;
    max-width: 350px;
    max-height: 500px;
 
-
    .search-heading {
-      margin: 0 0 .4rem 0;
+      margin: 0 0 0.4rem 0;
       font-size: 1.2rem;
       text-align: center;
    }
@@ -20,6 +23,10 @@
          &:nth-child(even) {
             background-color: darken($light-bg, 5%);
          }
+      }
+      
+      #clear-history-btn {
+         cursor: pointer;
       }
 
       .history_trending {
