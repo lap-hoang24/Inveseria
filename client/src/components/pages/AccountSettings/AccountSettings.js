@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { withCookies, useCookies } from 'react-cookie';
 import authAxios from '../../api/axiosAuth';
@@ -10,7 +10,7 @@ const AccountSettings = (props) => {
    localStorage.setItem('lastPath', "/account");
    const [userInfo, setUserInfo] = useState({});
    const [randomNum, setRandomNum] = useState(0);
-   const history = useHistory();
+   const history = useNavigate();
 
    const signOut = () => {
       props.cookies.set('jwt', '');
