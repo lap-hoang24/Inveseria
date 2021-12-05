@@ -8,21 +8,20 @@ function Chart({ tickerIntra, ticker }) {
 
    useEffect(() => {
       let data = tickerIntra.map(intra => [intra.date * 1000, intra.close.toFixed(2)])
-      let updatedData = [...data];
-      updatedData.length = length;
-      let startPoint = data[0][1];
+      data.length = length;
 
+      let startPoint = data[0][1];
       let endPoint = data[data.length - 1][1];
       let lineColor = parseInt(startPoint) - parseInt(endPoint) < 0 ? "#f94144" : "#38b000"; // red and green in _variables.scss
+
       let options = oneYearChart({ name: ticker, data: data }, lineColor);
       let chart = new ApexCharts(document.querySelector("#line-chart"), options);
-
 
       if (length === 250) {
          chart.render()
       } else {
          ApexCharts.exec('stockChart', "updateOptions", { stroke: { colors: [lineColor] } })
-         ApexCharts.exec('stockChart', "updateSeries", [{ name: ticker, data: updatedData }])
+         ApexCharts.exec('stockChart', "updateSeries", [{ name: ticker, data: data }])
       }
    }, [length])
 
