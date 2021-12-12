@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
+<<<<<<< HEAD
 import { useNavigate, useLocation } from 'react-router-dom';
+=======
+import { useNavigate } from 'react-router-dom';
+>>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
 import { withCookies } from 'react-cookie';
 import UserInfo from './UserInfo';
 import Search from '../../global/Search';
@@ -22,7 +26,11 @@ function Home(props) {
    const [action, setAction] = useState();
    const [message, setMessage] = useState('');
    const newsPeriod = '';
+<<<<<<< HEAD
    const location = useLocation();
+=======
+   const history = useNavigate();
+>>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
 
    useEffect(() => {
 

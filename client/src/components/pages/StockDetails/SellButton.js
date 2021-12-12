@@ -21,7 +21,11 @@ function SellButton({ open, percent, symbol, userPosition, tickerInfo }) {
    const alertClasses = useAlertStyles();
    const sellBtnRef = useRef();
    const sellBtnExec = useRef();
+<<<<<<< HEAD
    const navigate = useNavigate();
+=======
+   const history = useNavigate();
+>>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
 
 
    const compareShares = (shareInput) => {
@@ -86,7 +90,11 @@ function SellButton({ open, percent, symbol, userPosition, tickerInfo }) {
          <div className="input-wrapper">
             <p className={inputClasses.label}>Number of shares</p>
             <TextField
+<<<<<<< HEAD
                InputProps={{ className: inputClasses.input, inputProps: { min: 0 } }}
+=======
+               InputProps={{ className: inputClasses.input ,inputProps: { min: 0 } }}
+>>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
                className={inputClasses.root}
                onChange={(event) => { setNumOfShares(event.target.value); compareShares(event.target.value) }}
                value={numOfShares}

@@ -20,7 +20,11 @@ function BuyButton({ open, percent, symbol, userCash, tickerInfo }) {
    const alertClasses = useAlertStyles();
    const handleBuyOpen = () => { setBuyOpen(true) };
    const handleBuyClose = () => { setBuyOpen(false) };
+<<<<<<< HEAD
    const navigate = useNavigate();
+=======
+   const history = useNavigate();
+>>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
 
 
    const compareCash = (numOfShares) => {
