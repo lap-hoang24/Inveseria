@@ -63,13 +63,8 @@
     margin: auto;
     position: relative;
     overflow: scroll;
-<<<<<<< HEAD
     height: 700px;
     max-width: 350px;
-=======
-    height: 800px;
-    max-width: 400px;
->>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
     border: 10px solid #2d6a4f;
     border-radius: 30px;
   }
@@ -97,11 +92,7 @@ body .MuiDialogActions-root {
 }
 
 body .MuiDialog-paperWidthSm {
-<<<<<<< HEAD
   max-width: 330px;
-=======
-  max-width: 350px;
->>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
 }
 
 body .MuiDialog-scrollPaper {
@@ -124,12 +115,7 @@ body #empty {
 
 #nav-bar {
   height: 50px;
-<<<<<<< HEAD
   width: 333px;
-=======
-  max-width: 380px;
-  width: 380px;
->>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
   background-color: #2d6a4f;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -147,11 +133,7 @@ body #empty {
           align-items: center;
   position: fixed;
   margin: 0 auto;
-<<<<<<< HEAD
   top: 640px;
-=======
-  top: 740px;
->>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
 }
 
 #nav-bar .nav-link {
@@ -1241,13 +1223,12 @@ body #empty {
 
 #search-modal {
   overflow: scroll;
-<<<<<<< HEAD
   max-width: 310px;
   max-height: 470px;
-=======
-  max-width: 350px;
-  max-height: 500px;
->>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
+}
+
+#search-modal::-webkit-scrollbar {
+  display: none;
 }
 
 #search-modal::-webkit-scrollbar {
@@ -1303,11 +1284,7 @@ body #empty {
 
 #buy-modal,
 #sell-modal {
-<<<<<<< HEAD
   max-width: 310px;
-=======
-  max-width: 350px;
->>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
   max-height: 400px;
 }
 
@@ -1429,15 +1406,9 @@ body #empty {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-<<<<<<< HEAD
   height: 65vh;
   width: 93%;
   background-color: #ffffff;
-=======
-  height: 75vh;
-  width: 100%;
-  background-color: #2d6a4f;
->>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
 }
 
 .loading .lds-grid {

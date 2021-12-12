@@ -10,20 +10,12 @@ const AccountSettings = (props) => {
    localStorage.setItem('lastPath', "/account");
    const [userInfo, setUserInfo] = useState({});
    const [randomNum, setRandomNum] = useState(0);
-<<<<<<< HEAD
    const navigate = useNavigate();
-=======
-   const history = useNavigate();
->>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
 
    const signOut = () => {
       props.cookies.set('jwt', '');
 
-<<<<<<< HEAD
       return navigate('/login');
-=======
-      return history.push('/login');
->>>>>>> efcc94916bbd001302c6a66acc103fd342aba46c
    }
 
    useEffect(() => {
